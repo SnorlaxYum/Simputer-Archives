@@ -1,0 +1,261 @@
+﻿<!doctype html><html lang=en><title>Problem Solving with Algorithms and Data Structures - Chapter 2 - Analysis - Terminal In A Simputer Archives</title><meta charset=utf-8><link rel=canonical href=https://archives.snorl.ax/terminal/2019/06/23/problem-solving-with-algorithms-and-data-structures-chapter-2-analysis/><link href=https://archives.snorl.ax/theme/css/all.css rel=stylesheet><link rel=dns-prefetch href=https://fonts.googleapis.com><link rel=dns-prefetch href=https://fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Luckiest+Guy|Rajdhani:600|Rajdhani:700&amp;display=swap"><link href=https://archives.snorl.ax/theme/images/icon.png rel=icon><link href=https://archives.snorl.ax/theme/images/icon-apple.png rel=apple-touch-icon-precomposed><link href=https://archives.snorl.ax/feeds/terminal.xml rel=alternate title="Simputer Archives Terminal RSS Feed" type=application/rss+xml><meta content=python name=tags><meta content=algorithms name=tags><meta content=data structure name=tags><meta content=learning notes name=tags><meta content="width=device-width" name=viewport><meta name=twitter:card content=summary><meta name=twitter:image content=https://archives.snorl.ax/theme/images/usual-twitter.png><meta name=twitter:site content=@Snorl_ax><meta name=twitter:title content="Problem Solving with Algorithms and Data Structures - Chapter 2 - Analysis"><meta name=twitter:description content="Coming to Analysis."><div id=a><header id=c><div id=d><h1 id=e><a href=https://archives.snorl.ax/>Simputer Archives</a></h1></div></header><div id=f><nav id=h><ul><li><a href=https://archives.snorl.ax/>Home</a><li><a href=https://archives.snorl.ax/browser/>Browser</a><li id=i><a href=https://archives.snorl.ax/terminal/>Terminal</a><li><a href=https://archives.snorl.ax/tags/>Tags</a></ul></nav><nav id=r><a href=https://www.youtube.com/channel/UCnqOLMtPJaqa7e_6FhZ8-rw title=Youtube><svg id="youtube"/></a><a href=https://github.com/SnorlaxYum/ title=Github><svg id="github"/></a><a href=https://twitter.com/Snorl_ax title=Twitter><svg id="twitter"/></a><a href=https://archives.snorl.ax/feeds/terminal.xml title="Terminal RSS"><svg id="rss"/></a><a href=mailto:sim@snorl.ax title=Email><svg id="mail"/></a></nav><aside id=j><form action=https://archives.snorl.ax/search.html onsubmit="return validateForm(this.elements['q'].value);"><input placeholder=Search... name=q id=tipue_search_input></form></aside></div></div><div id=b><main id=k><article id=m><header id=o><h2 id=p>Problem Solving with Algorithms and Data Structures - Chapter 2 - Analysis</h2></header><div id=n><div id=series><p>This post is part 2 of the "Problem Solving with Algorithms and Data Structures Reading" series:<ol class=parts><li><a href=https://archives.snorl.ax/terminal/2019/06/19/problem-solving-with-algorithms-and-data-structures-chapter-1-introduction/>Problem Solving with Algorithms and Data Structures - Chapter 1 - Introduction</a><li id=i><a>Problem Solving with Algorithms and Data Structures - Chapter 2 - Analysis</a><li><a href=https://archives.snorl.ax/terminal/2019/06/27/problem-solving-with-algorithms-and-data-structures-chapter-3-basic-data-structures/>Problem Solving with Algorithms and Data Structures - Chapter 3 - Basic Data Structures</a></ol></div><h2 id=toc>Table Of Contents</h2><div class=toc><ul><li><a href=#21-objectives>2.1. Objectives</a><li><a href=#22-what-is-algorithm-analysis>2.2. What Is Algorithm Analysis</a><li><a href=#23-big-o-notation>2.3 Big-O Notation</a><li><a href=#24-an-anagram-detection-example>2.4. An Anagram Detection Example</a><li><a href=#25-performance-of-python-data-structures>2.5. Performance of Python Data Structures</a><li><a href=#26-lists>2.6. Lists</a><li><a href=#27-dictionaries>2.7. Dictionaries</a></ul></div><p>This book is amazing, last section of the last chapter blew my mind<sup id=fnref:1><a class=footnote-ref href=#fn:1 rel=footnote>1</a></sup>.<h2 id=21-objectives><a class=toclink href=#21-objectives>2.1. Objectives</a></h2><ul><li>To understand why algorithm analysis is important.<li>To be able to use “Big-O” to describe execution time.<li>To understand the “Big-O” execution time of common operations on Python lists and dictionaries.<li>To understand how the implementation of Python data impacts algorithm analysis.<li>To understand how to benchmark simple Python programs.</ul><h2 id=22-what-is-algorithm-analysis><a class=toclink href=#22-what-is-algorithm-analysis>2.2. What Is Algorithm Analysis</a></h2><p>Write readable code.<p><code>perf.py</code>:<div class=highlight><pre><span class=code-line><span></span><span class=kn>import</span> <span class=nn>time</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>def</span> <span class=nf>perf_wrapper</span><span class=p>(</span><span class=n>method</span><span class=p>,</span><span class=n>num</span><span class=p>):</span></span>
+<span class=code-line>    <span class=n>start</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>time</span><span class=p>()</span></span>
+<span class=code-line>    <span class=n>theSum</span> <span class=o>=</span> <span class=n>method</span><span class=p>(</span><span class=o>*</span><span class=n>num</span><span class=p>)</span></span>
+<span class=code-line>    <span class=n>end</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>time</span><span class=p>()</span></span>
+<span class=code-line>    <span class=k>return</span> <span class=n>theSum</span><span class=p>,</span> <span class=n>end</span><span class=o>-</span><span class=n>start</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>def</span> <span class=nf>sumOfN</span><span class=p>(</span><span class=n>n</span><span class=p>):</span></span>
+<span class=code-line>    <span class=n>theSum</span> <span class=o>=</span> <span class=mi>0</span></span>
+<span class=code-line>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=n>n</span><span class=o>+</span><span class=mi>1</span><span class=p>):</span></span>
+<span class=code-line>        <span class=n>theSum</span> <span class=o>=</span> <span class=n>theSum</span> <span class=o>+</span> <span class=n>i</span></span>
+<span class=code-line>    <span class=k>return</span> <span class=n>theSum</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>def</span> <span class=nf>sumOfN_op</span><span class=p>(</span><span class=n>n</span><span class=p>):</span></span>
+<span class=code-line>    <span class=n>theSum</span> <span class=o>=</span> <span class=n>n</span> <span class=o>*</span> <span class=p>(</span><span class=n>n</span> <span class=o>+</span> <span class=mi>1</span><span class=p>)</span> <span class=o>/</span> <span class=mi>2</span></span>
+<span class=code-line>    <span class=k>return</span> <span class=n>theSum</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>def</span> <span class=nf>sum_perf_check</span><span class=p>(</span><span class=n>method</span><span class=p>,</span> <span class=n>num</span><span class=p>):</span></span>
+<span class=code-line>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>5</span><span class=p>):</span></span>
+<span class=code-line>        <span class=k>print</span><span class=p>(</span><span class=s2>&quot;Sum is </span><span class=si>%d</span><span class=s2> required </span><span class=si>%10.7f</span><span class=s2> seconds&quot;</span> <span class=o>%</span> <span class=n>perf_wrapper</span><span class=p>(</span><span class=n>method</span><span class=p>,</span><span class=n>num</span><span class=p>))</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>print</span><span class=p>(</span><span class=s2>&quot;Before the algorithm is optimized:&quot;</span><span class=p>)</span></span>
+<span class=code-line><span class=n>check_set</span><span class=o>=</span><span class=p>[</span><span class=mi>10</span><span class=o>**</span><span class=n>n</span> <span class=k>for</span> <span class=n>n</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>2</span><span class=p>,</span><span class=mi>8</span><span class=p>)]</span></span>
+<span class=code-line><span class=k>for</span> <span class=n>num</span> <span class=ow>in</span> <span class=n>check_set</span><span class=p>:</span></span>
+<span class=code-line>    <span class=n>sum_perf_check</span><span class=p>(</span><span class=n>sumOfN</span><span class=p>,[</span><span class=n>num</span><span class=p>])</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>print</span><span class=p>(</span><span class=s2>&quot;After the algorithm is optimized:&quot;</span><span class=p>)</span></span>
+<span class=code-line><span class=k>for</span> <span class=n>num</span> <span class=ow>in</span> <span class=n>check_set</span><span class=p>:</span></span>
+<span class=code-line>    <span class=n>sum_perf_check</span><span class=p>(</span><span class=n>sumOfN_op</span><span class=p>,[</span><span class=n>num</span><span class=p>])</span></span>
+</pre></div><p>Output of <code>perf.py</code>:<div class=highlight><pre><span class=code-line><span></span>Before the algorithm is optimized:</span>
+<span class=code-line>Sum is 5050 required  0.0000110 seconds</span>
+<span class=code-line>Sum is 5050 required  0.0000076 seconds</span>
+<span class=code-line>Sum is 5050 required  0.0000069 seconds</span>
+<span class=code-line>Sum is 5050 required  0.0000069 seconds</span>
+<span class=code-line>Sum is 5050 required  0.0000069 seconds</span>
+<span class=code-line>Sum is 500500 required  0.0000796 seconds</span>
+<span class=code-line>Sum is 500500 required  0.0000989 seconds</span>
+<span class=code-line>Sum is 500500 required  0.0000939 seconds</span>
+<span class=code-line>Sum is 500500 required  0.0001440 seconds</span>
+<span class=code-line>Sum is 500500 required  0.0001280 seconds</span>
+<span class=code-line>Sum is 50005000 required  0.0013959 seconds</span>
+<span class=code-line>Sum is 50005000 required  0.0008447 seconds</span>
+<span class=code-line>Sum is 50005000 required  0.0008399 seconds</span>
+<span class=code-line>Sum is 50005000 required  0.0008893 seconds</span>
+<span class=code-line>Sum is 50005000 required  0.0013807 seconds</span>
+<span class=code-line>Sum is 5000050000 required  0.0081816 seconds</span>
+<span class=code-line>Sum is 5000050000 required  0.0075161 seconds</span>
+<span class=code-line>Sum is 5000050000 required  0.0074959 seconds</span>
+<span class=code-line>Sum is 5000050000 required  0.0074937 seconds</span>
+<span class=code-line>Sum is 5000050000 required  0.0074308 seconds</span>
+<span class=code-line>Sum is 500000500000 required  0.0759306 seconds</span>
+<span class=code-line>Sum is 500000500000 required  0.0759892 seconds</span>
+<span class=code-line>Sum is 500000500000 required  0.0759845 seconds</span>
+<span class=code-line>Sum is 500000500000 required  0.0772898 seconds</span>
+<span class=code-line>Sum is 500000500000 required  0.0759218 seconds</span>
+<span class=code-line>Sum is 50000005000000 required  0.7791717 seconds</span>
+<span class=code-line>Sum is 50000005000000 required  0.7657561 seconds</span>
+<span class=code-line>Sum is 50000005000000 required  0.7915492 seconds</span>
+<span class=code-line>Sum is 50000005000000 required  0.7761276 seconds</span>
+<span class=code-line>Sum is 50000005000000 required  0.7596998 seconds</span>
+<span class=code-line>After the algorithm is optimized:</span>
+<span class=code-line>Sum is 5050 required  0.0000050 seconds</span>
+<span class=code-line>Sum is 5050 required  0.0000010 seconds</span>
+<span class=code-line>Sum is 5050 required  0.0000010 seconds</span>
+<span class=code-line>Sum is 5050 required  0.0000007 seconds</span>
+<span class=code-line>Sum is 5050 required  0.0000005 seconds</span>
+<span class=code-line>Sum is 500500 required  0.0000012 seconds</span>
+<span class=code-line>Sum is 500500 required  0.0000007 seconds</span>
+<span class=code-line>Sum is 500500 required  0.0000007 seconds</span>
+<span class=code-line>Sum is 500500 required  0.0000007 seconds</span>
+<span class=code-line>Sum is 500500 required  0.0000005 seconds</span>
+<span class=code-line>Sum is 50005000 required  0.0000007 seconds</span>
+<span class=code-line>Sum is 50005000 required  0.0000005 seconds</span>
+<span class=code-line>Sum is 50005000 required  0.0000007 seconds</span>
+<span class=code-line>Sum is 50005000 required  0.0000005 seconds</span>
+<span class=code-line>Sum is 50005000 required  0.0000005 seconds</span>
+<span class=code-line>Sum is 5000050000 required  0.0000007 seconds</span>
+<span class=code-line>Sum is 5000050000 required  0.0000010 seconds</span>
+<span class=code-line>Sum is 5000050000 required  0.0000007 seconds</span>
+<span class=code-line>Sum is 5000050000 required  0.0000007 seconds</span>
+<span class=code-line>Sum is 5000050000 required  0.0000007 seconds</span>
+<span class=code-line>Sum is 500000500000 required  0.0000005 seconds</span>
+<span class=code-line>Sum is 500000500000 required  0.0000005 seconds</span>
+<span class=code-line>Sum is 500000500000 required  0.0000007 seconds</span>
+<span class=code-line>Sum is 500000500000 required  0.0000007 seconds</span>
+<span class=code-line>Sum is 500000500000 required  0.0000005 seconds</span>
+<span class=code-line>Sum is 50000005000000 required  0.0000005 seconds</span>
+<span class=code-line>Sum is 50000005000000 required  0.0000010 seconds</span>
+<span class=code-line>Sum is 50000005000000 required  0.0000005 seconds</span>
+<span class=code-line>Sum is 50000005000000 required  0.0000005 seconds</span>
+<span class=code-line>Sum is 50000005000000 required  0.0000005 seconds</span>
+</pre></div><h2 id=23-big-o-notation><a class=toclink href=#23-big-o-notation>2.3 Big-O Notation</a></h2><p>It's a method to characterize an algorithm’s efficiency in terms of execution time.<p>Example:<div class=highlight><pre><span class=code-line><span></span><span class=n>a</span><span class=o>=</span><span class=mi>5</span></span>
+<span class=code-line><span class=n>b</span><span class=o>=</span><span class=mi>6</span></span>
+<span class=code-line><span class=n>c</span><span class=o>=</span><span class=mi>10</span></span>
+<span class=code-line><span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>n</span><span class=p>):</span></span>
+<span class=code-line>   <span class=k>for</span> <span class=n>j</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>n</span><span class=p>):</span></span>
+<span class=code-line>      <span class=n>x</span> <span class=o>=</span> <span class=n>i</span> <span class=o>*</span> <span class=n>i</span></span>
+<span class=code-line>      <span class=n>y</span> <span class=o>=</span> <span class=n>j</span> <span class=o>*</span> <span class=n>j</span></span>
+<span class=code-line>      <span class=n>z</span> <span class=o>=</span> <span class=n>i</span> <span class=o>*</span> <span class=n>j</span></span>
+<span class=code-line><span class=k>for</span> <span class=n>k</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>n</span><span class=p>):</span></span>
+<span class=code-line>   <span class=n>w</span> <span class=o>=</span> <span class=n>a</span><span class=o>*</span><span class=n>k</span> <span class=o>+</span> <span class=mi>45</span></span>
+<span class=code-line>   <span class=n>v</span> <span class=o>=</span> <span class=n>b</span><span class=o>*</span><span class=n>b</span></span>
+<span class=code-line><span class=n>d</span> <span class=o>=</span> <span class=mi>33</span></span>
+</pre></div><p>T(n) = 3 + 3n<sup>2</sup> + 2n + 1 = 3n<sup>2</sup> + 2n + 4<p>The fragment of the code: O(n<sup>2</sup>)<h2 id=24-an-anagram-detection-example><a class=toclink href=#24-an-anagram-detection-example>2.4. An Anagram Detection Example</a></h2><ul><li>Solution 1: Checking Off O(n<sup>2</sup>)<li>Solution 2: Sort and Compare O(nlogn) or O(n<sup>2</sup>) due to <code>sort</code><li>Solution 3: Brute Force (Never good)<li>Solution 4: Count and Compare O(n)</ul><h2 id=25-performance-of-python-data-structures><a class=toclink href=#25-performance-of-python-data-structures>2.5. Performance of Python Data Structures</a></h2><p>In later chapters you will see some possible implementations of both lists and dictionaries and how the performance depends on the implementation.<h2 id=26-lists><a class=toclink href=#26-lists>2.6. Lists</a></h2><p><code>list_perf.py</code>:<div class=highlight><pre><span class=code-line><span></span><span class=kn>from</span> <span class=nn>timeit</span> <span class=kn>import</span> <span class=n>Timer</span></span>
+<span class=code-line><span class=k>def</span> <span class=nf>test1</span><span class=p>():</span></span>
+<span class=code-line>    <span class=n>l</span> <span class=o>=</span> <span class=p>[]</span></span>
+<span class=code-line>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1000</span><span class=p>):</span></span>
+<span class=code-line>        <span class=n>l</span> <span class=o>=</span> <span class=n>l</span> <span class=o>+</span> <span class=p>[</span><span class=n>i</span><span class=p>]</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>def</span> <span class=nf>test2</span><span class=p>():</span></span>
+<span class=code-line>    <span class=n>l</span> <span class=o>=</span> <span class=p>[]</span></span>
+<span class=code-line>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1000</span><span class=p>):</span></span>
+<span class=code-line>        <span class=n>l</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>i</span><span class=p>)</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>def</span> <span class=nf>test3</span><span class=p>():</span></span>
+<span class=code-line>    <span class=n>l</span> <span class=o>=</span> <span class=p>[</span><span class=n>i</span> <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1000</span><span class=p>)]</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>def</span> <span class=nf>test4</span><span class=p>():</span></span>
+<span class=code-line>    <span class=n>l</span> <span class=o>=</span> <span class=nb>list</span><span class=p>(</span><span class=nb>range</span><span class=p>(</span><span class=mi>1000</span><span class=p>))</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=n>t1</span> <span class=o>=</span> <span class=n>Timer</span><span class=p>(</span><span class=s2>&quot;test1()&quot;</span><span class=p>,</span> <span class=s2>&quot;from __main__ import test1&quot;</span><span class=p>)</span></span>
+<span class=code-line><span class=k>print</span><span class=p>(</span><span class=s2>&quot;concat &quot;</span><span class=p>,</span><span class=n>t1</span><span class=o>.</span><span class=n>timeit</span><span class=p>(</span><span class=n>number</span><span class=o>=</span><span class=mi>1000</span><span class=p>),</span> <span class=s2>&quot;milliseconds&quot;</span><span class=p>)</span></span>
+<span class=code-line><span class=n>t2</span> <span class=o>=</span> <span class=n>Timer</span><span class=p>(</span><span class=s2>&quot;test2()&quot;</span><span class=p>,</span> <span class=s2>&quot;from __main__ import test2&quot;</span><span class=p>)</span></span>
+<span class=code-line><span class=k>print</span><span class=p>(</span><span class=s2>&quot;append &quot;</span><span class=p>,</span><span class=n>t2</span><span class=o>.</span><span class=n>timeit</span><span class=p>(</span><span class=n>number</span><span class=o>=</span><span class=mi>1000</span><span class=p>),</span> <span class=s2>&quot;milliseconds&quot;</span><span class=p>)</span></span>
+<span class=code-line><span class=n>t3</span> <span class=o>=</span> <span class=n>Timer</span><span class=p>(</span><span class=s2>&quot;test3()&quot;</span><span class=p>,</span> <span class=s2>&quot;from __main__ import test3&quot;</span><span class=p>)</span></span>
+<span class=code-line><span class=k>print</span><span class=p>(</span><span class=s2>&quot;comprehension &quot;</span><span class=p>,</span><span class=n>t3</span><span class=o>.</span><span class=n>timeit</span><span class=p>(</span><span class=n>number</span><span class=o>=</span><span class=mi>1000</span><span class=p>),</span> <span class=s2>&quot;milliseconds&quot;</span><span class=p>)</span></span>
+<span class=code-line><span class=n>t4</span> <span class=o>=</span> <span class=n>Timer</span><span class=p>(</span><span class=s2>&quot;test4()&quot;</span><span class=p>,</span> <span class=s2>&quot;from __main__ import test4&quot;</span><span class=p>)</span></span>
+<span class=code-line><span class=k>print</span><span class=p>(</span><span class=s2>&quot;list range &quot;</span><span class=p>,</span><span class=n>t4</span><span class=o>.</span><span class=n>timeit</span><span class=p>(</span><span class=n>number</span><span class=o>=</span><span class=mi>1000</span><span class=p>),</span> <span class=s2>&quot;milliseconds&quot;</span><span class=p>)</span></span>
+</pre></div><p>Result of <code>list_perf.py</code>:<div class=highlight><pre><span class=code-line><span></span>concat  1.9500927650005906 milliseconds</span>
+<span class=code-line>append  0.11545232799835503 milliseconds</span>
+<span class=code-line>comprehension  0.062062365002930164 milliseconds</span>
+<span class=code-line>list range  0.0495129260016256 milliseconds</span>
+</pre></div><table><thead><tr><th align=center><strong>Operation</strong><th align=center><strong>Big-O Efficiency</strong><tbody><tr><td align=center>index []<td align=center>O(1)<tr><td align=center>index assignment<td align=center>O(1)<tr><td align=center>append<td align=center>O(1)<tr><td align=center>pop()<td align=center>O(1)<tr><td align=center>pop(i)<td align=center>O(n)<tr><td align=center>insert(i,item)<td align=center>O(n)<tr><td align=center>del operator<td align=center>O(n)<tr><td align=center>iteration<td align=center>O(n)<tr><td align=center>contains (in)<td align=center>O(n)<tr><td align=center>get slice [x:y]<td align=center>O(k)<tr><td align=center>del slice<td align=center>O(n)<tr><td align=center>set slice<td align=center>O(n+k)<tr><td align=center>reverse<td align=center>O(n)<tr><td align=center>concatenate<td align=center>O(k)<tr><td align=center>sort<td align=center>O(n log n)<tr><td align=center>multiply<td align=center>O(nk)</table><p><code>popperf.py</code>:<div class=highlight><pre><span class=code-line><span></span><span class=kn>import</span> <span class=nn>timeit</span></span>
+<span class=code-line><span class=n>popzero</span> <span class=o>=</span> <span class=n>timeit</span><span class=o>.</span><span class=n>Timer</span><span class=p>(</span><span class=s2>&quot;x.pop(0)&quot;</span><span class=p>,</span></span>
+<span class=code-line>                       <span class=s2>&quot;from __main__ import x&quot;</span><span class=p>)</span></span>
+<span class=code-line><span class=n>popend</span> <span class=o>=</span> <span class=n>timeit</span><span class=o>.</span><span class=n>Timer</span><span class=p>(</span><span class=s2>&quot;x.pop()&quot;</span><span class=p>,</span></span>
+<span class=code-line>                      <span class=s2>&quot;from __main__ import x&quot;</span><span class=p>)</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=n>x</span> <span class=o>=</span> <span class=nb>list</span><span class=p>(</span><span class=nb>range</span><span class=p>(</span><span class=mi>2000000</span><span class=p>))</span></span>
+<span class=code-line><span class=k>print</span><span class=p>(</span><span class=s2>&quot;x.pop(0) execution time: </span><span class=si>%f</span><span class=s2>s&quot;</span> <span class=o>%</span> <span class=n>popzero</span><span class=o>.</span><span class=n>timeit</span><span class=p>(</span><span class=n>number</span><span class=o>=</span><span class=mi>1000</span><span class=p>))</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=n>x</span> <span class=o>=</span> <span class=nb>list</span><span class=p>(</span><span class=nb>range</span><span class=p>(</span><span class=mi>2000000</span><span class=p>))</span></span>
+<span class=code-line><span class=k>print</span><span class=p>(</span><span class=s2>&quot;x.pop() execution time: </span><span class=si>%f</span><span class=s2>s&quot;</span> <span class=o>%</span> <span class=n>popend</span><span class=o>.</span><span class=n>timeit</span><span class=p>(</span><span class=n>number</span><span class=o>=</span><span class=mi>1000</span><span class=p>))</span></span>
+</pre></div><p>Result of <code>popperf.py</code>:<div class=highlight><pre><span class=code-line><span></span>x.pop(0) execution time: 2.256239s</span>
+<span class=code-line>x.pop() execution time: 0.000111s</span>
+</pre></div><p><code>popperf_2.py</code>:<div class=highlight><pre><span class=code-line><span></span><span class=kn>from</span> <span class=nn>timeit</span> <span class=kn>import</span> <span class=n>Timer</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=n>popzero</span> <span class=o>=</span> <span class=n>Timer</span><span class=p>(</span><span class=s2>&quot;x.pop(0)&quot;</span><span class=p>,</span></span>
+<span class=code-line>                <span class=s2>&quot;from __main__ import x&quot;</span><span class=p>)</span></span>
+<span class=code-line><span class=n>popend</span> <span class=o>=</span> <span class=n>Timer</span><span class=p>(</span><span class=s2>&quot;x.pop()&quot;</span><span class=p>,</span></span>
+<span class=code-line>               <span class=s2>&quot;from __main__ import x&quot;</span><span class=p>)</span></span>
+<span class=code-line><span class=k>print</span><span class=p>(</span><span class=s2>&quot;pop(0)   pop()&quot;</span><span class=p>)</span></span>
+<span class=code-line><span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1000000</span><span class=p>,</span><span class=mi>100000001</span><span class=p>,</span><span class=mi>1000000</span><span class=p>):</span></span>
+<span class=code-line>    <span class=n>x</span> <span class=o>=</span> <span class=nb>list</span><span class=p>(</span><span class=nb>range</span><span class=p>(</span><span class=n>i</span><span class=p>))</span></span>
+<span class=code-line>    <span class=n>pt</span> <span class=o>=</span> <span class=n>popend</span><span class=o>.</span><span class=n>timeit</span><span class=p>(</span><span class=n>number</span><span class=o>=</span><span class=mi>1000</span><span class=p>)</span></span>
+<span class=code-line>    <span class=n>x</span> <span class=o>=</span> <span class=nb>list</span><span class=p>(</span><span class=nb>range</span><span class=p>(</span><span class=n>i</span><span class=p>))</span></span>
+<span class=code-line>    <span class=n>pz</span> <span class=o>=</span> <span class=n>popzero</span><span class=o>.</span><span class=n>timeit</span><span class=p>(</span><span class=n>number</span><span class=o>=</span><span class=mi>1000</span><span class=p>)</span></span>
+<span class=code-line>    <span class=k>print</span><span class=p>(</span><span class=s2>&quot;</span><span class=si>%15.5f</span><span class=s2>, </span><span class=si>%15.5f</span><span class=s2>&quot;</span> <span class=o>%</span><span class=p>(</span><span class=n>pz</span><span class=p>,</span><span class=n>pt</span><span class=p>))</span></span>
+</pre></div><p>Result of <code>popperf_2.py</code>:<div class=highlight><pre><span class=code-line><span></span>pop(0)   pop()</span>
+<span class=code-line>        0.94833,         0.00010</span>
+<span class=code-line>        2.04151,         0.00011</span>
+<span class=code-line>        3.24372,         0.00011</span>
+<span class=code-line>        4.37107,         0.00011</span>
+<span class=code-line>        5.42274,         0.00012</span>
+<span class=code-line>        6.68484,         0.00011</span>
+<span class=code-line>        7.64100,         0.00011</span>
+<span class=code-line>        8.23122,         0.00011</span>
+<span class=code-line>        9.99637,         0.00011</span>
+<span class=code-line>       11.55539,         0.00012</span>
+<span class=code-line>       12.92389,         0.00026</span>
+<span class=code-line>       13.31022,         0.00012</span>
+<span class=code-line>       14.33949,         0.00011</span>
+<span class=code-line>       16.14405,         0.00011</span>
+<span class=code-line>       17.22286,         0.00014</span>
+<span class=code-line>       17.30630,         0.00013</span>
+<span class=code-line>       18.30070,         0.00014</span>
+<span class=code-line>       19.25390,         0.00013</span>
+<span class=code-line>       20.32429,         0.00017</span>
+<span class=code-line>       21.64347,         0.00014</span>
+<span class=code-line>       22.62368,         0.00013</span>
+<span class=code-line>       23.68417,         0.00013</span>
+<span class=code-line>       24.95661,         0.00011</span>
+<span class=code-line>       25.84395,         0.00011</span>
+<span class=code-line>       27.02810,         0.00011</span>
+<span class=code-line>       29.19760,         0.00011</span>
+<span class=code-line>       30.58301,         0.00011</span>
+<span class=code-line>       31.83124,         0.00011</span>
+<span class=code-line>       32.58386,         0.00016</span>
+<span class=code-line>       33.32165,         0.00011</span>
+<span class=code-line>       35.25702,         0.00011</span>
+<span class=code-line>       36.03567,         0.00011</span>
+<span class=code-line>       36.56381,         0.00012</span>
+<span class=code-line>       38.86707,         0.00011</span>
+<span class=code-line>       39.97921,         0.00011</span>
+<span class=code-line>       39.82716,         0.00011</span>
+<span class=code-line>       41.63275,         0.00011</span>
+<span class=code-line>       43.04904,         0.00011</span>
+<span class=code-line>......</span>
+</pre></div><h2 id=27-dictionaries><a class=toclink href=#27-dictionaries>2.7. Dictionaries</a></h2><table><thead><tr><th align=center><strong>operation</strong><th align=center><strong>Big-O Efficiency</strong><tbody><tr><td align=center>copy<td align=center>O(n)<tr><td align=center>get item<td align=center>O(1)<tr><td align=center>set item<td align=center>O(1)<tr><td align=center>delete item<td align=center>O(1)<tr><td align=center>contains (in)<td align=center>O(1)<tr><td align=center>iteration<td align=center>O(n)</table><p><code>dict_perf.py</code>:<div class=highlight><pre><span class=code-line><span></span><span class=kn>import</span> <span class=nn>timeit</span></span>
+<span class=code-line><span class=kn>import</span> <span class=nn>random</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>10000</span><span class=p>,</span><span class=mi>1000001</span><span class=p>,</span><span class=mi>20000</span><span class=p>):</span></span>
+<span class=code-line>    <span class=n>t</span> <span class=o>=</span> <span class=n>timeit</span><span class=o>.</span><span class=n>Timer</span><span class=p>(</span><span class=s2>&quot;random.randrange(</span><span class=si>%d</span><span class=s2>) in x&quot;</span><span class=o>%</span><span class=n>i</span><span class=p>,</span></span>
+<span class=code-line>                     <span class=s2>&quot;from __main__ import random,x&quot;</span><span class=p>)</span></span>
+<span class=code-line>    <span class=n>x</span> <span class=o>=</span> <span class=nb>list</span><span class=p>(</span><span class=nb>range</span><span class=p>(</span><span class=n>i</span><span class=p>))</span></span>
+<span class=code-line>    <span class=n>lst_time</span> <span class=o>=</span> <span class=n>t</span><span class=o>.</span><span class=n>timeit</span><span class=p>(</span><span class=n>number</span><span class=o>=</span><span class=mi>1000</span><span class=p>)</span></span>
+<span class=code-line>    <span class=n>x</span> <span class=o>=</span> <span class=p>{</span><span class=n>j</span><span class=p>:</span><span class=bp>None</span> <span class=k>for</span> <span class=n>j</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>i</span><span class=p>)}</span></span>
+<span class=code-line>    <span class=n>d_time</span> <span class=o>=</span> <span class=n>t</span><span class=o>.</span><span class=n>timeit</span><span class=p>(</span><span class=n>number</span><span class=o>=</span><span class=mi>1000</span><span class=p>)</span></span>
+<span class=code-line>    <span class=k>print</span><span class=p>(</span><span class=s2>&quot;</span><span class=si>%d</span><span class=s2>,</span><span class=si>%10.3f</span><span class=s2>,</span><span class=si>%10.3f</span><span class=s2>&quot;</span> <span class=o>%</span> <span class=p>(</span><span class=n>i</span><span class=p>,</span> <span class=n>lst_time</span><span class=p>,</span> <span class=n>d_time</span><span class=p>))</span></span>
+</pre></div><p>Result of <code>dict_perf.py</code>:<div class=highlight><pre><span class=code-line><span></span>10000,     0.119,     0.001</span>
+<span class=code-line>30000,     0.366,     0.002</span>
+<span class=code-line>50000,     0.612,     0.002</span>
+<span class=code-line>70000,     0.914,     0.003</span>
+<span class=code-line>90000,     1.193,     0.003</span>
+<span class=code-line>110000,     1.381,     0.003</span>
+<span class=code-line>130000,     1.708,     0.003</span>
+<span class=code-line>150000,     1.984,     0.002</span>
+<span class=code-line>170000,     2.283,     0.003</span>
+<span class=code-line>190000,     2.660,     0.003</span>
+<span class=code-line>210000,     2.880,     0.002</span>
+<span class=code-line>230000,     2.918,     0.002</span>
+<span class=code-line>250000,     1.782,     0.001</span>
+<span class=code-line>270000,     1.881,     0.001</span>
+<span class=code-line>290000,     2.034,     0.001</span>
+<span class=code-line>310000,     2.122,     0.001</span>
+<span class=code-line>330000,     2.254,     0.001</span>
+<span class=code-line>350000,     2.473,     0.002</span>
+<span class=code-line>370000,     2.502,     0.001</span>
+<span class=code-line>390000,     2.844,     0.002</span>
+<span class=code-line>410000,     3.044,     0.001</span>
+<span class=code-line>430000,     3.268,     0.001</span>
+<span class=code-line>450000,     3.170,     0.002</span>
+<span class=code-line>470000,     3.398,     0.002</span>
+<span class=code-line>490000,     3.607,     0.002</span>
+<span class=code-line>510000,     3.740,     0.001</span>
+<span class=code-line>530000,     3.844,     0.002</span>
+<span class=code-line>550000,     4.131,     0.001</span>
+<span class=code-line>570000,     4.102,     0.002</span>
+<span class=code-line>590000,     4.418,     0.002</span>
+<span class=code-line>610000,     4.413,     0.002</span>
+<span class=code-line>630000,     4.829,     0.002</span>
+<span class=code-line>650000,     4.717,     0.003</span>
+<span class=code-line>670000,     5.037,     0.001</span>
+<span class=code-line>690000,     5.114,     0.002</span>
+<span class=code-line>710000,     5.599,     0.002</span>
+<span class=code-line>730000,     5.634,     0.002</span>
+<span class=code-line>750000,     5.669,     0.002</span>
+<span class=code-line>770000,     5.701,     0.001</span>
+<span class=code-line>790000,     5.745,     0.002</span>
+<span class=code-line>810000,     5.985,     0.002</span>
+<span class=code-line>830000,     6.167,     0.001</span>
+<span class=code-line>850000,     6.496,     0.002</span>
+<span class=code-line>870000,     6.966,     0.002</span>
+<span class=code-line>890000,     6.906,     0.001</span>
+<span class=code-line>910000,     6.333,     0.001</span>
+<span class=code-line>930000,     7.055,     0.001</span>
+<span class=code-line>950000,     6.709,     0.001</span>
+<span class=code-line>970000,     7.176,     0.002</span>
+<span class=code-line>990000,     6.942,     0.001</span>
+</pre></div><p>Dictionary is consitently faster than list.<p>The only dictionary operations that are not O(1) are those that require iteration.<div class=footnote><hr><ol><li id=fn:1><p><a href=http://interactivepython.org/runestone/static/pythonds/index.html>Problem Solving with Algorithms and Data Structures using Python</a>&#160;<a class=footnote-backref href=#fnref:1 rev=footnote title="Jump back to footnote 1 in the text">&#8617;</a></ol></div></div><footer id=q><svg id="publish"/><b>Created:&nbsp;</b><time datetime=2019-06-23T21:30:00+02:00>June 23, 2019</time><span id=y>•</span><svg id="edit"/><b>Updated:&nbsp;</b><time datetime=2019-06-25T23:40:00+02:00>June 25, 2019</time><span id=y>•</span><svg id="session"/></svg>In a <a href=https://archives.snorl.ax/terminal/ rel="category tag"><b>Terminal</b></a> Session<span id=y>•</span><svg id="tags"/><b>Tags:&nbsp;</b><a href=https://archives.snorl.ax/tags/python/ rel=tag>python</a>,&nbsp;<a href=https://archives.snorl.ax/tags/algorithms/ rel=tag>algorithms</a>,&nbsp;<a href=https://archives.snorl.ax/tags/data-structure/ rel=tag>data structure</a>,&nbsp;<a href=https://archives.snorl.ax/tags/learning-notes/ rel=tag>learning notes</a></footer></article><article id=m><div id=n><section id=comments data-title="Problem Solving with Algorithms and Data Structures - Chapter 2 - Analysis" data-isso-id=/terminal/2019/06/23/problem-solving-with-algorithms-and-data-structures-chapter-2-analysis/></section></div></article></main></div><footer id=g><div id=l>Simputer Archives &#169; 2016 - 2019 (<a href=https://snorl.ax/>Click to view Current Version of Simputer</a>) • Licensed under <a target=_blank rel=license href=http://creativecommons.org/licenses/by/3.0/>CC BY 3.0</a><br>Made using <a href=http://getpelican.com/ target=_blank>Pelican</a> • Design from <a href=https://wordpress.org/themes/twentyfifteen/ target=_blank>TwentyFifteen</a></div></footer><script data-isso=https://isso.snorl.ax/ data-isso-gravatar=true data-isso-avatar=false data-isso-reply-notifications=true data-isso-reply-to-self=true data-isso-css=false src=https://archives.snorl.ax/theme/js/isso_embed.min.js data-isso-lang=en></script>

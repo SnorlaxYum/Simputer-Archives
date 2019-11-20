@@ -1,0 +1,1043 @@
+﻿<!doctype html><html lang=en><title>Notes on Types & Grammer (YDJS) - Terminal In A Simputer Archives</title><meta charset=utf-8><link rel=canonical href=https://archives.snorl.ax/terminal/2019/05/07/notes-on-types-grammer-ydjs/><link href=https://archives.snorl.ax/theme/css/all.css rel=stylesheet><link rel=dns-prefetch href=https://fonts.googleapis.com><link rel=dns-prefetch href=https://fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Luckiest+Guy|Rajdhani:600|Rajdhani:700&amp;display=swap"><link href=https://archives.snorl.ax/theme/images/icon.png rel=icon><link href=https://archives.snorl.ax/theme/images/icon-apple.png rel=apple-touch-icon-precomposed><link href=https://archives.snorl.ax/feeds/terminal.xml rel=alternate title="Simputer Archives Terminal RSS Feed" type=application/rss+xml><meta content=js name=tags><meta content=You don't know js name=tags><meta content=learning notes name=tags><meta content="width=device-width" name=viewport><meta name=twitter:card content=summary><meta name=twitter:image content=https://archives.snorl.ax/theme/images/usual-twitter.png><meta name=twitter:site content=@Snorl_ax><meta name=twitter:title content="Notes on Types & Grammer (YDJS)"><meta name=twitter:description content="Notes on the first two chapters. I just started taking notes. Js is kinda confusing."><div id=a><header id=c><div id=d><h1 id=e><a href=https://archives.snorl.ax/>Simputer Archives</a></h1></div></header><div id=f><nav id=h><ul><li><a href=https://archives.snorl.ax/>Home</a><li><a href=https://archives.snorl.ax/browser/>Browser</a><li id=i><a href=https://archives.snorl.ax/terminal/>Terminal</a><li><a href=https://archives.snorl.ax/tags/>Tags</a></ul></nav><nav id=r><a href=https://www.youtube.com/channel/UCnqOLMtPJaqa7e_6FhZ8-rw title=Youtube><svg id="youtube"/></a><a href=https://github.com/SnorlaxYum/ title=Github><svg id="github"/></a><a href=https://twitter.com/Snorl_ax title=Twitter><svg id="twitter"/></a><a href=https://archives.snorl.ax/feeds/terminal.xml title="Terminal RSS"><svg id="rss"/></a><a href=mailto:sim@snorl.ax title=Email><svg id="mail"/></a></nav><aside id=j><form action=https://archives.snorl.ax/search.html onsubmit="return validateForm(this.elements['q'].value);"><input placeholder=Search... name=q id=tipue_search_input></form></aside></div></div><div id=b><main id=k><article id=m><header id=o><h2 id=p>Notes on Types & Grammer (YDJS)</h2></header><div id=n><div id=series><p>This post is part 1 of the "You Don't Know JS Read Note" series:<ol class=parts><li id=i><a>Notes on Types & Grammer (YDJS)</a><li><a href=https://archives.snorl.ax/terminal/2019/05/17/notes-on-async-performance-ydjs/>Notes on Async & Performance (YDJS)</a></ol></div><p>Just started taking notes. Forgot to take notes on the former three. To summerize, js is about one object linked to another. A lot to learn for me. So it's best to learn it quickly the first time and then start learning by doing. I'll try Firebase function.<h2 id=toctable>Table Of Contents</h2><div class=toc><ul><li><a href=#chapter-1>Chapter 1</a><li><a href=#chapter-2>Chapter 2</a><li><a href=#chapter-3>Chapter 3</a><li><a href=#chapter-4>Chapter 4</a><ul><li><a href=#converting-values>Converting values</a><li><a href=#abstract-value-operations>Abstract Value Operations</a><ul><li><a href=#tostring>ToString</a><ul><li><a href=#json-stringification>JSON Stringification</a></ul><li><a href=#tonumber>toNumber</a><li><a href=#toboolean>toBoolean</a><ul><li><a href=#falsy-values>Falsy Values</a><li><a href=#falsy-objects>Falsy Objects</a><li><a href=#truthy-values>Truthy Values</a></ul></ul><li><a href=#explicit-coercion>Explicit Coercion</a><ul><li><a href=#strings-numbers>Strings &lt;==&gt; Numbers</a><ul><li><a href=#date-to-number>Date To Number</a><li><a href=#the-curious-case-of-the>The Curious Case of the ~</a><ul><li><a href=#truncating-bits>Truncating Bits</a></ul></ul><li><a href=#explicitly-parsing-numeric-strings>Explicitly: Parsing Numeric Strings</a><ul><li><a href=#parsing-non-strings>Parsing Non-Strings</a></ul><li><a href=#explicitly-boolean>Explicitly: * --&gt; Boolean</a></ul><li><a href=#implicit-coercion>Implicit Coercion</a><ul><li><a href=#simplifying-implicitly>Simplifying Implicitly</a><li><a href=#implicitly-strings-numbers>Implicitly: Strings &lt;==&gt; Numbers</a><li><a href=#implicitly-booleans-numbers>Implicitly: Booleans --&gt; Numbers</a><li><a href=#implicitly-boolean>Implicitly: * --&gt; Boolean</a><li><a href=#operators-and-ampamp>Operators || and &amp;&amp;</a><li><a href=#symbol-coercion>Symbol Coercion</a></ul><li><a href=#loose-equals-vs-strict-equals>Loose Equals vs. Strict Equals</a><ul><li><a href=#equality-performance>Equality Performance</a><li><a href=#abstract-equality>Abstract Equality</a><ul><li><a href=#comparing-strings-to-numbers>Comparing: strings to numbers</a><li><a href=#comparing-anything-to-boolean>Comparing: anything to boolean</a><li><a href=#comparing-nulls-to-undefineds>Comparing: nulls to undefineds</a><li><a href=#comparing-objects-to-non-objects>Comparing: objects to non-objects</a></ul><li><a href=#edge-cases>Edge Cases</a><ul><li><a href=#a-number-by-any-other-value-would>A Number By Any Other Value Would...</a><li><a href=#false-y-comparisons>False-y Comparisons</a></ul><li><a href=#sanity-check>Sanity Check</a><ul><li><a href=#safely-using-implicit-coercion>Safely Using Implicit Coercion</a></ul></ul><li><a href=#abstract-relational-comparison>Abstract Relational Comparison</a></ul><li><a href=#chapter-5>Chapter 5</a><ul><li><a href=#statements-expressions>Statements &amp; Expressions</a><ul><li><a href=#statement-completion-values>Statement Completion Values</a><li><a href=#expression-side-effects>Expression Side Effects</a><li><a href=#contextual-rules>Contextual Rules</a><ul><li><a href=#curly-braces>{ .. } Curly Braces</a><ul><li><a href=#object-literals>Object Literals</a><li><a href=#labels>Labels</a><li><a href=#blocks>Blocks</a><li><a href=#object-destructuring>Object Destructuring</a></ul><li><a href=#else-if-and-optional-blocks>else if And Optional Blocks</a></ul><li><a href=#short-circuited>Short Circuited</a><li><a href=#tighter-binding>Tighter Binding</a><li><a href=#associativity>Associativity</a><li><a href=#disambiguation>Disambiguation</a></ul><li><a href=#automatic-semicolons>Automatic Semicolons</a><ul><li><a href=#error-correction>Error Correction</a></ul><li><a href=#errors>Errors</a><ul><li><a href=#using-variables-too-early>Using Variables Too Early</a></ul><li><a href=#function-arguments>Function Arguments</a><li><a href=#tryfinally>try..finally</a><li><a href=#switch>switch</a></ul></ul></div><h2 id=chapter-1><a class=toclink href=#chapter-1>Chapter 1</a></h2><p>In JavaScript, variables don't have types -- values have types. Variables can hold any value, at any time.<p>"not defined" means the var being not declared.
+undefined means the var doesn't have a value.
+undefined is our friend to check if the var has a value.
+typeof returns undefined for both undeclared and undefined var<h2 id=chapter-2><a class=toclink href=#chapter-2>Chapter 2</a></h2><p>Array are also objects which can have keys/values.<p>String is an array consisting of immutable chars. Meanwhile array has lots of usable functions String don't have.
+Use split to convert string to array then do the things.
+Or use the array from the start.<p>Number:toFixed(digit) is similar to toPrecision(digit)
+0.1+0.2 !== 0.3<p>We can use this Number.EPSILON to compare two numbers for "equality" (within the rounding error tolerance)<p>void: here's where don't understand, what's the use? I might look into it sometimes.<p>isNaN: 2 / "foo" etc<p>Infinity: 1/0<p>Object.is(a,b): Special Equality<h2 id=chapter-3><a class=toclink href=#chapter-3>Chapter 3</a></h2><p>They are constructors of type wrappers:<ul><li><code>String()</code><li><code>Number()</code><li><code>Boolean()</code><li><code>Array()</code><li><code>Object()</code><li><code>Function()</code><li><code>RegExp()</code><li><code>Date()</code><li><code>Error()</code><li><code>Symbol()</code> -- added in ES6!</ul><p>For example, <code>var s = new String( "Hello World!" );</code> constructs a String wrapper. To convert it to String, <code>s.toString()</code>.<br>Internal <code>[[class]]</code> can be inspected using <code>Object.prototype.toString.call()</code>.
+Boxing wrapper is type wrapper having methods. Thankfully, JS will automatically box the primitive value to do methods. No need in doing things like <code>new String("abc")</code>, just use the primitive values like <code>"abc"</code>.<br>Boolean wrapper created by <code>new boolean()</code> is truthy itself no matter it's true or false.
+Use <code>valueof()</code> to unbox the warpper and get the value.<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=k>new</span> <span class=nb>String</span><span class=p>(</span><span class=s2>&quot;abc&quot;</span><span class=p>);</span></span>
+<span class=code-line><span class=nx>a</span><span class=p>.</span><span class=nx>valueof</span><span class=p>();</span></span>
+</pre></div><p>Unboxing can happen implicitly:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=k>new</span> <span class=nb>String</span><span class=p>(</span> <span class=s2>&quot;abc&quot;</span> <span class=p>);</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=nx>a</span> <span class=o>+</span> <span class=s2>&quot;&quot;</span><span class=p>;</span> <span class=c1>// `b` has the unboxed primitive value &quot;abc&quot;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>typeof</span> <span class=nx>a</span><span class=p>;</span> <span class=c1>// &quot;object&quot;</span></span>
+<span class=code-line><span class=k>typeof</span> <span class=nx>b</span><span class=p>;</span> <span class=c1>// &quot;string&quot;</span></span>
+</pre></div><p>Just as we've seen above with the other natives, these constructor forms should generally be avoided, unless you really know you need them, mostly because they introduce exceptions and gotchas that you probably don't really want to deal with.<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=k>new</span> <span class=nb>Array</span><span class=p>(</span> <span class=mi>3</span> <span class=p>);</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=p>[</span> <span class=kc>undefined</span><span class=p>,</span> <span class=kc>undefined</span><span class=p>,</span> <span class=kc>undefined</span> <span class=p>];</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>c</span> <span class=o>=</span> <span class=p>[];</span></span>
+<span class=code-line><span class=nx>c</span><span class=p>.</span><span class=nx>length</span> <span class=o>=</span> <span class=mi>3</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span><span class=p>;</span></span>
+<span class=code-line><span class=nx>b</span><span class=p>;</span></span>
+<span class=code-line><span class=nx>c</span><span class=p>;</span></span>
+</pre></div><div class=highlight><pre><span class=code-line><span></span><span class=nx>a</span><span class=p>.</span><span class=nx>join</span><span class=p>(</span> <span class=s2>&quot;-&quot;</span> <span class=p>);</span> <span class=c1>// &quot;--&quot;</span></span>
+<span class=code-line><span class=nx>b</span><span class=p>.</span><span class=nx>join</span><span class=p>(</span> <span class=s2>&quot;-&quot;</span> <span class=p>);</span> <span class=c1>// &quot;--&quot;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span><span class=p>.</span><span class=nx>map</span><span class=p>(</span><span class=kd>function</span><span class=p>(</span><span class=nx>v</span><span class=p>,</span><span class=nx>i</span><span class=p>){</span> <span class=k>return</span> <span class=nx>i</span><span class=p>;</span> <span class=p>});</span> <span class=c1>// [ undefined x 3 ]</span></span>
+<span class=code-line><span class=nx>b</span><span class=p>.</span><span class=nx>map</span><span class=p>(</span><span class=kd>function</span><span class=p>(</span><span class=nx>v</span><span class=p>,</span><span class=nx>i</span><span class=p>){</span> <span class=k>return</span> <span class=nx>i</span><span class=p>;</span> <span class=p>});</span> <span class=c1>// [ 0, 1, 2 ]</span></span>
+</pre></div><p>Bottom line: never ever, under any circumstances, should you intentionally create and use those empty-slot arrays. Just don't do it. They're nuts.<p>Also optional: Object(..), Function(..), and RegExp(..)<p>The <code>Date(..)</code> and <code>Error(..)</code> native constructors are much more useful than the other natives, because there is no literal form for either. <code>Date.now()</code> shows a time value. <code>throw new Error("x wasn't provided")</code> throw a new error <code>"x wasn't provided"</code>. In addition to <code>Error()</code>, there are several specific-error-type natives though it's rare to use them manually: <code>EvalError(..)</code>, <code>RangeError(..)</code>, <code>ReferenceError(..)</code>, <code>SyntaxError(..)</code>, <code>TypeError(..)</code>, and <code>URIError(..)</code>.<p><code>Symbol</code> are unique in that you are not allowed to use <code>new</code> with it. Using them for private or special properties is likely their primary use-case. (Ex: <code>Symbol.ierator</code>, to define use <code>Symbol("statement")</code>)<p>Some of the native Prototypes are aren't just plain objects:<div class=highlight><pre><span class=code-line><span></span><span class=k>typeof</span> <span class=nb>Function</span><span class=p>.</span><span class=nx>prototype</span><span class=p>;</span>          <span class=c1>// &quot;function&quot;</span></span>
+<span class=code-line><span class=nb>Function</span><span class=p>.</span><span class=nx>prototype</span><span class=p>();</span>               <span class=c1>// it&#39;s an empty function!</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nb>RegExp</span><span class=p>.</span><span class=nx>prototype</span><span class=p>.</span><span class=nx>toString</span><span class=p>();</span>        <span class=c1>// &quot;/(?:)/&quot; -- empty regex</span></span>
+<span class=code-line><span class=s2>&quot;abc&quot;</span><span class=p>.</span><span class=nx>match</span><span class=p>(</span> <span class=nb>RegExp</span><span class=p>.</span><span class=nx>prototype</span> <span class=p>);</span>    <span class=c1>// [&quot;&quot;]</span></span>
+</pre></div><p>The chapter leads through a journey about knowing interestings underlying wrappers and prototypes. Hmm...... Hope to know something practical.<h2 id=chapter-4><a class=toclink href=#chapter-4>Chapter 4</a></h2><p>Coercion is controversial. Most people run away from them. Try to get it more fully though it can be confusing.<h3 id=converting-values><a class=toclink href=#converting-values>Converting values</a></h3><p>JavaScript coercions always result in one of the scalar primitive (see Chapter 2) values, like <code>string</code>, <code>number</code>, or <code>boolean</code>.<br>In js, most people call all the types of conversions "coercion".
+The author prefer to distinguish all the type conversion as "implicit coercion"(intended) vs. "explicit coercion."(occurred as a side effect of some other intentional operation)<p><strong>Example</strong>:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=mi>42</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=nx>a</span> <span class=o>+</span> <span class=s2>&quot;&quot;</span><span class=p>;</span>         <span class=c1>// implicit coercion</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>c</span> <span class=o>=</span> <span class=nb>String</span><span class=p>(</span> <span class=nx>a</span> <span class=p>);</span>    <span class=c1>// explicit coercion</span></span>
+</pre></div><h3 id=abstract-value-operations><a class=toclink href=#abstract-value-operations>Abstract Value Operations</a></h3><h4 id=tostring><a class=toclink href=#tostring><code>ToString</code></a></h4><p>The default <code>toString</code> (<code>StObject.prototype.toString()</code>) returns the *internal <code>[[Class]]</code>.<br>If an object has its own <code>toString</code>, the result will be <code>string</code> instead.<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>];</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span><span class=p>.</span><span class=nx>toString</span><span class=p>();</span> <span class=c1>// &quot;1,2,3&quot;</span></span>
+</pre></div><h5 id=json-stringification><a class=toclink href=#json-stringification>JSON Stringification</a></h5><p>Another task that seems awfully related to <code>ToString</code> is when you use the <code>JSON.stringify(..)</code> utility to serialize a value to a JSON-compatible <code>string</code> value.<div class=highlight><pre><span class=code-line><span></span><span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>(</span> <span class=mi>42</span> <span class=p>);</span>   <span class=c1>// &quot;42&quot;</span></span>
+<span class=code-line><span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>(</span> <span class=s2>&quot;42&quot;</span> <span class=p>);</span> <span class=c1>// &quot;&quot;42&quot;&quot; (a string with a quoted string value in it)</span></span>
+<span class=code-line><span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>(</span> <span class=kc>null</span> <span class=p>);</span> <span class=c1>// &quot;null&quot;</span></span>
+<span class=code-line><span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>(</span> <span class=kc>true</span> <span class=p>);</span> <span class=c1>// &quot;true&quot;</span></span>
+</pre></div><p><code>JSON.stringify(..)</code> with an <code>object</code> as argument can make an error thrown.<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>o</span> <span class=o>=</span> <span class=p>{</span> <span class=p>};</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=nx>b</span><span class=o>:</span> <span class=mi>42</span><span class=p>,</span></span>
+<span class=code-line>    <span class=nx>c</span><span class=o>:</span> <span class=nx>o</span><span class=p>,</span></span>
+<span class=code-line>    <span class=nx>d</span><span class=o>:</span> <span class=kd>function</span><span class=p>(){}</span></span>
+<span class=code-line><span class=p>};</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=c1>// create a circular reference inside `a`</span></span>
+<span class=code-line><span class=nx>o</span><span class=p>.</span><span class=nx>e</span> <span class=o>=</span> <span class=nx>a</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=c1>// would throw an error on the circular reference</span></span>
+<span class=code-line><span class=c1>// JSON.stringify( a );</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=c1>// define a custom JSON value serialization</span></span>
+<span class=code-line><span class=nx>a</span><span class=p>.</span><span class=nx>toJSON</span> <span class=o>=</span> <span class=kd>function</span><span class=p>()</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=c1>// only include the `b` property for serialization</span></span>
+<span class=code-line>    <span class=k>return</span> <span class=p>{</span> <span class=nx>b</span><span class=o>:</span> <span class=k>this</span><span class=p>.</span><span class=nx>b</span> <span class=p>};</span></span>
+<span class=code-line><span class=p>};</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>(</span> <span class=nx>a</span> <span class=p>);</span> <span class=c1>// &quot;{&quot;b&quot;:42}&quot;</span></span>
+</pre></div><p><code>toJSON()</code> should be interpreted as "to a JSON-safe value suitable for stringification," not "to a JSON string" as many developers mistakenly assume.<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=nx>val</span><span class=o>:</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>],</span></span>
+<span class=code-line></span>
+<span class=code-line>    <span class=c1>// probably correct!</span></span>
+<span class=code-line>    <span class=nx>toJSON</span><span class=o>:</span> <span class=kd>function</span><span class=p>(){</span></span>
+<span class=code-line>        <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>val</span><span class=p>.</span><span class=nx>slice</span><span class=p>(</span> <span class=mi>1</span> <span class=p>);</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line><span class=p>};</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=nx>val</span><span class=o>:</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>],</span></span>
+<span class=code-line></span>
+<span class=code-line>    <span class=c1>// probably incorrect!</span></span>
+<span class=code-line>    <span class=nx>toJSON</span><span class=o>:</span> <span class=kd>function</span><span class=p>(){</span></span>
+<span class=code-line>        <span class=k>return</span> <span class=s2>&quot;[&quot;</span> <span class=o>+</span></span>
+<span class=code-line>            <span class=k>this</span><span class=p>.</span><span class=nx>val</span><span class=p>.</span><span class=nx>slice</span><span class=p>(</span> <span class=mi>1</span> <span class=p>).</span><span class=nx>join</span><span class=p>()</span> <span class=o>+</span></span>
+<span class=code-line>        <span class=s2>&quot;]&quot;</span><span class=p>;</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line><span class=p>};</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>(</span> <span class=nx>a</span> <span class=p>);</span> <span class=c1>// &quot;[2,3]&quot;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>(</span> <span class=nx>b</span> <span class=p>);</span> <span class=c1>// &quot;&quot;[2,3]&quot;&quot;</span></span>
+</pre></div><p>Lesser known functionality:
+<strong>replacer</strong>: An optional second argument can be passed to <code>JSON.stringify(..)</code>. Can be an <code>array</code> or a <code>function</code>.<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=nx>b</span><span class=o>:</span> <span class=mi>42</span><span class=p>,</span></span>
+<span class=code-line>    <span class=nx>c</span><span class=o>:</span> <span class=s2>&quot;42&quot;</span><span class=p>,</span></span>
+<span class=code-line>    <span class=nx>d</span><span class=o>:</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>]</span></span>
+<span class=code-line><span class=p>};</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>(</span> <span class=nx>a</span><span class=p>,</span> <span class=p>[</span><span class=s2>&quot;b&quot;</span><span class=p>,</span><span class=s2>&quot;c&quot;</span><span class=p>]</span> <span class=p>);</span> <span class=c1>// &quot;{&quot;b&quot;:42,&quot;c&quot;:&quot;42&quot;}&quot;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>(</span> <span class=nx>a</span><span class=p>,</span> <span class=kd>function</span><span class=p>(</span><span class=nx>k</span><span class=p>,</span><span class=nx>v</span><span class=p>){</span></span>
+<span class=code-line>    <span class=k>if</span> <span class=p>(</span><span class=nx>k</span> <span class=o>!==</span> <span class=s2>&quot;c&quot;</span><span class=p>)</span> <span class=k>return</span> <span class=nx>v</span><span class=p>;</span></span>
+<span class=code-line><span class=p>}</span> <span class=p>);</span></span>
+<span class=code-line><span class=c1>// &quot;{&quot;b&quot;:42,&quot;d&quot;:[1,2,3]}&quot;</span></span>
+</pre></div><p><code>space</code>: A third argument passed to <code>JSON.stringify(..)</code>. Can be a positive number (how many space characters shoule be used at each indentation level) or a <code>string</code> (up to the first ten characters of its value will be used for each indentation level).<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=nx>b</span><span class=o>:</span> <span class=mi>42</span><span class=p>,</span></span>
+<span class=code-line>    <span class=nx>c</span><span class=o>:</span> <span class=s2>&quot;42&quot;</span><span class=p>,</span></span>
+<span class=code-line>    <span class=nx>d</span><span class=o>:</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>]</span></span>
+<span class=code-line><span class=p>};</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>(</span> <span class=nx>a</span><span class=p>,</span> <span class=kc>null</span><span class=p>,</span> <span class=mi>3</span> <span class=p>);</span></span>
+<span class=code-line><span class=c1>// &quot;{</span></span>
+<span class=code-line><span class=c1>//    &quot;b&quot;: 42,</span></span>
+<span class=code-line><span class=c1>//    &quot;c&quot;: &quot;42&quot;,</span></span>
+<span class=code-line><span class=c1>//    &quot;d&quot;: [</span></span>
+<span class=code-line><span class=c1>//       1,</span></span>
+<span class=code-line><span class=c1>//       2,</span></span>
+<span class=code-line><span class=c1>//       3</span></span>
+<span class=code-line><span class=c1>//    ]</span></span>
+<span class=code-line><span class=c1>// }&quot;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>(</span> <span class=nx>a</span><span class=p>,</span> <span class=kc>null</span><span class=p>,</span> <span class=s2>&quot;-----&quot;</span> <span class=p>);</span></span>
+<span class=code-line><span class=c1>// &quot;{</span></span>
+<span class=code-line><span class=c1>// -----&quot;b&quot;: 42,</span></span>
+<span class=code-line><span class=c1>// -----&quot;c&quot;: &quot;42&quot;,</span></span>
+<span class=code-line><span class=c1>// -----&quot;d&quot;: [</span></span>
+<span class=code-line><span class=c1>// ----------1,</span></span>
+<span class=code-line><span class=c1>// ----------2,</span></span>
+<span class=code-line><span class=c1>// ----------3</span></span>
+<span class=code-line><span class=c1>// -----]</span></span>
+<span class=code-line><span class=c1>// }&quot;</span></span>
+</pre></div><ol><li><code>string</code>, <code>number</code>, <code>boolean</code>, and <code>null</code> values all stringify for JSON basically the same as how they coerce to <code>string</code> values via the rules of the <code>ToString</code> abstract operation.<li>If you pass an <code>object</code> value to <code>JSON.stringify(..)</code>, and that <code>object</code> has a <code>toJSON()</code> method on it, <code>toJSON()</code> is automatically called to (sort of) "coerce" the value to be <em>JSON-safe</em> before stringification.</ol><h4 id=tonumber><a class=toclink href=#tonumber><code>toNumber</code></a></h4><p>Convert a non-<code>number</code> value to a <code>number</code>. If the conversion fails, it will return a <code>NaN</code> instead.<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=nx>valueOf</span><span class=o>:</span> <span class=kd>function</span><span class=p>(){</span></span>
+<span class=code-line>        <span class=k>return</span> <span class=s2>&quot;42&quot;</span><span class=p>;</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line><span class=p>};</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=nx>toString</span><span class=o>:</span> <span class=kd>function</span><span class=p>(){</span></span>
+<span class=code-line>        <span class=k>return</span> <span class=s2>&quot;42&quot;</span><span class=p>;</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line><span class=p>};</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>c</span> <span class=o>=</span> <span class=p>[</span><span class=mi>4</span><span class=p>,</span><span class=mi>2</span><span class=p>];</span></span>
+<span class=code-line><span class=nx>c</span><span class=p>.</span><span class=nx>toString</span> <span class=o>=</span> <span class=kd>function</span><span class=p>(){</span></span>
+<span class=code-line>    <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>join</span><span class=p>(</span> <span class=s2>&quot;&quot;</span> <span class=p>);</span> <span class=c1>// &quot;42&quot;</span></span>
+<span class=code-line><span class=p>};</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nb>Number</span><span class=p>(</span> <span class=nx>a</span> <span class=p>);</span>            <span class=c1>// 42</span></span>
+<span class=code-line><span class=nb>Number</span><span class=p>(</span> <span class=nx>b</span> <span class=p>);</span>            <span class=c1>// 42</span></span>
+<span class=code-line><span class=nb>Number</span><span class=p>(</span> <span class=nx>c</span> <span class=p>);</span>            <span class=c1>// 42</span></span>
+<span class=code-line><span class=nb>Number</span><span class=p>(</span> <span class=s2>&quot;&quot;</span> <span class=p>);</span>           <span class=c1>// 0</span></span>
+<span class=code-line><span class=nb>Number</span><span class=p>(</span> <span class=p>[]</span> <span class=p>);</span>           <span class=c1>// 0</span></span>
+<span class=code-line><span class=nb>Number</span><span class=p>(</span> <span class=p>[</span> <span class=s2>&quot;abc&quot;</span> <span class=p>]</span> <span class=p>);</span>    <span class=c1>// NaN</span></span>
+</pre></div><h4 id=toboolean><a class=toclink href=#toboolean><code>toBoolean</code></a></h4><p>One thing to notice: <code>0</code> can be coerced to <code>false</code>, or <code>1</code> to <code>true</code> (and vice versa). But they r not the same.<h5 id=falsy-values><a class=toclink href=#falsy-values>Falsy Values</a></h5><p>So-called falsy values will be coerced into <code>false</code> if you force a <code>boolean</code> coercion on it:<ul><li><code>undefined</code><li><code>null</code><li><code>false</code><li><code>+0</code>, <code>-0</code>, and <code>NaN</code><li><code>""</code></ul><h5 id=falsy-objects><a class=toclink href=#falsy-objects>Falsy Objects</a></h5><p>As the name says, they r objects ... <code>false</code> .... <code>boolean</code> coercion ....<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=k>new</span> <span class=nb>Boolean</span><span class=p>(</span> <span class=kc>false</span> <span class=p>);</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=k>new</span> <span class=nb>Number</span><span class=p>(</span> <span class=mi>0</span> <span class=p>);</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>c</span> <span class=o>=</span> <span class=k>new</span> <span class=nb>String</span><span class=p>(</span> <span class=s2>&quot;&quot;</span> <span class=p>);</span></span>
+</pre></div><p>THey seem to be falsy, but that's not true:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=k>new</span> <span class=nb>Boolean</span><span class=p>(</span><span class=kc>false</span><span class=p>);</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=k>new</span> <span class=nb>Boolean</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>c</span> <span class=o>=</span> <span class=k>new</span> <span class=nb>Boolean</span><span class=p>(</span><span class=s2>&quot;&quot;</span><span class=p>);</span></span>
+<span class=code-line><span class=nx>a</span> <span class=o>&amp;&amp;</span> <span class=nx>b</span> <span class=o>&amp;&amp;</span> <span class=nx>c</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// Boolean { false }</span></span>
+<span class=code-line><span class=nx>a</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// Boolean { false }</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>d</span> <span class=o>=</span> <span class=nb>Boolean</span><span class=p>(</span><span class=nx>a</span> <span class=o>&amp;&amp;</span> <span class=nx>b</span> <span class=o>&amp;&amp;</span> <span class=nx>c</span><span class=p>);</span></span>
+<span class=code-line><span class=nx>d</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// true</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>d</span> <span class=o>=</span> <span class=nx>a</span> <span class=o>&amp;&amp;</span> <span class=nx>b</span> <span class=o>&amp;&amp;</span> <span class=nx>c</span><span class=p>;</span></span>
+<span class=code-line><span class=nx>d</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// Boolean { false }</span></span>
+<span class=code-line><span class=nx>b</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// Boolean { false }</span></span>
+<span class=code-line><span class=nx>c</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// Boolean { false }</span></span>
+<span class=code-line><span class=nb>Boolean</span><span class=p>(</span><span class=nx>a</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// true</span></span>
+<span class=code-line><span class=nb>Boolean</span><span class=p>(</span><span class=nx>b</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// true</span></span>
+<span class=code-line><span class=nb>Boolean</span><span class=p>(</span><span class=nx>c</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// true</span></span>
+</pre></div><p>A most well-known case:<div class=highlight><pre><span class=code-line><span></span><span class=nb>Boolean</span><span class=p>(</span><span class=nb>document</span><span class=p>.</span><span class=nx>all</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// false</span></span>
+</pre></div><p><code>document.all</code> itself was never really "standard" and has long since been deprecated/abandoned. They are used as a means of detecting old, nonstandard IE.<h5 id=truthy-values><a class=toclink href=#truthy-values>Truthy Values</a></h5><p>It's the counterpart of the falsy values.<p>My runs for the examples:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=s2>&quot;false&quot;</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=s2>&quot;0&quot;</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>c</span> <span class=o>=</span> <span class=s2>&quot;&#39;&#39;&quot;</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>d</span> <span class=o>=</span> <span class=nb>Boolean</span><span class=p>(</span><span class=nx>a</span> <span class=o>&amp;&amp;</span> <span class=nx>b</span> <span class=o>&amp;&amp;</span> <span class=nx>c</span><span class=p>);</span></span>
+<span class=code-line><span class=nx>d</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// true</span></span>
+<span class=code-line><span class=nx>a</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// &quot;false&quot;</span></span>
+<span class=code-line><span class=nx>b</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// &quot;0&quot;</span></span>
+<span class=code-line><span class=nx>c</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// &quot;&#39;&#39;&quot;</span></span>
+<span class=code-line><span class=nx>a</span> <span class=o>&amp;&amp;</span> <span class=nx>b</span> <span class=o>&amp;&amp;</span> <span class=nx>c</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// &quot;&#39;&#39;&quot;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=p>[];</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=p>{};</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>c</span> <span class=o>=</span> <span class=kd>function</span><span class=p>(){};</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>d</span> <span class=o>=</span> <span class=nb>Boolean</span><span class=p>(</span><span class=nx>a</span> <span class=o>&amp;&amp;</span> <span class=nx>b</span> <span class=o>&amp;&amp;</span> <span class=nx>c</span><span class=p>);</span></span>
+<span class=code-line><span class=nx>d</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// true</span></span>
+</pre></div><p>To know whether a value is truthy, consult a finite falsy list. A truthy list would be infinitely long.<h3 id=explicit-coercion><a class=toclink href=#explicit-coercion>Explicit Coercion</a></h3><p>As the name says, the coercion is explicit and obvious.<h4 id=strings-numbers><a class=toclink href=#strings-numbers>Strings &lt;==&gt; Numbers</a></h4><p>Don't use the <code>new</code> keyword as in doing such a wrapped object will be created.<br>My runs:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=mi>42</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=nb>String</span><span class=p>(</span><span class=nx>a</span><span class=p>);</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>c</span> <span class=o>=</span> <span class=s2>&quot;3.14&quot;</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>d</span> <span class=o>=</span> <span class=nb>Number</span><span class=p>(</span><span class=nx>c</span><span class=p>);</span></span>
+<span class=code-line><span class=nx>b</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// &quot;42&quot;</span></span>
+<span class=code-line><span class=nx>d</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// 3.14</span></span>
+</pre></div><p>My runs on another way:<div class=highlight><pre><span class=code-line><span></span><span class=c1>//inherited from previously created var a, c</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=nx>a</span><span class=p>.</span><span class=nx>toString</span><span class=p>();</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>d</span> <span class=o>=</span> <span class=o>+</span><span class=nx>c</span><span class=p>;</span></span>
+<span class=code-line><span class=nx>b</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// &quot;42&quot;</span></span>
+<span class=code-line><span class=nx>d</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// 3.14</span></span>
+</pre></div><p>Something implicit happened here: <code>a</code> was automatically boxed as the primitive value doesn't have the function.<br>THe unary <code>+</code> is explicitly intended for <code>number</code> coercion.<p><code>++</code> and <code>--</code> have the side effect like they do in c/c++.<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>c</span> <span class=o>=</span> <span class=s2>&quot;3.14&quot;</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>d</span> <span class=o>=</span> <span class=mi>5</span> <span class=o>+</span> <span class=o>-</span><span class=nx>c</span><span class=p>;</span></span>
+<span class=code-line><span class=nx>d</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// 1.8599999999999999</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>d</span> <span class=o>=</span> <span class=mi>5</span> <span class=o>+</span> <span class=o>+</span><span class=nx>c</span><span class=p>;</span></span>
+<span class=code-line><span class=nx>d</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// 8.14</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>d</span> <span class=o>=</span> <span class=mi>5</span> <span class=o>+</span> <span class=o>++</span><span class=nx>c</span><span class=p>;</span></span>
+<span class=code-line><span class=nx>d</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// 9.14</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>d</span> <span class=o>=</span> <span class=mi>5</span> <span class=o>+</span> <span class=o>--</span><span class=nx>c</span><span class=p>;</span></span>
+<span class=code-line><span class=nx>d</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// 8.14</span></span>
+<span class=code-line><span class=nx>c</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// 3.1400000000000006</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>d</span> <span class=o>=</span> <span class=mi>5</span> <span class=o>+</span> <span class=o>--</span><span class=nx>c</span><span class=p>;</span></span>
+<span class=code-line><span class=nx>c</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// 2.1400000000000006</span></span>
+</pre></div><p>Trying to be explicit and <strong>reduce confusion</strong>, not make it worse.<h5 id=date-to-number><a class=toclink href=#date-to-number><code>Date</code> To <code>Number</code></a></h5><p>Use <code>+</code> to coerce a date into a <code>number</code> that is the unix timestamp.<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>d</span> <span class=o>=</span> <span class=k>new</span> <span class=nb>Date</span><span class=p>(</span><span class=s2>&quot;2019-05-09 20:00&quot;</span><span class=p>);</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=o>+</span><span class=nx>d</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// 1557403200000</span></span>
+</pre></div><p><code>+</code> get the now moment as a timestamp:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>now_timestamp</span> <span class=o>=</span> <span class=o>+</span><span class=k>new</span> <span class=nb>Date</span><span class=p>();</span></span>
+<span class=code-line><span class=nx>now_timestamp</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// 1557403504691</span></span>
+</pre></div><p>Due to a peculiar syntactic "trick", it's doable to omit <code>()</code>:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>now_timestamp</span> <span class=o>=</span> <span class=o>+</span><span class=k>new</span> <span class=nb>Date</span><span class=p>;</span></span>
+<span class=code-line><span class=nx>now_timestamp</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// 1557403628543</span></span>
+</pre></div><p>A noncoercion approach is preferred:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>timestamp</span> <span class=o>=</span> <span class=k>new</span> <span class=nb>Date</span><span class=p>().</span><span class=nx>getTime</span><span class=p>();</span></span>
+<span class=code-line><span class=nx>timestamp</span></span>
+<span class=code-line><span class=c1>// 1557405924752</span></span>
+</pre></div><p>A more prefferred and recommended way:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>timestamp</span> <span class=o>=</span> <span class=nb>Date</span><span class=p>.</span><span class=nx>now</span><span class=p>();</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>timestamp</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// 1557406018081</span></span>
+</pre></div><h5 id=the-curious-case-of-the><a class=toclink href=#the-curious-case-of-the>The Curious Case of the <code>~</code></a></h5><p>It's a bitwise operator.<p>It's pretty common to try to use <code>indexOf(..)</code> not just as an operation to get the position, but as a <code>boolean</code> check of presence/absence of a substring in another <code>string</code>. Here's how developers usually perform such checks:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=s2>&quot;Hello world&quot;</span><span class=p>;</span></span>
+<span class=code-line><span class=k>if</span> <span class=p>(</span><span class=nx>a</span><span class=p>.</span><span class=nx>indexOf</span><span class=p>(</span><span class=s2>&quot;lo&quot;</span><span class=p>)</span> <span class=o>&gt;=</span> <span class=mi>0</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>  <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&quot;True hmm.......&quot;</span><span class=p>);</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line><span class=c1>// True hmm.......</span></span>
+<span class=code-line><span class=k>if</span> <span class=p>(</span><span class=nx>a</span><span class=p>.</span><span class=nx>indexOf</span><span class=p>(</span><span class=s2>&quot;lo&quot;</span><span class=p>)</span> <span class=o>!=</span> <span class=o>-</span><span class=mi>1</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>  <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&quot;Uh&quot;</span><span class=p>);</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line><span class=c1>// Uh</span></span>
+<span class=code-line><span class=k>if</span> <span class=p>(</span><span class=nx>a</span><span class=p>.</span><span class=nx>indexOf</span><span class=p>(</span><span class=s2>&quot;ol&quot;</span><span class=p>)</span> <span class=o>&lt;</span> <span class=mi>0</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>  <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&quot;Uh&quot;</span><span class=p>);</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line><span class=c1>// Uh</span></span>
+<span class=code-line><span class=k>if</span> <span class=p>(</span><span class=nx>a</span><span class=p>.</span><span class=nx>indexOf</span><span class=p>(</span><span class=s2>&quot;ol&quot;</span><span class=p>)</span> <span class=o>==</span> <span class=o>-</span><span class=mi>1</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>  <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&quot;Uh&quot;</span><span class=p>);</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line><span class=c1>// Uh</span></span>
+<span class=code-line><span class=nx>a</span><span class=p>.</span><span class=nx>indexOf</span><span class=p>(</span><span class=s2>&quot;lo&quot;</span><span class=p>)</span></span>
+<span class=code-line><span class=c1>// 3</span></span>
+<span class=code-line><span class=nx>a</span><span class=p>.</span><span class=nx>indexOf</span><span class=p>(</span><span class=s2>&quot;ol&quot;</span><span class=p>)</span></span>
+<span class=code-line><span class=c1>// -1</span></span>
+</pre></div><p>Whether the substring is found or not, the number is treated as true in <code>if</code>.<div class=highlight><pre><span class=code-line><span></span><span class=o>~</span><span class=nx>a</span><span class=p>.</span><span class=nx>indexOf</span><span class=p>(</span><span class=s2>&quot;lo&quot;</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// -4</span></span>
+<span class=code-line><span class=k>if</span> <span class=p>(</span><span class=o>~</span><span class=nx>a</span><span class=p>.</span><span class=nx>indexOf</span><span class=p>(</span><span class=s2>&quot;lo&quot;</span><span class=p>))</span> <span class=p>{</span></span>
+<span class=code-line>  <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&quot;Found &#39;lo&#39;&quot;</span><span class=p>);</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line><span class=c1>// Found &#39;lo&#39;</span></span>
+<span class=code-line><span class=o>~</span><span class=nx>a</span><span class=p>.</span><span class=nx>indexOf</span><span class=p>(</span><span class=s2>&quot;ol&quot;</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// 0</span></span>
+<span class=code-line><span class=o>!~</span><span class=nx>a</span><span class=p>.</span><span class=nx>indexOf</span><span class=p>(</span><span class=s2>&quot;ol&quot;</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// true</span></span>
+<span class=code-line><span class=o>!~</span><span class=nx>a</span><span class=p>.</span><span class=nx>indexOf</span><span class=p>(</span><span class=s2>&quot;lo&quot;</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// false</span></span>
+<span class=code-line><span class=k>if</span> <span class=p>(</span><span class=o>!~</span><span class=nx>a</span><span class=p>.</span><span class=nx>indexOf</span><span class=p>(</span><span class=s2>&quot;ol&quot;</span><span class=p>))</span> <span class=p>{</span></span>
+<span class=code-line>  <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&quot;Not found&quot;</span><span class=p>);</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line><span class=c1>// Not found</span></span>
+<span class=code-line><span class=k>if</span> <span class=p>(</span><span class=nx>a</span><span class=p>.</span><span class=nx>indexOf</span><span class=p>(</span><span class=s2>&quot;ol&quot;</span><span class=p>))</span> <span class=p>{</span></span>
+<span class=code-line>  <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&quot;Found&quot;</span><span class=p>);</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line><span class=c1>// no output</span></span>
+</pre></div><p><code>~</code> takes the return value of <code>indexOf(..)</code> and transforms it: for the "failure" <code>-1</code> we get the falsy <code>0</code>, and every other value is truthy.<h6 id=truncating-bits><a class=toclink href=#truncating-bits>Truncating Bits</a></h6><p><code>~~</code> to truncate the decimal part of a <code>number</code>. First, it only works reliably on 32-bit values. But more importantly, it doesn't work the same on negative numbers as <code>Math.floor(..)</code> does:<div class=highlight><pre><span class=code-line><span></span><span class=nb>Math</span><span class=p>.</span><span class=nx>floor</span><span class=p>(</span><span class=o>-</span><span class=mf>49.6</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// -50</span></span>
+<span class=code-line><span class=o>~~-</span><span class=mf>49.6</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// -49</span></span>
+</pre></div><p><code>x | 0</code> does the same job, but:<div class=highlight><pre><span class=code-line><span></span><span class=o>~~</span><span class=mi>1</span><span class=nx>E20</span> <span class=o>/</span><span class=mi>10</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// 166199296</span></span>
+<span class=code-line><span class=o>~~</span><span class=mi>1</span><span class=nx>E20</span> <span class=o>|</span> <span class=mi>0</span> <span class=o>/</span><span class=mi>10</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// 1661992960</span></span>
+<span class=code-line><span class=p>(</span><span class=o>~~</span><span class=mi>1</span><span class=nx>E20</span> <span class=o>|</span> <span class=mi>0</span><span class=p>)</span> <span class=o>/</span><span class=mi>10</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// 166199296</span></span>
+</pre></div><h4 id=explicitly-parsing-numeric-strings><a class=toclink href=#explicitly-parsing-numeric-strings>Explicitly: Parsing Numeric Strings</a></h4><p>Between parsing and type conversion:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=s2>&quot;42&quot;</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=s2>&quot;42px&quot;</span><span class=p>;</span></span>
+<span class=code-line><span class=nb>Number</span><span class=p>(</span><span class=nx>a</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// 42</span></span>
+<span class=code-line><span class=nb>Number</span><span class=p>(</span><span class=nx>b</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// NaN</span></span>
+<span class=code-line><span class=nb>parseInt</span><span class=p>(</span><span class=nx>a</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// 42</span></span>
+<span class=code-line><span class=nb>parseInt</span><span class=p>(</span><span class=nx>b</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// 42</span></span>
+</pre></div><p>a twin of <code>parseInt</code>: <code>parseFloat</code><p>In <code>parseInt</code>, it's safe to pass the second parameter to set the base:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>min</span> <span class=o>=</span> <span class=nb>parseInt</span><span class=p>(</span><span class=s2>&quot;09&quot;</span><span class=p>);</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>hour</span> <span class=o>=</span> <span class=nb>parseInt</span><span class=p>(</span><span class=s2>&quot;08&quot;</span><span class=p>);</span></span>
+<span class=code-line><span class=nx>min</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// 9</span></span>
+<span class=code-line><span class=nx>hour</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// 8</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>hour</span> <span class=o>=</span> <span class=nb>parseInt</span><span class=p>(</span><span class=s2>&quot;08&quot;</span><span class=p>,</span> <span class=mi>8</span><span class=p>);</span></span>
+<span class=code-line><span class=nx>hour</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// 0</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>hour</span> <span class=o>=</span> <span class=nb>parseInt</span><span class=p>(</span><span class=s2>&quot;09&quot;</span><span class=p>,</span> <span class=mi>8</span><span class=p>);</span></span>
+<span class=code-line><span class=nx>hour</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// 0</span></span>
+</pre></div><h5 id=parsing-non-strings><a class=toclink href=#parsing-non-strings>Parsing Non-Strings</a></h5><p>All output are predictable in that all <code>js</code> representation have some sort of default <code>string</code> representation:<div class=highlight><pre><span class=code-line><span></span><span class=nb>parseInt</span><span class=p>(</span><span class=mi>1</span><span class=o>/</span><span class=mi>0</span><span class=p>,</span> <span class=mi>18</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// NaN</span></span>
+<span class=code-line><span class=nb>parseInt</span><span class=p>(</span><span class=k>new</span> <span class=nb>String</span><span class=p>(</span><span class=s2>&quot;42&quot;</span><span class=p>));</span></span>
+<span class=code-line><span class=c1>// 42</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=nx>num</span><span class=o>:</span> <span class=mi>21</span><span class=p>,</span></span>
+<span class=code-line>    <span class=nx>toString</span><span class=o>:</span> <span class=kd>function</span><span class=p>()</span> <span class=p>{</span> <span class=k>return</span> <span class=nb>String</span><span class=p>(</span> <span class=k>this</span><span class=p>.</span><span class=nx>num</span> <span class=o>*</span> <span class=mi>2</span> <span class=p>);</span> <span class=p>}</span></span>
+<span class=code-line><span class=p>};</span></span>
+<span class=code-line><span class=nb>parseInt</span><span class=p>(</span> <span class=nx>a</span> <span class=p>);</span></span>
+<span class=code-line><span class=c1>// 42</span></span>
+<span class=code-line><span class=nb>parseInt</span><span class=p>(</span><span class=mf>0.000008</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// 0</span></span>
+<span class=code-line><span class=nb>parseInt</span><span class=p>(</span><span class=mf>0.0000008</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// 8</span></span>
+<span class=code-line><span class=nb>parseInt</span><span class=p>(</span><span class=kc>false</span><span class=p>,</span> <span class=mi>16</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// 250</span></span>
+<span class=code-line><span class=nb>parseInt</span><span class=p>(</span><span class=nb>parseInt</span><span class=p>,</span> <span class=mi>16</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// 15</span></span>
+<span class=code-line><span class=nb>parseInt</span><span class=p>(</span><span class=s2>&quot;0x10&quot;</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// 16</span></span>
+<span class=code-line><span class=nb>parseInt</span><span class=p>(</span><span class=s2>&quot;103&quot;</span><span class=p>,</span> <span class=mi>2</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// 2</span></span>
+</pre></div><h4 id=explicitly-boolean><a class=toclink href=#explicitly-boolean>Explicitly: * --&gt; Boolean</a></h4><p>This is not recommended in js:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=mi>42</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=nx>a</span> <span class=o>?</span> <span class=kc>true</span> <span class=o>:</span> <span class=kc>false</span><span class=p>;</span></span>
+</pre></div><p><code>a</code> should be coerced to <code>boolean</code> first.<p><code>Boolean(a)</code> and <code>!!a</code> are far better as <em>explicit</em> coercion options.<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=s2>&quot;0&quot;</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=p>[];</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=p>{};</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>c</span> <span class=o>=</span> <span class=p>[];</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>d</span> <span class=o>=</span> <span class=s2>&quot;&quot;</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>e</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>f</span> <span class=o>=</span> <span class=kc>null</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>g</span><span class=p>;</span></span>
+<span class=code-line><span class=nb>Boolean</span><span class=p>(</span><span class=nx>a</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// true</span></span>
+<span class=code-line><span class=nb>Boolean</span><span class=p>(</span><span class=nx>b</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// true</span></span>
+<span class=code-line><span class=nb>Boolean</span><span class=p>(</span><span class=nx>c</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// true</span></span>
+<span class=code-line><span class=nb>Boolean</span><span class=p>(</span><span class=nx>d</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// false</span></span>
+<span class=code-line><span class=nb>Boolean</span><span class=p>(</span><span class=nx>e</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// false</span></span>
+<span class=code-line><span class=nb>Boolean</span><span class=p>(</span><span class=nx>f</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// false</span></span>
+<span class=code-line><span class=nb>Boolean</span><span class=p>(</span><span class=nx>g</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// false</span></span>
+<span class=code-line><span class=o>!!</span><span class=nx>a</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// true</span></span>
+<span class=code-line><span class=o>!!</span><span class=nx>b</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// true</span></span>
+<span class=code-line><span class=o>!!</span><span class=nx>c</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// true</span></span>
+<span class=code-line><span class=o>!!</span><span class=nx>d</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// false</span></span>
+<span class=code-line><span class=o>!!</span><span class=nx>e</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// false</span></span>
+<span class=code-line><span class=o>!!</span><span class=nx>f</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// false</span></span>
+<span class=code-line><span class=o>!!</span><span class=nx>g</span><span class=p>;</span></span>
+<span class=code-line><span class=c1>// false</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=p>[</span></span>
+<span class=code-line>    <span class=mi>1</span><span class=p>,</span></span>
+<span class=code-line>    <span class=kd>function</span><span class=p>(){</span> <span class=cm>/*..*/</span> <span class=p>},</span></span>
+<span class=code-line>    <span class=mi>2</span><span class=p>,</span></span>
+<span class=code-line>    <span class=kd>function</span><span class=p>(){</span> <span class=cm>/*..*/</span> <span class=p>}</span></span>
+<span class=code-line><span class=p>];</span></span>
+<span class=code-line><span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>(</span> <span class=nx>a</span> <span class=p>);</span></span>
+<span class=code-line><span class=c1>// &quot;[1,null,2,null]&quot;</span></span>
+<span class=code-line><span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>(</span> <span class=nx>a</span><span class=p>,</span> <span class=kd>function</span><span class=p>(</span><span class=nx>key</span><span class=p>,</span><span class=nx>val</span><span class=p>){</span></span>
+<span class=code-line>    <span class=k>if</span> <span class=p>(</span><span class=k>typeof</span> <span class=nx>val</span> <span class=o>==</span> <span class=s2>&quot;function&quot;</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>        <span class=c1>// force `ToBoolean` coercion of the function</span></span>
+<span class=code-line>        <span class=k>return</span> <span class=o>!!</span><span class=nx>val</span><span class=p>;</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line>    <span class=k>else</span> <span class=p>{</span></span>
+<span class=code-line>        <span class=k>return</span> <span class=nx>val</span><span class=p>;</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line><span class=p>}</span> <span class=p>);</span></span>
+<span class=code-line><span class=c1>// &quot;[1,true,2,true]&quot;</span></span>
+</pre></div><h3 id=implicit-coercion><a class=toclink href=#implicit-coercion>Implicit Coercion</a></h3><h4 id=simplifying-implicitly><a class=toclink href=#simplifying-implicitly>Simplifying Implicitly</a></h4><p>There are good part in "implicit", don't refuse it. I guess that what it talks about.<h4 id=implicitly-strings-numbers><a class=toclink href=#implicitly-strings-numbers>Implicitly: Strings &lt;==&gt; Numbers</a></h4><p>Common concatenation:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=s2>&quot;42&quot;</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=s2>&quot;0&quot;</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>c</span> <span class=o>=</span> <span class=mi>42</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>d</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span> <span class=o>+</span> <span class=nx>b</span><span class=p>;</span> <span class=c1>// &quot;420&quot;</span></span>
+<span class=code-line><span class=nx>c</span> <span class=o>+</span> <span class=nx>d</span><span class=p>;</span> <span class=c1>// 42</span></span>
+</pre></div><p>Array turned into string:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>];</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=p>[</span><span class=mi>3</span><span class=p>,</span><span class=mi>4</span><span class=p>];</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span> <span class=o>+</span> <span class=nx>b</span><span class=p>;</span> <span class=c1>// &quot;1,23,4&quot;</span></span>
+</pre></div><p>According to ES5 spec section 11.6.1, the <code>+</code> algorithm (when an <code>object</code> value is an operand) will concatenate if either operand is either already a <code>string</code>, or if the following steps produce a <code>string</code> representation. So, when <code>+</code> receives an <code>object</code> (including <code>array</code>) for either operand, it first calls the <code>ToPrimitive</code> abstract operation (section 9.1) on the value, which then calls the <code>[[DefaultValue]]</code> algorithm (section 8.12.8) with a context hint of <code>number</code>.<p>Coerce a number to a string:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=mi>42</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=nx>a</span> <span class=o>+</span> <span class=s2>&quot;&quot;</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>b</span><span class=p>;</span> <span class=c1>// &quot;42&quot;</span></span>
+</pre></div><p>If you're using an <code>object</code> instead of a regular primitive <code>number</code> value, you may not necessarily get the <em>same</em> <code>string</code> value!<p>Consider:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=nx>valueOf</span><span class=o>:</span> <span class=kd>function</span><span class=p>()</span> <span class=p>{</span> <span class=k>return</span> <span class=mi>42</span><span class=p>;</span> <span class=p>},</span></span>
+<span class=code-line>    <span class=nx>toString</span><span class=o>:</span> <span class=kd>function</span><span class=p>()</span> <span class=p>{</span> <span class=k>return</span> <span class=mi>4</span><span class=p>;</span> <span class=p>}</span></span>
+<span class=code-line><span class=p>};</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span> <span class=o>+</span> <span class=s2>&quot;&quot;</span><span class=p>;</span>         <span class=c1>// &quot;42&quot;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nb>String</span><span class=p>(</span> <span class=nx>a</span> <span class=p>);</span>    <span class=c1>// &quot;4&quot;</span></span>
+</pre></div><p>Implicitly coerce* from <code>string</code> to <code>number</code>:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=s2>&quot;3.14&quot;</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=nx>a</span> <span class=o>-</span> <span class=mi>0</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>b</span><span class=p>;</span> <span class=c1>// 3.14</span></span>
+</pre></div><p>The <code>-</code> operator is defined only for numeric subtraction, so <code>a - 0</code> forces <code>a</code>'s value to be coerced to a <code>number</code>. While far less common, <code>a * 1</code> or <code>a / 1</code> would accomplish the same result, as those operators are also only defined for numeric operations.<p>Object value with <code>-</code>:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=p>[</span><span class=mi>3</span><span class=p>];</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=p>[</span><span class=mi>1</span><span class=p>];</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span> <span class=o>-</span> <span class=nx>b</span><span class=p>;</span> <span class=c1>// 2</span></span>
+</pre></div><h4 id=implicitly-booleans-numbers><a class=toclink href=#implicitly-booleans-numbers>Implicitly: Booleans --&gt; Numbers</a></h4><div class=highlight><pre><span class=code-line><span></span><span class=kd>function</span> <span class=nx>onlyOne</span><span class=p>(</span><span class=nx>a</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>c</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>  <span class=k>return</span> <span class=o>!!</span><span class=p>((</span><span class=nx>a</span> <span class=o>&amp;&amp;</span> <span class=o>!</span><span class=nx>b</span> <span class=o>&amp;&amp;</span> <span class=o>!</span><span class=nx>c</span><span class=p>)</span> <span class=o>||</span></span>
+<span class=code-line>            <span class=p>(</span><span class=o>!</span><span class=nx>a</span> <span class=o>&amp;&amp;</span> <span class=nx>b</span> <span class=o>&amp;&amp;</span> <span class=o>!</span><span class=nx>c</span><span class=p>)</span> <span class=o>||</span> <span class=p>(</span><span class=o>!</span><span class=nx>a</span> <span class=o>&amp;&amp;</span> <span class=o>!</span><span class=nx>b</span> <span class=o>&amp;&amp;</span> <span class=nx>c</span><span class=p>));</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=kc>true</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=kc>false</span><span class=p>;</span></span>
+<span class=code-line><span class=nx>onlyOne</span><span class=p>(</span><span class=nx>a</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// true</span></span>
+<span class=code-line><span class=nx>onlyOne</span><span class=p>(</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// false</span></span>
+</pre></div><p>If there are four or more to get only one true:<div class=highlight><pre><span class=code-line><span></span><span class=kd>function</span> <span class=nx>onlyOne</span><span class=p>()</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=kd>var</span> <span class=nx>sum</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span></span>
+<span class=code-line>    <span class=k>for</span> <span class=p>(</span><span class=kd>var</span> <span class=nx>i</span><span class=o>=</span><span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=o>&lt;</span> <span class=nx>arguments</span><span class=p>.</span><span class=nx>length</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>        <span class=c1>// skip falsy values. same as treating</span></span>
+<span class=code-line>        <span class=c1>// them as 0&#39;s, but avoids NaN&#39;s.</span></span>
+<span class=code-line>        <span class=k>if</span> <span class=p>(</span><span class=nx>arguments</span><span class=p>[</span><span class=nx>i</span><span class=p>])</span> <span class=p>{</span></span>
+<span class=code-line>            <span class=nx>sum</span> <span class=o>+=</span> <span class=nx>arguments</span><span class=p>[</span><span class=nx>i</span><span class=p>];</span></span>
+<span class=code-line>        <span class=p>}</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line>    <span class=k>return</span> <span class=nx>sum</span> <span class=o>==</span> <span class=mi>1</span><span class=p>;</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=kc>true</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=kc>false</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>onlyOne</span><span class=p>(</span> <span class=nx>b</span><span class=p>,</span> <span class=nx>a</span> <span class=p>);</span>        <span class=c1>// true</span></span>
+<span class=code-line><span class=nx>onlyOne</span><span class=p>(</span> <span class=nx>b</span><span class=p>,</span> <span class=nx>a</span><span class=p>,</span> <span class=nx>b</span><span class=p>,</span> <span class=nx>b</span><span class=p>,</span> <span class=nx>b</span> <span class=p>);</span>   <span class=c1>// true</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>onlyOne</span><span class=p>(</span> <span class=nx>b</span><span class=p>,</span> <span class=nx>b</span> <span class=p>);</span>        <span class=c1>// false</span></span>
+<span class=code-line><span class=nx>onlyOne</span><span class=p>(</span> <span class=nx>b</span><span class=p>,</span> <span class=nx>a</span><span class=p>,</span> <span class=nx>b</span><span class=p>,</span> <span class=nx>b</span><span class=p>,</span> <span class=nx>b</span><span class=p>,</span> <span class=nx>a</span> <span class=p>);</span>    <span class=c1>// false</span></span>
+</pre></div><p>A version using <code>reduce(..)</code><sup id=fnref:1><a class=footnote-ref href=#fn:1 rel=footnote>1</a></sup>:<div class=highlight><pre><span class=code-line><span></span><span class=kd>function</span> <span class=nx>onlyOne</span><span class=p>()</span> <span class=p>{</span></span>
+<span class=code-line>  <span class=k>return</span> <span class=nb>Object</span><span class=p>.</span><span class=nx>values</span><span class=p>(</span><span class=nx>arguments</span><span class=p>).</span><span class=nx>reduce</span><span class=p>((</span><span class=nx>total</span><span class=p>,</span> <span class=nx>current</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>total</span> <span class=o>+</span> <span class=nx>current</span><span class=p>)</span> <span class=o>==</span> <span class=mi>1</span><span class=p>;</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line><span class=nx>onlyOne</span><span class=p>(</span><span class=nx>a</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>a</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// false</span></span>
+<span class=code-line><span class=nx>onlyOne</span><span class=p>(</span><span class=nx>a</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>b</span><span class=p>);</span></span>
+<span class=code-line><span class=c1>// true</span></span>
+</pre></div><p>Explicit version:<div class=highlight><pre><span class=code-line><span></span><span class=kd>function</span> <span class=nx>onlyOne</span><span class=p>()</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=kd>var</span> <span class=nx>sum</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span></span>
+<span class=code-line>    <span class=k>for</span> <span class=p>(</span><span class=kd>var</span> <span class=nx>i</span><span class=o>=</span><span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=o>&lt;</span> <span class=nx>arguments</span><span class=p>.</span><span class=nx>length</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>        <span class=nx>sum</span> <span class=o>+=</span> <span class=nb>Number</span><span class=p>(</span> <span class=o>!!</span><span class=nx>arguments</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span> <span class=p>);</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line>    <span class=k>return</span> <span class=nx>sum</span> <span class=o>===</span> <span class=mi>1</span><span class=p>;</span></span>
+<span class=code-line><span class=p>}</span></span>
+</pre></div><h4 id=implicitly-boolean><a class=toclink href=#implicitly-boolean>Implicitly: * --&gt; Boolean</a></h4><div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=mi>42</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=s2>&quot;abc&quot;</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>c</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>d</span> <span class=o>=</span> <span class=kc>null</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>if</span> <span class=p>(</span><span class=nx>a</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span> <span class=s2>&quot;yep&quot;</span> <span class=p>);</span>       <span class=c1>// yep</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>while</span> <span class=p>(</span><span class=nx>c</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span> <span class=s2>&quot;nope, never runs&quot;</span> <span class=p>);</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>c</span> <span class=o>=</span> <span class=nx>d</span> <span class=o>?</span> <span class=nx>a</span> <span class=o>:</span> <span class=nx>b</span><span class=p>;</span></span>
+<span class=code-line><span class=nx>c</span><span class=p>;</span>                  <span class=c1>// &quot;abc&quot;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>if</span> <span class=p>((</span><span class=nx>a</span> <span class=o>&amp;&amp;</span> <span class=nx>d</span><span class=p>)</span> <span class=o>||</span> <span class=nx>c</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span> <span class=s2>&quot;yep&quot;</span> <span class=p>);</span>       <span class=c1>// yep</span></span>
+<span class=code-line><span class=p>}</span></span>
+</pre></div><h4 id=operators-and-ampamp><a class=toclink href=#operators-and-ampamp>Operators <code>||</code> and <code>&amp;&amp;</code></a></h4><p>Quoting the ES5 spec from section 11.11:<blockquote><p>The value produced by a &amp;&amp; or || operator is not necessarily of type Boolean. The value produced will always be the value of one of the two operand expressions.</blockquote><div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=mi>42</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=s2>&quot;abc&quot;</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>c</span> <span class=o>=</span> <span class=kc>null</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span> <span class=o>||</span> <span class=nx>b</span><span class=p>;</span>     <span class=c1>// 42</span></span>
+<span class=code-line><span class=nx>a</span> <span class=o>&amp;&amp;</span> <span class=nx>b</span><span class=p>;</span>     <span class=c1>// &quot;abc&quot;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>c</span> <span class=o>||</span> <span class=nx>b</span><span class=p>;</span>     <span class=c1>// &quot;abc&quot;</span></span>
+<span class=code-line><span class=nx>c</span> <span class=o>&amp;&amp;</span> <span class=nx>b</span><span class=p>;</span>     <span class=c1>// null</span></span>
+</pre></div><p>Both operators will always test the first operands.<p>Below, "RES" == "The result of the first operands".<table><thead><tr><th align=left>RES\Operand<th align=left><code>||</code><th align=left><code>&amp;&amp;</code><tbody><tr><td align=left><code>true</code><td align=left>The first<td align=left>The second<tr><td align=left><code>false</code><td align=left>The second<td align=left>The first</table><p>The table tells that what will be returned from the operator in certain condition.<h4 id=symbol-coercion><a class=toclink href=#symbol-coercion>Symbol Coercion</a></h4><div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>s1</span> <span class=o>=</span> <span class=nx>Symbol</span><span class=p>(</span> <span class=s2>&quot;cool&quot;</span> <span class=p>);</span></span>
+<span class=code-line><span class=nb>String</span><span class=p>(</span> <span class=nx>s1</span> <span class=p>);</span>                   <span class=c1>// &quot;Symbol(cool)&quot;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>s2</span> <span class=o>=</span> <span class=nx>Symbol</span><span class=p>(</span> <span class=s2>&quot;not cool&quot;</span> <span class=p>);</span></span>
+<span class=code-line><span class=nx>s2</span> <span class=o>+</span> <span class=s2>&quot;&quot;</span><span class=p>;</span>                        <span class=c1>// TypeError</span></span>
+</pre></div><p>The good news: it's probably going to be exceedingly rare for you to need to coerce a <code>symbol</code> value. The way they're typically used (see Chapter 3) will probably not call for coercion on a normal basis.<h3 id=loose-equals-vs-strict-equals><a class=toclink href=#loose-equals-vs-strict-equals>Loose Equals vs. Strict Equals</a></h3><p>Loose equals is the <code>==</code> operator, and strict equals is the <code>===</code> operator. Both operators are used for comparing two values for "equality," but the "loose" vs. "strict" indicates a <strong>very important</strong> difference in behavior between the two, specifically in how they decide "equality."<p>A very common misconception about these two operators is: "<code>==</code> checks values for equality and <code>===</code> checks both values and types for equality."<p>The correct description is: "<code>==</code> allows coercion in the equality comparison and <code>===</code> disallows coercion."<h4 id=equality-performance><a class=toclink href=#equality-performance>Equality Performance</a></h4><p>If you want coercion, use <code>==</code> loose equality, but if you don't want coercion, use <code>===</code> strict equality.<p><strong>Note:</strong> The implication here then is that both <code>==</code> and <code>===</code> check the types of their operands. The difference is in how they respond if the types don't match.<h4 id=abstract-equality><a class=toclink href=#abstract-equality>Abstract Equality</a></h4><p>Basically, the first clause (11.9.3.1) says, if the two values being compared are of the same type, they are simply and naturally compared via Identity as you'd expect. For example, <code>42</code> is only equal to <code>42</code>, and <code>"abc"</code> is only equal to <code>"abc"</code>.<p>Some minor exceptions to normal expectation to be aware of:<ul><li><code>NaN</code> is never equal to itself (see Chapter 2)<li><code>+0</code> and <code>-0</code> are equal to each other (see Chapter 2)</ul><p>The final provision in clause 11.9.3.1 is for <code>==</code> loose equality comparison with <code>object</code>s (including <code>function</code>s and <code>array</code>s). Two such values are only <em>equal</em> if they are both references to <em>the exact same value</em>. No coercion occurs here.<p><strong>Note:</strong> The <code>===</code> strict equality comparison is defined identically to 11.9.3.1, including the provision about two <code>object</code> values. It's a very little known fact that <strong><code>==</code> and <code>===</code> behave identically</strong> in the case where two <code>object</code>s are being compared!<p>The rest of the algorithm in 11.9.3 specifies that if you use <code>==</code> loose equality to compare two values of different types, one or both of the values will need to be <em>implicitly</em> coerced. This coercion happens so that both values eventually end up as the same type, which can then directly be compared for equality using simple value Identity.<p><strong>Note:</strong> The <code>!=</code> loose not-equality operation is defined exactly as you'd expect, in that it's literally the <code>==</code> operation comparison performed in its entirety, then the negation of the result. The same goes for the <code>!==</code> strict not-equality operation.<h5 id=comparing-strings-to-numbers><a class=toclink href=#comparing-strings-to-numbers>Comparing: <code>string</code>s to <code>number</code>s</a></h5><div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=mi>42</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=s2>&quot;42&quot;</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span> <span class=o>===</span> <span class=nx>b</span><span class=p>;</span>    <span class=c1>// false</span></span>
+<span class=code-line><span class=nx>a</span> <span class=o>==</span> <span class=nx>b</span><span class=p>;</span>     <span class=c1>// true</span></span>
+</pre></div><p>In the ES5 spec, clauses 11.9.3.4-5 say:<blockquote><ol><li>If Type(x) is Number and Type(y) is String,
+return the result of the comparison x == ToNumber(y).<li>If Type(x) is String and Type(y) is Number,
+return the result of the comparison ToNumber(x) == y.</ol></blockquote><p>According to this, it's the string <code>"42"</code> coerced into the number <code>42</code> when the <code>==</code> is used.<h5 id=comparing-anything-to-boolean><a class=toclink href=#comparing-anything-to-boolean>Comparing: anything to <code>boolean</code></a></h5><div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=s2>&quot;42&quot;</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=kc>true</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span> <span class=o>==</span> <span class=nx>b</span><span class=p>;</span> <span class=c1>// false</span></span>
+</pre></div><p>Let's again quote the spec, clauses 11.9.3.6-7:<blockquote><ol><li>If Type(x) is Boolean,
+return the result of the comparison ToNumber(x) == y.<li>If Type(y) is Boolean,
+return the result of the comparison x == ToNumber(y).</ol></blockquote><p>It's <strong>not performing a boolean test</strong>. The boolean was just coerced into number <code>1</code>.<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=s2>&quot;42&quot;</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=c1>// bad (will fail!):</span></span>
+<span class=code-line><span class=k>if</span> <span class=p>(</span><span class=nx>a</span> <span class=o>==</span> <span class=kc>true</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=c1>// ..</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=c1>// also bad (will fail!):</span></span>
+<span class=code-line><span class=k>if</span> <span class=p>(</span><span class=nx>a</span> <span class=o>===</span> <span class=kc>true</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=c1>// ..</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=c1>// good enough (works implicitly):</span></span>
+<span class=code-line><span class=k>if</span> <span class=p>(</span><span class=nx>a</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=c1>// ..</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=c1>// better (works explicitly):</span></span>
+<span class=code-line><span class=k>if</span> <span class=p>(</span><span class=o>!!</span><span class=nx>a</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=c1>// ..</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=c1>// also great (works explicitly):</span></span>
+<span class=code-line><span class=k>if</span> <span class=p>(</span><span class=nb>Boolean</span><span class=p>(</span> <span class=nx>a</span> <span class=p>))</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=c1>// ..</span></span>
+<span class=code-line><span class=p>}</span></span>
+</pre></div><h5 id=comparing-nulls-to-undefineds><a class=toclink href=#comparing-nulls-to-undefineds>Comparing: <code>null</code>s to <code>undefined</code>s</a></h5><p>Another example of <em>implicit</em> coercion can be seen with <code>==</code> loose equality between <code>null</code> and <code>undefined</code> values. Yet again quoting the ES5 spec, clauses 11.9.3.2-3:<blockquote><ol><li>If x is null and y is undefined, return true.<li>If x is undefined and y is null, return true.</ol></blockquote><div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=kc>null</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span> <span class=o>==</span> <span class=nx>b</span><span class=p>;</span>     <span class=c1>// true</span></span>
+<span class=code-line><span class=nx>a</span> <span class=o>==</span> <span class=kc>null</span><span class=p>;</span>  <span class=c1>// true</span></span>
+<span class=code-line><span class=nx>b</span> <span class=o>==</span> <span class=kc>null</span><span class=p>;</span>  <span class=c1>// true</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span> <span class=o>==</span> <span class=kc>false</span><span class=p>;</span> <span class=c1>// false</span></span>
+<span class=code-line><span class=nx>b</span> <span class=o>==</span> <span class=kc>false</span><span class=p>;</span> <span class=c1>// false</span></span>
+<span class=code-line><span class=nx>a</span> <span class=o>==</span> <span class=s2>&quot;&quot;</span><span class=p>;</span>    <span class=c1>// false</span></span>
+<span class=code-line><span class=nx>b</span> <span class=o>==</span> <span class=s2>&quot;&quot;</span><span class=p>;</span>    <span class=c1>// false</span></span>
+<span class=code-line><span class=nx>a</span> <span class=o>==</span> <span class=mi>0</span><span class=p>;</span>     <span class=c1>// false</span></span>
+<span class=code-line><span class=nx>b</span> <span class=o>==</span> <span class=mi>0</span><span class=p>;</span>     <span class=c1>// false</span></span>
+</pre></div><p>The author recommends using this coercion to allow <code>null</code> and <code>undefined</code> to be indistinguishable and thus treated as the same value.<p>For example:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=nx>doSomething</span><span class=p>();</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>if</span> <span class=p>(</span><span class=nx>a</span> <span class=o>==</span> <span class=kc>null</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=c1>// ..</span></span>
+<span class=code-line><span class=p>}</span></span>
+</pre></div><p>The <code>a == null</code> only pass when a is either <code>null</code> or <code>undefined</code><p>THe uglier explicit version:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=nx>doSomething</span><span class=p>();</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>if</span> <span class=p>(</span><span class=nx>a</span> <span class=o>===</span> <span class=kc>undefined</span> <span class=o>||</span> <span class=nx>a</span> <span class=o>===</span> <span class=kc>null</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=c1>// ..</span></span>
+<span class=code-line><span class=p>}</span></span>
+</pre></div><p>It's reliable safe way of using implicit coersion.<h5 id=comparing-objects-to-non-objects><a class=toclink href=#comparing-objects-to-non-objects>Comparing: <code>object</code>s to non-<code>object</code>s</a></h5><p>If an <code>object</code>/<code>function</code>/<code>array</code> is compared to a simple scalar primitive (<code>string</code>, <code>number</code>, or <code>boolean</code>), the ES5 spec says in clauses 11.9.3.8-9:<blockquote><ol><li>If Type(x) is either String or Number and Type(y) is Object,
+return the result of the comparison x == ToPrimitive(y).<li>If Type(x) is Object and Type(y) is either String or Number,
+return the result of the comparison ToPrimitive(x) == y.</ol></blockquote><p>No boolean 'cause in a <code>==</code> sentence a boolean will always be coerced into a <code>Number</code> first.<p>There are some values where this is not the case, though, because of other overriding rules in the <code>==</code> algorithm. Consider:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=kc>null</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=nb>Object</span><span class=p>(</span> <span class=nx>a</span> <span class=p>);</span>    <span class=c1>// same as `Object()`</span></span>
+<span class=code-line><span class=nx>a</span> <span class=o>==</span> <span class=nx>b</span><span class=p>;</span>                 <span class=c1>// false</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>c</span> <span class=o>=</span> <span class=kc>undefined</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>d</span> <span class=o>=</span> <span class=nb>Object</span><span class=p>(</span> <span class=nx>c</span> <span class=p>);</span>    <span class=c1>// same as `Object()`</span></span>
+<span class=code-line><span class=nx>c</span> <span class=o>==</span> <span class=nx>d</span><span class=p>;</span>                 <span class=c1>// false</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>e</span> <span class=o>=</span> <span class=kc>NaN</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>f</span> <span class=o>=</span> <span class=nb>Object</span><span class=p>(</span> <span class=nx>e</span> <span class=p>);</span>    <span class=c1>// same as `new Number( e )`</span></span>
+<span class=code-line><span class=nx>e</span> <span class=o>==</span> <span class=nx>f</span><span class=p>;</span>                 <span class=c1>// false</span></span>
+</pre></div><p>The <code>null</code> and <code>undefined</code> values cannot be boxed -- they have no object wrapper equivalent -- so <code>Object(null)</code> is just like <code>Object()</code> in that both just produce a normal object.<p><code>NaN</code> can be boxed to its <code>Number</code> object wrapper equivalent, but when <code>==</code> causes an unboxing, the <code>NaN == NaN</code> comparison fails because <code>NaN</code> is never equal to itself (see Chapter 2).<h4 id=edge-cases><a class=toclink href=#edge-cases>Edge Cases</a></h4><p>This section the worst, craziest corner cases will be called so we can see what we need to avoid to not get bitten with coercion bugs.<h5 id=a-number-by-any-other-value-would><a class=toclink href=#a-number-by-any-other-value-would>A Number By Any Other Value Would...</a></h5><div class=highlight><pre><span class=code-line><span></span><span class=nb>Number</span><span class=p>.</span><span class=nx>prototype</span><span class=p>.</span><span class=nx>valueOf</span> <span class=o>=</span> <span class=kd>function</span><span class=p>()</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=k>return</span> <span class=mi>3</span><span class=p>;</span></span>
+<span class=code-line><span class=p>};</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>new</span> <span class=nb>Number</span><span class=p>(</span> <span class=mi>2</span> <span class=p>)</span> <span class=o>==</span> <span class=mi>3</span><span class=p>;</span>   <span class=c1>// true</span></span>
+</pre></div><p>It's trap that should be avoided.<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>i</span> <span class=o>=</span> <span class=mi>2</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nb>Number</span><span class=p>.</span><span class=nx>prototype</span><span class=p>.</span><span class=nx>valueOf</span> <span class=o>=</span> <span class=kd>function</span><span class=p>()</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=k>return</span> <span class=nx>i</span><span class=o>++</span><span class=p>;</span></span>
+<span class=code-line><span class=p>};</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=k>new</span> <span class=nb>Number</span><span class=p>(</span> <span class=mi>42</span> <span class=p>);</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>if</span> <span class=p>(</span><span class=nx>a</span> <span class=o>==</span> <span class=mi>2</span> <span class=o>&amp;&amp;</span> <span class=nx>a</span> <span class=o>==</span> <span class=mi>3</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span> <span class=s2>&quot;Yep, this happened.&quot;</span> <span class=p>);</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line><span class=c1>// Yep, this happened.</span></span>
+</pre></div><p>Avoid these crazy tricks, and stick only with valid and proper usage of coercion.<h5 id=false-y-comparisons><a class=toclink href=#false-y-comparisons>False-y Comparisons</a></h5><div class=highlight><pre><span class=code-line><span></span><span class=s2>&quot;0&quot;</span> <span class=o>==</span> <span class=kc>null</span><span class=p>;</span>            <span class=c1>// false</span></span>
+<span class=code-line><span class=s2>&quot;0&quot;</span> <span class=o>==</span> <span class=kc>undefined</span><span class=p>;</span>       <span class=c1>// false</span></span>
+<span class=code-line><span class=s2>&quot;0&quot;</span> <span class=o>==</span> <span class=kc>false</span><span class=p>;</span>           <span class=c1>// true -- UH OH!</span></span>
+<span class=code-line><span class=s2>&quot;0&quot;</span> <span class=o>==</span> <span class=kc>NaN</span><span class=p>;</span>             <span class=c1>// false</span></span>
+<span class=code-line><span class=s2>&quot;0&quot;</span> <span class=o>==</span> <span class=mi>0</span><span class=p>;</span>               <span class=c1>// true</span></span>
+<span class=code-line><span class=s2>&quot;0&quot;</span> <span class=o>==</span> <span class=s2>&quot;&quot;</span><span class=p>;</span>              <span class=c1>// false</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=kc>false</span> <span class=o>==</span> <span class=kc>null</span><span class=p>;</span>          <span class=c1>// false</span></span>
+<span class=code-line><span class=kc>false</span> <span class=o>==</span> <span class=kc>undefined</span><span class=p>;</span>     <span class=c1>// false</span></span>
+<span class=code-line><span class=kc>false</span> <span class=o>==</span> <span class=kc>NaN</span><span class=p>;</span>           <span class=c1>// false</span></span>
+<span class=code-line><span class=kc>false</span> <span class=o>==</span> <span class=mi>0</span><span class=p>;</span>             <span class=c1>// true -- UH OH!</span></span>
+<span class=code-line><span class=kc>false</span> <span class=o>==</span> <span class=s2>&quot;&quot;</span><span class=p>;</span>            <span class=c1>// true -- UH OH!</span></span>
+<span class=code-line><span class=kc>false</span> <span class=o>==</span> <span class=p>[];</span>            <span class=c1>// true -- UH OH!</span></span>
+<span class=code-line><span class=kc>false</span> <span class=o>==</span> <span class=p>{};</span>            <span class=c1>// false</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=s2>&quot;&quot;</span> <span class=o>==</span> <span class=kc>null</span><span class=p>;</span>             <span class=c1>// false</span></span>
+<span class=code-line><span class=s2>&quot;&quot;</span> <span class=o>==</span> <span class=kc>undefined</span><span class=p>;</span>        <span class=c1>// false</span></span>
+<span class=code-line><span class=s2>&quot;&quot;</span> <span class=o>==</span> <span class=kc>NaN</span><span class=p>;</span>              <span class=c1>// false</span></span>
+<span class=code-line><span class=s2>&quot;&quot;</span> <span class=o>==</span> <span class=mi>0</span><span class=p>;</span>                <span class=c1>// true -- UH OH!</span></span>
+<span class=code-line><span class=s2>&quot;&quot;</span> <span class=o>==</span> <span class=p>[];</span>               <span class=c1>// true -- UH OH!</span></span>
+<span class=code-line><span class=s2>&quot;&quot;</span> <span class=o>==</span> <span class=p>{};</span>               <span class=c1>// false</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=mi>0</span> <span class=o>==</span> <span class=kc>null</span><span class=p>;</span>              <span class=c1>// false</span></span>
+<span class=code-line><span class=mi>0</span> <span class=o>==</span> <span class=kc>undefined</span><span class=p>;</span>         <span class=c1>// false</span></span>
+<span class=code-line><span class=mi>0</span> <span class=o>==</span> <span class=kc>NaN</span><span class=p>;</span>               <span class=c1>// false</span></span>
+<span class=code-line><span class=mi>0</span> <span class=o>==</span> <span class=p>[];</span>                <span class=c1>// true -- UH OH!</span></span>
+<span class=code-line><span class=mi>0</span> <span class=o>==</span> <span class=p>{};</span>                <span class=c1>// false</span></span>
+</pre></div><p><code>UH OH!</code> comparisons are false positives.<div class=highlight><pre><span class=code-line><span></span><span class=p>[]</span> <span class=o>==</span> <span class=o>!</span><span class=p>[];</span>      <span class=c1>// true</span></span>
+</pre></div><div class=highlight><pre><span class=code-line><span></span><span class=mi>2</span> <span class=o>==</span> <span class=p>[</span><span class=mi>2</span><span class=p>];</span>       <span class=c1>// true</span></span>
+<span class=code-line><span class=s2>&quot;&quot;</span> <span class=o>==</span> <span class=p>[</span><span class=kc>null</span><span class=p>];</span>   <span class=c1>// true</span></span>
+</pre></div><div class=highlight><pre><span class=code-line><span></span><span class=mi>0</span> <span class=o>==</span> <span class=s2>&quot;\n&quot;</span><span class=p>;</span>      <span class=c1>// true</span></span>
+</pre></div><p>To contrast against these 24 likely suspects for coercion gotchas, consider another list like this:<div class=highlight><pre><span class=code-line><span></span><span class=mi>42</span> <span class=o>==</span> <span class=s2>&quot;43&quot;</span><span class=p>;</span>                         <span class=c1>// false</span></span>
+<span class=code-line><span class=s2>&quot;foo&quot;</span> <span class=o>==</span> <span class=mi>42</span><span class=p>;</span>                        <span class=c1>// false</span></span>
+<span class=code-line><span class=s2>&quot;true&quot;</span> <span class=o>==</span> <span class=kc>true</span><span class=p>;</span>                     <span class=c1>// false</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=mi>42</span> <span class=o>==</span> <span class=s2>&quot;42&quot;</span><span class=p>;</span>                         <span class=c1>// true</span></span>
+<span class=code-line><span class=s2>&quot;foo&quot;</span> <span class=o>==</span> <span class=p>[</span> <span class=s2>&quot;foo&quot;</span> <span class=p>];</span>                 <span class=c1>// true</span></span>
+</pre></div><p>In these nonfalsy, noncorner cases (and there are literally an infinite number of comparisons we could put on this list), the coercion results are totally safe, reasonable, and explainable.<h4 id=sanity-check><a class=toclink href=#sanity-check>Sanity Check</a></h4><p>Avoid list in coercion:<div class=highlight><pre><span class=code-line><span></span><span class=s2>&quot;0&quot;</span> <span class=o>==</span> <span class=kc>false</span><span class=p>;</span>           <span class=c1>// true -- UH OH!</span></span>
+<span class=code-line><span class=kc>false</span> <span class=o>==</span> <span class=mi>0</span><span class=p>;</span>             <span class=c1>// true -- UH OH!</span></span>
+<span class=code-line><span class=kc>false</span> <span class=o>==</span> <span class=s2>&quot;&quot;</span><span class=p>;</span>            <span class=c1>// true -- UH OH!</span></span>
+<span class=code-line><span class=kc>false</span> <span class=o>==</span> <span class=p>[];</span>            <span class=c1>// true -- UH OH!</span></span>
+<span class=code-line><span class=s2>&quot;&quot;</span> <span class=o>==</span> <span class=mi>0</span><span class=p>;</span>                <span class=c1>// true -- UH OH!</span></span>
+<span class=code-line><span class=s2>&quot;&quot;</span> <span class=o>==</span> <span class=p>[];</span>               <span class=c1>// true -- UH OH!</span></span>
+<span class=code-line><span class=mi>0</span> <span class=o>==</span> <span class=p>[];</span>                <span class=c1>// true -- UH OH!</span></span>
+</pre></div><p>Boolean in <code>==</code> should be avoided. And it was mentioned before. So the list is down to three:<div class=highlight><pre><span class=code-line><span></span><span class=s2>&quot;&quot;</span> <span class=o>==</span> <span class=mi>0</span><span class=p>;</span>                <span class=c1>// true -- UH OH!</span></span>
+<span class=code-line><span class=s2>&quot;&quot;</span> <span class=o>==</span> <span class=p>[];</span>               <span class=c1>// true -- UH OH!</span></span>
+<span class=code-line><span class=mi>0</span> <span class=o>==</span> <span class=p>[];</span>                <span class=c1>// true -- UH OH!</span></span>
+</pre></div><h5 id=safely-using-implicit-coercion><a class=toclink href=#safely-using-implicit-coercion>Safely Using Implicit Coercion</a></h5><p>Some heuristic rules to follow:<ol><li>If either side of the comparison can have <code>true</code> or <code>false</code> values, don't ever, EVER use <code>==</code>.<li>If either side of the comparison can have <code>[]</code>, <code>""</code>, or <code>0</code> values, seriously consider not using <code>==</code>.</ol><p><strong>Being more explicit/verbose in these cases will save you from a lot of headaches.</strong><h3 id=abstract-relational-comparison><a class=toclink href=#abstract-relational-comparison>Abstract Relational Comparison</a></h3><div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=p>[</span> <span class=mi>42</span> <span class=p>];</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=p>[</span> <span class=s2>&quot;43&quot;</span> <span class=p>];</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span> <span class=o>&lt;</span> <span class=nx>b</span><span class=p>;</span>  <span class=c1>// true</span></span>
+<span class=code-line><span class=nx>b</span> <span class=o>&lt;</span> <span class=nx>a</span><span class=p>;</span>  <span class=c1>// false</span></span>
+</pre></div><p>Similar to <code>==</code><div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=p>[</span> <span class=s2>&quot;42&quot;</span> <span class=p>];</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=p>[</span> <span class=s2>&quot;043&quot;</span> <span class=p>];</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span> <span class=o>&lt;</span> <span class=nx>b</span><span class=p>;</span>  <span class=c1>// false</span></span>
+</pre></div><p><code>a</code> and <code>b</code> are <em>not</em> coerced to <code>number</code>s, because both of them end up as <code>string</code>s after the <code>ToPrimitive</code> coercion on the two <code>array</code>s. So, <code>"42"</code> is compared character by character to <code>"043"</code>, starting with the first characters <code>"4"</code> and <code>"0"</code>, respectively. Since <code>"0"</code> is lexicographically <em>less than</em> than <code>"4"</code>, the comparison returns <code>false</code>.<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=p>{</span> <span class=nx>b</span><span class=o>:</span> <span class=mi>42</span> <span class=p>};</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=p>{</span> <span class=nx>b</span><span class=o>:</span> <span class=mi>43</span> <span class=p>};</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span> <span class=o>&lt;</span> <span class=nx>b</span><span class=p>;</span>  <span class=c1>// ??</span></span>
+</pre></div><p><code>a &lt; b</code> is also <code>false</code>, because <code>a</code> becomes <code>[object Object]</code> and <code>b</code> becomes <code>[object Object]</code>, and so clearly <code>a</code> is not lexicographically less than <code>b</code>.<p>Strange:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=p>{</span> <span class=nx>b</span><span class=o>:</span> <span class=mi>42</span> <span class=p>};</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=p>{</span> <span class=nx>b</span><span class=o>:</span> <span class=mi>43</span> <span class=p>};</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span> <span class=o>&lt;</span> <span class=nx>b</span><span class=p>;</span>  <span class=c1>// false</span></span>
+<span class=code-line><span class=nx>a</span> <span class=o>==</span> <span class=nx>b</span><span class=p>;</span> <span class=c1>// false</span></span>
+<span class=code-line><span class=nx>a</span> <span class=o>&gt;</span> <span class=nx>b</span><span class=p>;</span>  <span class=c1>// false</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span> <span class=o>&lt;=</span> <span class=nx>b</span><span class=p>;</span> <span class=c1>// true</span></span>
+<span class=code-line><span class=nx>a</span> <span class=o>&gt;=</span> <span class=nx>b</span><span class=p>;</span> <span class=c1>// true</span></span>
+</pre></div><p><code>a &lt;= b</code> is just the opposite result of <code>a &lt; b</code><p>If coercion is helpful and reasonably safe, like in a <code>42 &lt; "43"</code> comparison, <strong>use it</strong>. On the other hand, if you need to be safe about a relational comparison, <em>explicitly coerce</em> the values first, before using <code>&lt;</code> (or its counterparts).<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=p>[</span> <span class=mi>42</span> <span class=p>];</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=s2>&quot;043&quot;</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span> <span class=o>&lt;</span> <span class=nx>b</span><span class=p>;</span>                      <span class=c1>// false -- string comparison!</span></span>
+<span class=code-line><span class=nb>Number</span><span class=p>(</span> <span class=nx>a</span> <span class=p>)</span> <span class=o>&lt;</span> <span class=nb>Number</span><span class=p>(</span> <span class=nx>b</span> <span class=p>);</span>  <span class=c1>// true -- number comparison!</span></span>
+</pre></div><h2 id=chapter-5><a class=toclink href=#chapter-5>Chapter 5</a></h2><p>Talking about js' grammer.<h3 id=statements-expressions><a class=toclink href=#statements-expressions>Statements &amp; Expressions</a></h3><div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=mi>3</span> <span class=o>*</span> <span class=mi>6</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=nx>a</span><span class=p>;</span></span>
+<span class=code-line><span class=nx>b</span><span class=p>;</span></span>
+</pre></div><p>Expressions: <code>3 * 6</code> on the first line, <code>a</code> on the second line.<br>Statements: each of the three lines.<h4 id=statement-completion-values><a class=toclink href=#statement-completion-values>Statement Completion Values</a></h4><p><code>var</code>'s completion value is empty (<code>undefined</code>) due to the value swallowed up.<p><code>undefined</code> is quite common as completion values.<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>b</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>if</span> <span class=p>(</span><span class=kc>true</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=nx>b</span> <span class=o>=</span> <span class=mi>4</span> <span class=o>+</span> <span class=mi>38</span><span class=p>;</span></span>
+<span class=code-line><span class=p>}</span></span>
+</pre></div><p>This returns 42. In other words, the completion value of a block is like an <em>implicit return</em> of the last statement value in the block.<p>To catch the completion value: (Only demo, don't do it. <code>eval(..)</code> sometimes pronounced "evil")<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span><span class=p>,</span> <span class=nx>b</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span> <span class=o>=</span> <span class=nb>eval</span><span class=p>(</span> <span class=s2>&quot;if (true) { b = 4 + 38; }&quot;</span> <span class=p>);</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span><span class=p>;</span>  <span class=c1>// 42</span></span>
+</pre></div><p>There's a proposal for ES7 called "do expression." Here's how it might work:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span><span class=p>,</span> <span class=nx>b</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span> <span class=o>=</span> <span class=k>do</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=k>if</span> <span class=p>(</span><span class=kc>true</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>        <span class=nx>b</span> <span class=o>=</span> <span class=mi>4</span> <span class=o>+</span> <span class=mi>38</span><span class=p>;</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line><span class=p>};</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span><span class=p>;</span>  <span class=c1>// 42</span></span>
+</pre></div><h4 id=expression-side-effects><a class=toclink href=#expression-side-effects>Expression Side Effects</a></h4><div class=highlight><pre><span class=code-line><span></span><span class=kd>function</span> <span class=nx>foo</span><span class=p>()</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=nx>a</span> <span class=o>=</span> <span class=nx>a</span> <span class=o>+</span> <span class=mi>1</span><span class=p>;</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span></span>
+<span class=code-line><span class=nx>foo</span><span class=p>();</span>      <span class=c1>// result: `undefined`, side effect: changed `a`</span></span>
+</pre></div><div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=mi>42</span><span class=p>;</span></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=nx>a</span><span class=o>++</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span><span class=p>;</span>  <span class=c1>// 43</span></span>
+<span class=code-line><span class=nx>b</span><span class=p>;</span>  <span class=c1>// 42</span></span>
+</pre></div><p>THe same behaviour in C code:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=mi>42</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span><span class=o>++</span><span class=p>;</span>    <span class=c1>// 42</span></span>
+<span class=code-line><span class=nx>a</span><span class=p>;</span>      <span class=c1>// 43</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=o>++</span><span class=nx>a</span><span class=p>;</span>    <span class=c1>// 44</span></span>
+<span class=code-line><span class=nx>a</span><span class=p>;</span>      <span class=c1>// 44</span></span>
+</pre></div><p>The expression <code>a++</code> has two separate behaviors. <em>First</em>, it returns the current value of <code>a</code>, which is <code>42</code> (which then gets assigned to <code>b</code>). But <em>next</em>, it changes the value of <code>a</code> itself, incrementing it by one.<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=mi>42</span><span class=p>,</span> <span class=nx>b</span><span class=p>;</span></span>
+<span class=code-line><span class=nx>b</span> <span class=o>=</span> <span class=p>(</span> <span class=nx>a</span><span class=o>++</span><span class=p>,</span> <span class=nx>a</span> <span class=p>);</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span><span class=p>;</span>  <span class=c1>// 43</span></span>
+<span class=code-line><span class=nx>b</span><span class=p>;</span>  <span class=c1>// 43</span></span>
+</pre></div><p><strong>Note:</strong> The <code>( .. )</code> around <code>a++, a</code> is required here. The reason is operator precedence, which we'll cover later in this chapter.<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>obj</span> <span class=o>=</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=nx>a</span><span class=o>:</span> <span class=mi>42</span></span>
+<span class=code-line><span class=p>};</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>obj</span><span class=p>.</span><span class=nx>a</span><span class=p>;</span>          <span class=c1>// 42</span></span>
+<span class=code-line><span class=k>delete</span> <span class=nx>obj</span><span class=p>.</span><span class=nx>a</span><span class=p>;</span>   <span class=c1>// true</span></span>
+<span class=code-line><span class=nx>obj</span><span class=p>.</span><span class=nx>a</span><span class=p>;</span>          <span class=c1>// undefined</span></span>
+</pre></div><p>The result value of the <code>delete</code> operator is <code>true</code> if the requested operation is valid/allowable, or <code>false</code> otherwise. But the side effect of the operator is that it removes the property (or array slot).<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span> <span class=o>=</span> <span class=mi>42</span><span class=p>;</span>     <span class=c1>// 42</span></span>
+<span class=code-line><span class=nx>a</span><span class=p>;</span>          <span class=c1>// 42</span></span>
+</pre></div><p>It may not seem like <code>=</code> in <code>a = 42</code> is a side-effecting operator for the expression. But if we examine the result value of the <code>a = 42</code> statement, it's the value that was just assigned (<code>42</code>), so the assignment of that same value into <code>a</code> is essentially a side effect.<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span><span class=p>,</span> <span class=nx>b</span><span class=p>,</span> <span class=nx>c</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span> <span class=o>=</span> <span class=nx>b</span> <span class=o>=</span> <span class=nx>c</span> <span class=o>=</span> <span class=mi>42</span><span class=p>;</span></span>
+</pre></div><p>Here, <code>c = 42</code> is evaluated to <code>42</code> (with the side effect of assigning <code>42</code> to <code>c</code>), then <code>b = 42</code> is evaluated to <code>42</code> (with the side effect of assigning <code>42</code> to <code>b</code>), and finally <code>a = 42</code> is evaluated (with the side effect of assigning <code>42</code> to <code>a</code>).<p>Another scenario to consider:<div class=highlight><pre><span class=code-line><span></span><span class=kd>function</span> <span class=nx>vowels</span><span class=p>(</span><span class=nx>str</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=kd>var</span> <span class=nx>matches</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line>    <span class=k>if</span> <span class=p>(</span><span class=nx>str</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>        <span class=c1>// pull out all the vowels</span></span>
+<span class=code-line>        <span class=nx>matches</span> <span class=o>=</span> <span class=nx>str</span><span class=p>.</span><span class=nx>match</span><span class=p>(</span> <span class=sr>/[aeiou]/g</span> <span class=p>);</span></span>
+<span class=code-line></span>
+<span class=code-line>        <span class=k>if</span> <span class=p>(</span><span class=nx>matches</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>            <span class=k>return</span> <span class=nx>matches</span><span class=p>;</span></span>
+<span class=code-line>        <span class=p>}</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>vowels</span><span class=p>(</span> <span class=s2>&quot;Hello World&quot;</span> <span class=p>);</span> <span class=c1>// [&quot;e&quot;,&quot;o&quot;,&quot;o&quot;]</span></span>
+</pre></div><p>This works, and many developers prefer such. But using an idiom where we take advantage of the assignment side effect, we can simplify by combining the two <code>if</code> statements into one:<div class=highlight><pre><span class=code-line><span></span><span class=kd>function</span> <span class=nx>vowels</span><span class=p>(</span><span class=nx>str</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=kd>var</span> <span class=nx>matches</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line>    <span class=c1>// pull out all the vowels</span></span>
+<span class=code-line>    <span class=k>if</span> <span class=p>(</span><span class=nx>str</span> <span class=o>&amp;&amp;</span> <span class=p>(</span><span class=nx>matches</span> <span class=o>=</span> <span class=nx>str</span><span class=p>.</span><span class=nx>match</span><span class=p>(</span> <span class=sr>/[aeiou]/g</span> <span class=p>)))</span> <span class=p>{</span></span>
+<span class=code-line>        <span class=k>return</span> <span class=nx>matches</span><span class=p>;</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>vowels</span><span class=p>(</span> <span class=s2>&quot;Hello World&quot;</span> <span class=p>);</span> <span class=c1>// [&quot;e&quot;,&quot;o&quot;,&quot;o&quot;]</span></span>
+</pre></div><p><strong>Note:</strong> The <code>( .. )</code> around <code>matches = str.match..</code> is required. The reason is operator precedence, which we'll cover in the "Operator Precedence" section later in this chapter.<p>I prefer this shorter style, as I think it makes it clearer that the two conditionals are in fact related rather than separate. But as with most stylistic choices in JS, it's purely opinion which one is <em>better</em>.<h4 id=contextual-rules><a class=toclink href=#contextual-rules>Contextual Rules</a></h4><h5 id=curly-braces><a class=toclink href=#curly-braces><code>{ .. }</code> Curly Braces</a></h5><h6 id=object-literals><a class=toclink href=#object-literals>Object Literals</a></h6><div class=highlight><pre><span class=code-line><span></span><span class=c1>// assume there&#39;s a `bar()` function defined</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=nx>foo</span><span class=o>:</span> <span class=nx>bar</span><span class=p>()</span></span>
+<span class=code-line><span class=p>};</span></span>
+</pre></div><p>How do we know this is an <code>object</code> literal? Because the <code>{ .. }</code> pair is a value that's getting assigned to <code>a</code>.<h6 id=labels><a class=toclink href=#labels>Labels</a></h6><p>JS <em>does</em> support a limited, special form of <code>goto</code>: labeled jumps.<div class=highlight><pre><span class=code-line><span></span><span class=c1>// `foo` labeled-loop</span></span>
+<span class=code-line><span class=nx>foo</span><span class=o>:</span> <span class=k>for</span> <span class=p>(</span><span class=kd>var</span> <span class=nx>i</span><span class=o>=</span><span class=mi>0</span><span class=p>;</span> <span class=nx>i</span><span class=o>&lt;</span><span class=mi>4</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=k>for</span> <span class=p>(</span><span class=kd>var</span> <span class=nx>j</span><span class=o>=</span><span class=mi>0</span><span class=p>;</span> <span class=nx>j</span><span class=o>&lt;</span><span class=mi>4</span><span class=p>;</span> <span class=nx>j</span><span class=o>++</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>        <span class=c1>// whenever the loops meet, continue outer loop</span></span>
+<span class=code-line>        <span class=k>if</span> <span class=p>(</span><span class=nx>j</span> <span class=o>==</span> <span class=nx>i</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>            <span class=c1>// jump to the next iteration of</span></span>
+<span class=code-line>            <span class=c1>// the `foo` labeled-loop</span></span>
+<span class=code-line>            <span class=k>continue</span> <span class=nx>foo</span><span class=p>;</span></span>
+<span class=code-line>        <span class=p>}</span></span>
+<span class=code-line></span>
+<span class=code-line>        <span class=c1>// skip odd multiples</span></span>
+<span class=code-line>        <span class=k>if</span> <span class=p>((</span><span class=nx>j</span> <span class=o>*</span> <span class=nx>i</span><span class=p>)</span> <span class=o>%</span> <span class=mi>2</span> <span class=o>==</span> <span class=mi>1</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>            <span class=c1>// normal (non-labeled) `continue` of inner loop</span></span>
+<span class=code-line>            <span class=k>continue</span><span class=p>;</span></span>
+<span class=code-line>        <span class=p>}</span></span>
+<span class=code-line></span>
+<span class=code-line>        <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>j</span> <span class=p>);</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line><span class=c1>// 1 0</span></span>
+<span class=code-line><span class=c1>// 2 0</span></span>
+<span class=code-line><span class=c1>// 2 1</span></span>
+<span class=code-line><span class=c1>// 3 0</span></span>
+<span class=code-line><span class=c1>// 3 2</span></span>
+</pre></div><p>The use of <code>break</code>:<div class=highlight><pre><span class=code-line><span></span><span class=c1>// `foo` labeled-loop</span></span>
+<span class=code-line><span class=nx>foo</span><span class=o>:</span> <span class=k>for</span> <span class=p>(</span><span class=kd>var</span> <span class=nx>i</span><span class=o>=</span><span class=mi>0</span><span class=p>;</span> <span class=nx>i</span><span class=o>&lt;</span><span class=mi>4</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=k>for</span> <span class=p>(</span><span class=kd>var</span> <span class=nx>j</span><span class=o>=</span><span class=mi>0</span><span class=p>;</span> <span class=nx>j</span><span class=o>&lt;</span><span class=mi>4</span><span class=p>;</span> <span class=nx>j</span><span class=o>++</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>        <span class=k>if</span> <span class=p>((</span><span class=nx>i</span> <span class=o>*</span> <span class=nx>j</span><span class=p>)</span> <span class=o>&gt;=</span> <span class=mi>3</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>            <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span> <span class=s2>&quot;stopping!&quot;</span><span class=p>,</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>j</span> <span class=p>);</span></span>
+<span class=code-line>            <span class=c1>// break out of the `foo` labeled loop</span></span>
+<span class=code-line>            <span class=k>break</span> <span class=nx>foo</span><span class=p>;</span></span>
+<span class=code-line>        <span class=p>}</span></span>
+<span class=code-line></span>
+<span class=code-line>        <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>j</span> <span class=p>);</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line><span class=c1>// 0 0</span></span>
+<span class=code-line><span class=c1>// 0 1</span></span>
+<span class=code-line><span class=c1>// 0 2</span></span>
+<span class=code-line><span class=c1>// 0 3</span></span>
+<span class=code-line><span class=c1>// 1 0</span></span>
+<span class=code-line><span class=c1>// 1 1</span></span>
+<span class=code-line><span class=c1>// 1 2</span></span>
+<span class=code-line><span class=c1>// stopping! 1 3</span></span>
+</pre></div><h6 id=blocks><a class=toclink href=#blocks>Blocks</a></h6><div class=highlight><pre><span class=code-line><span></span><span class=p>[]</span> <span class=o>+</span> <span class=p>{};</span> <span class=c1>// &quot;[object Object]&quot;</span></span>
+<span class=code-line><span class=p>{}</span> <span class=o>+</span> <span class=p>[];</span> <span class=c1>// 0</span></span>
+</pre></div><h6 id=object-destructuring><a class=toclink href=#object-destructuring>Object Destructuring</a></h6><p>Starting with ES6, another place that you'll see <code>{ .. }</code> pairs showing up is with "destructuring assignments" (see the <em>ES6 &amp; Beyond</em> title of this series for more info), specifically <code>object</code> destructuring. Consider:<div class=highlight><pre><span class=code-line><span></span><span class=kd>function</span> <span class=nx>getData</span><span class=p>()</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=c1>// ..</span></span>
+<span class=code-line>    <span class=k>return</span> <span class=p>{</span></span>
+<span class=code-line>        <span class=nx>a</span><span class=o>:</span> <span class=mi>42</span><span class=p>,</span></span>
+<span class=code-line>        <span class=nx>b</span><span class=o>:</span> <span class=s2>&quot;foo&quot;</span></span>
+<span class=code-line>    <span class=p>};</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=kd>var</span> <span class=p>{</span> <span class=nx>a</span><span class=p>,</span> <span class=nx>b</span> <span class=p>}</span> <span class=o>=</span> <span class=nx>getData</span><span class=p>();</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span> <span class=nx>a</span><span class=p>,</span> <span class=nx>b</span> <span class=p>);</span> <span class=c1>// 42 &quot;foo&quot;</span></span>
+</pre></div><p>Object destructuring with a <code>{ .. }</code> pair can also be used for named function arguments, which is sugar for this same sort of implicit object property assignment:<div class=highlight><pre><span class=code-line><span></span><span class=kd>function</span> <span class=nx>foo</span><span class=p>({</span> <span class=nx>a</span><span class=p>,</span> <span class=nx>b</span><span class=p>,</span> <span class=nx>c</span> <span class=p>})</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=c1>// no need for:</span></span>
+<span class=code-line>    <span class=c1>// var a = obj.a, b = obj.b, c = obj.c</span></span>
+<span class=code-line>    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span> <span class=nx>a</span><span class=p>,</span> <span class=nx>b</span><span class=p>,</span> <span class=nx>c</span> <span class=p>);</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>foo</span><span class=p>(</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=nx>c</span><span class=o>:</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>],</span></span>
+<span class=code-line>    <span class=nx>a</span><span class=o>:</span> <span class=mi>42</span><span class=p>,</span></span>
+<span class=code-line>    <span class=nx>b</span><span class=o>:</span> <span class=s2>&quot;foo&quot;</span></span>
+<span class=code-line><span class=p>}</span> <span class=p>);</span>    <span class=c1>// 42 &quot;foo&quot; [1, 2, 3]</span></span>
+</pre></div><h5 id=else-if-and-optional-blocks><a class=toclink href=#else-if-and-optional-blocks><code>else if</code> And Optional Blocks</a></h5><p>It's a common misconception that JavaScript has an <code>else if</code> clause, because you can do:<div class=highlight><pre><span class=code-line><span></span><span class=k>if</span> <span class=p>(</span><span class=nx>a</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=c1>// ..</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line><span class=k>else</span> <span class=k>if</span> <span class=p>(</span><span class=nx>b</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=c1>// ..</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line><span class=k>else</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=c1>// ..</span></span>
+<span class=code-line><span class=p>}</span></span>
+</pre></div><p>But there's a hidden characteristic of the JS grammar here: there is no <code>else if</code>. But <code>if</code> and <code>else</code> statements are allowed to omit the <code>{ }</code> around their attached block if they only contain a single statement. You've seen this many times before, undoubtedly:<div class=highlight><pre><span class=code-line><span></span><span class=k>if</span> <span class=p>(</span><span class=nx>a</span><span class=p>)</span> <span class=nx>doSomething</span><span class=p>(</span> <span class=nx>a</span> <span class=p>);</span></span>
+</pre></div><p>However, the exact same grammar rule applies to the <code>else</code> clause, so the <code>else if</code> form you've likely always coded is <em>actually</em> parsed as:<div class=highlight><pre><span class=code-line><span></span><span class=k>if</span> <span class=p>(</span><span class=nx>a</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=c1>// ..</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line><span class=k>else</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=k>if</span> <span class=p>(</span><span class=nx>b</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>        <span class=c1>// ..</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line>    <span class=k>else</span> <span class=p>{</span></span>
+<span class=code-line>        <span class=c1>// ..</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line><span class=p>}</span></span>
+</pre></div><p>Recall the example from above:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=mi>42</span><span class=p>,</span> <span class=nx>b</span><span class=p>;</span></span>
+<span class=code-line><span class=nx>b</span> <span class=o>=</span> <span class=p>(</span> <span class=nx>a</span><span class=o>++</span><span class=p>,</span> <span class=nx>a</span> <span class=p>);</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span><span class=p>;</span>  <span class=c1>// 43</span></span>
+<span class=code-line><span class=nx>b</span><span class=p>;</span>  <span class=c1>// 43</span></span>
+</pre></div><p>But what would happen if we remove the <code>( )</code>?<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=mi>42</span><span class=p>,</span> <span class=nx>b</span><span class=p>;</span></span>
+<span class=code-line><span class=nx>b</span> <span class=o>=</span> <span class=nx>a</span><span class=o>++</span><span class=p>,</span> <span class=nx>a</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span><span class=p>;</span>  <span class=c1>// 43</span></span>
+<span class=code-line><span class=nx>b</span><span class=p>;</span>  <span class=c1>// 42</span></span>
+</pre></div><p>Because the <code>,</code> operator has a lower precedence than the <code>=</code> operator.<p>Now, recall this example from above:<div class=highlight><pre><span class=code-line><span></span><span class=k>if</span> <span class=p>(</span><span class=nx>str</span> <span class=o>&amp;&amp;</span> <span class=p>(</span><span class=nx>matches</span> <span class=o>=</span> <span class=nx>str</span><span class=p>.</span><span class=nx>match</span><span class=p>(</span> <span class=sr>/[aeiou]/g</span> <span class=p>)))</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=c1>// ..</span></span>
+<span class=code-line><span class=p>}</span></span>
+</pre></div><p>We said the <code>( )</code> around the assignment is required, but why? Because <code>&amp;&amp;</code> has higher precedence than <code>=</code>, so without the <code>( )</code> to force the binding, the expression would instead be treated as <code>(str &amp;&amp; matches) = str.match..</code>. But this would be an error, because the result of <code>(str &amp;&amp; matches)</code> isn't going to be a variable, but instead a value (in this case <code>undefined</code>), and so it can't be the left-hand side of an <code>=</code> assignment!<h4 id=short-circuited><a class=toclink href=#short-circuited>Short Circuited</a></h4><p>This short circuiting can be very helpful and is commonly used:<div class=highlight><pre><span class=code-line><span></span><span class=kd>function</span> <span class=nx>doSomething</span><span class=p>(</span><span class=nx>opts</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=k>if</span> <span class=p>(</span><span class=nx>opts</span> <span class=o>&amp;&amp;</span> <span class=nx>opts</span><span class=p>.</span><span class=nx>cool</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>        <span class=c1>// ..</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line><span class=p>}</span></span>
+</pre></div><p>Similarly, you can use <code>||</code> short circuiting:<div class=highlight><pre><span class=code-line><span></span><span class=kd>function</span> <span class=nx>doSomething</span><span class=p>(</span><span class=nx>opts</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=k>if</span> <span class=p>(</span><span class=nx>opts</span><span class=p>.</span><span class=nx>cache</span> <span class=o>||</span> <span class=nx>primeCache</span><span class=p>())</span> <span class=p>{</span></span>
+<span class=code-line>        <span class=c1>// ..</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line><span class=p>}</span></span>
+</pre></div><h4 id=tighter-binding><a class=toclink href=#tighter-binding>Tighter Binding</a></h4><div class=highlight><pre><span class=code-line><span></span><span class=nx>a</span> <span class=o>&amp;&amp;</span> <span class=nx>b</span> <span class=o>||</span> <span class=nx>c</span> <span class=o>?</span> <span class=nx>c</span> <span class=o>||</span> <span class=nx>b</span> <span class=o>?</span> <span class=nx>a</span> <span class=o>:</span> <span class=nx>c</span> <span class=o>&amp;&amp;</span> <span class=nx>b</span> <span class=o>:</span> <span class=nx>a</span></span>
+</pre></div><p>Is that more like this:<div class=highlight><pre><span class=code-line><span></span><span class=nx>a</span> <span class=o>&amp;&amp;</span> <span class=nx>b</span> <span class=o>||</span> <span class=p>(</span><span class=nx>c</span> <span class=o>?</span> <span class=nx>c</span> <span class=o>||</span> <span class=p>(</span><span class=nx>b</span> <span class=o>?</span> <span class=nx>a</span> <span class=o>:</span> <span class=nx>c</span><span class=p>)</span> <span class=o>&amp;&amp;</span> <span class=nx>b</span> <span class=o>:</span> <span class=nx>a</span><span class=p>)</span></span>
+</pre></div><p>or this?<div class=highlight><pre><span class=code-line><span></span><span class=p>(</span><span class=nx>a</span> <span class=o>&amp;&amp;</span> <span class=nx>b</span> <span class=o>||</span> <span class=nx>c</span><span class=p>)</span> <span class=o>?</span> <span class=p>(</span><span class=nx>c</span> <span class=o>||</span> <span class=nx>b</span><span class=p>)</span> <span class=o>?</span> <span class=nx>a</span> <span class=o>:</span> <span class=p>(</span><span class=nx>c</span> <span class=o>&amp;&amp;</span> <span class=nx>b</span><span class=p>)</span> <span class=o>:</span> <span class=nx>a</span></span>
+</pre></div><p>The answer is the second one. But why?<p><strong>Because <code>&amp;&amp;</code> is more precedent than <code>||</code>, and <code>||</code> is more precedent than <code>? :</code>.</strong> (<code>&amp;&amp;</code> &gt; <code>||</code> &gt; <code>||</code>)<h4 id=associativity><a class=toclink href=#associativity>Associativity</a></h4><p>In general, operators are either left-associative or right-associative, referring to whether <strong>grouping happens from the left or from the right</strong>.<p>Technically, <code>a &amp;&amp; b &amp;&amp; c</code> will be handled as <code>(a &amp;&amp; b) &amp;&amp; c</code>, because <code>&amp;&amp;</code> is left-associative (so is <code>||</code>, by the way). However, the right-associative alternative <code>a &amp;&amp; (b &amp;&amp; c)</code> behaves observably the same way. For the same values, the same expressions are evaluated in the same order.<p>So it doesn't really matter that much that <code>&amp;&amp;</code> and <code>||</code> are left-associative, other than to be accurate in how we discuss their definitions.<p>But that's not always the case. Some operators would behave very differently depending on left-associativity vs. right-associativity.<p>The <code>? :</code> ("ternary" or "conditional") operator is right-associative:<div class=highlight><pre><span class=code-line><span></span><span class=nx>a</span> <span class=o>?</span> <span class=nx>b</span> <span class=o>:</span> <span class=nx>c</span> <span class=o>?</span> <span class=nx>d</span> <span class=o>:</span> <span class=nx>e</span><span class=p>;</span></span>
+</pre></div><h4 id=disambiguation><a class=toclink href=#disambiguation>Disambiguation</a></h4><p><strong>use operator precedence/associativity where it leads to shorter and cleaner code, but use <code>( )</code> manual grouping in places where it helps create clarity and reduce confusion.</strong><h3 id=automatic-semicolons><a class=toclink href=#automatic-semicolons>Automatic Semicolons</a></h3><p>JS won't treat <code>c</code> as the next line as part of the <code>var</code> statement if no <code>,</code> is between <code>b</code> and <code>c</code>:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=mi>42</span><span class=p>,</span> <span class=nx>b</span></span>
+<span class=code-line><span class=nx>c</span><span class=p>;</span></span>
+</pre></div><p>Similar:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=mi>42</span><span class=p>,</span> <span class=nx>b</span> <span class=o>=</span> <span class=s2>&quot;foo&quot;</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>a</span></span>
+<span class=code-line><span class=nx>b</span>   <span class=c1>// &quot;foo&quot;</span></span>
+</pre></div><p>Where ASI is helpful:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=mi>42</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>do</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=c1>// ..</span></span>
+<span class=code-line><span class=p>}</span> <span class=k>while</span> <span class=p>(</span><span class=nx>a</span><span class=p>)</span> <span class=c1>// &lt;-- ; expected here!</span></span>
+<span class=code-line><span class=nx>a</span><span class=p>;</span></span>
+</pre></div><p>Statement blocks do not require <code>;</code> termination, so ASI isn't necessary:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=mi>42</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>while</span> <span class=p>(</span><span class=nx>a</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=c1>// ..</span></span>
+<span class=code-line><span class=p>}</span> <span class=c1>// &lt;-- no ; expected here</span></span>
+<span class=code-line><span class=nx>a</span><span class=p>;</span></span>
+</pre></div><p>The other major case where ASI kicks in is with the <code>break</code>, <code>continue</code>, <code>return</code>, and (ES6) <code>yield</code> keywords:<div class=highlight><pre><span class=code-line><span></span><span class=kd>function</span> <span class=nx>foo</span><span class=p>(</span><span class=nx>a</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>a</span><span class=p>)</span> <span class=k>return</span></span>
+<span class=code-line>    <span class=nx>a</span> <span class=o>*=</span> <span class=mi>2</span><span class=p>;</span></span>
+<span class=code-line>    <span class=c1>// ..</span></span>
+<span class=code-line><span class=p>}</span></span>
+</pre></div><p>The <code>return</code> statement doesn't carry across the newline to the <code>a *= 2</code> expression, as ASI assumes the <code>;</code> terminating the <code>return</code> statement. Of course, <code>return</code> statements <em>can</em> easily break across multiple lines, just not when there's nothing after <code>return</code> but the newline/line break.<div class=highlight><pre><span class=code-line><span></span><span class=kd>function</span> <span class=nx>foo</span><span class=p>(</span><span class=nx>a</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=k>return</span> <span class=p>(</span></span>
+<span class=code-line>        <span class=nx>a</span> <span class=o>*</span> <span class=mi>2</span> <span class=o>+</span> <span class=mi>3</span> <span class=o>/</span> <span class=mi>12</span></span>
+<span class=code-line>    <span class=p>);</span></span>
+<span class=code-line><span class=p>}</span></span>
+</pre></div><p>Identical reasoning applies to <code>break</code>, <code>continue</code>, and <code>yield</code>.<h4 id=error-correction><a class=toclink href=#error-correction>Error Correction</a></h4><p>The author: <strong>use semicolons wherever you know they are "required," and limit your assumptions about ASI to a minimum.</strong><p>But don't just take my word for it. Back in 2012, creator of JavaScript Brendan Eich said (http://brendaneich.com/2012/04/the-infernal-semicolon/) the following:<blockquote><p>The moral of this story: ASI is (formally speaking) a syntactic error correction procedure. If you start to code as if it were a universal significant-newline rule, you will get into trouble.
+..
+I wish I had made newlines more significant in JS back in those ten days in May, 1995.
+..
+Be careful not to use ASI as if it gave JS significant newlines.</blockquote><h3 id=errors><a class=toclink href=#errors>Errors</a></h3><p>Invalid syntax:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=sr>/+foo/</span><span class=p>;</span>     <span class=c1>// Error!</span></span>
+</pre></div><p>The wrong target of an assignment:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span><span class=p>;</span></span>
+<span class=code-line><span class=mi>42</span> <span class=o>=</span> <span class=nx>a</span><span class=p>;</span>     <span class=c1>// Error!</span></span>
+</pre></div><p>ES5's <code>strict</code> mode defines even more early errors. For example, in <code>strict</code> mode, function parameter names cannot be duplicated:<div class=highlight><pre><span class=code-line><span></span><span class=kd>function</span> <span class=nx>foo</span><span class=p>(</span><span class=nx>a</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>a</span><span class=p>)</span> <span class=p>{</span> <span class=p>}</span>                 <span class=c1>// just fine</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=kd>function</span> <span class=nx>bar</span><span class=p>(</span><span class=nx>a</span><span class=p>,</span><span class=nx>b</span><span class=p>,</span><span class=nx>a</span><span class=p>)</span> <span class=p>{</span> <span class=s2>&quot;use strict&quot;</span><span class=p>;</span> <span class=p>}</span>   <span class=c1>// Error!</span></span>
+</pre></div><p>Another <code>strict</code> mode early error is an object literal having more than one property of the same name:<div class=highlight><pre><span class=code-line><span></span><span class=p>(</span><span class=kd>function</span><span class=p>(){</span></span>
+<span class=code-line>    <span class=s2>&quot;use strict&quot;</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line>    <span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=p>{</span></span>
+<span class=code-line>        <span class=nx>b</span><span class=o>:</span> <span class=mi>42</span><span class=p>,</span></span>
+<span class=code-line>        <span class=nx>b</span><span class=o>:</span> <span class=mi>43</span></span>
+<span class=code-line>    <span class=p>};</span>          <span class=c1>// Error!</span></span>
+<span class=code-line><span class=p>})();</span></span>
+</pre></div><h4 id=using-variables-too-early><a class=toclink href=#using-variables-too-early>Using Variables Too Early</a></h4><p>ES6 defines a (frankly confusingly named) new concept called the TDZ ("Temporal Dead Zone").<p>The TDZ refers to places in code where a variable reference cannot yet be made, because it hasn't reached its required initialization.<div class=highlight><pre><span class=code-line><span></span><span class=p>{</span></span>
+<span class=code-line>    <span class=nx>a</span> <span class=o>=</span> <span class=mi>2</span><span class=p>;</span>      <span class=c1>// ReferenceError!</span></span>
+<span class=code-line>    <span class=kd>let</span> <span class=nx>a</span><span class=p>;</span></span>
+<span class=code-line><span class=p>}</span></span>
+</pre></div><p>The assignment <code>a = 2</code> is accessing the <code>a</code> variable (which is indeed block-scoped to the <code>{ .. }</code> block) before it's been initialized by the <code>let a</code> declaration, so it's in the TDZ for <code>a</code> and throws an error.<p>Interestingly, while <code>typeof</code> has an exception to be safe for undeclared variables (see Chapter 1), no such safety exception is made for TDZ references:<div class=highlight><pre><span class=code-line><span></span><span class=p>{</span></span>
+<span class=code-line>    <span class=k>typeof</span> <span class=nx>a</span><span class=p>;</span>   <span class=c1>// undefined</span></span>
+<span class=code-line>    <span class=k>typeof</span> <span class=nx>b</span><span class=p>;</span>   <span class=c1>// ReferenceError! (TDZ)</span></span>
+<span class=code-line>    <span class=kd>let</span> <span class=nx>b</span><span class=p>;</span></span>
+<span class=code-line><span class=p>}</span></span>
+</pre></div><h3 id=function-arguments><a class=toclink href=#function-arguments>Function Arguments</a></h3><p>Another example of a TDZ violation can be seen with ES6 default parameter values (see the <em>ES6 &amp; Beyond</em> title of this series):<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>b</span> <span class=o>=</span> <span class=mi>3</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=kd>function</span> <span class=nx>foo</span><span class=p>(</span> <span class=nx>a</span> <span class=o>=</span> <span class=mi>42</span><span class=p>,</span> <span class=nx>b</span> <span class=o>=</span> <span class=nx>a</span> <span class=o>+</span> <span class=nx>b</span> <span class=o>+</span> <span class=mi>5</span> <span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=c1>// ..</span></span>
+<span class=code-line><span class=p>}</span></span>
+</pre></div><p>The <code>b</code> reference in the assignment would happen in the TDZ for the parameter <code>b</code> (not pull in the outer <code>b</code> reference), so it will throw an error. However, the <code>a</code> in the assignment is fine since by that time it's past the TDZ for parameter <code>a</code>.<p>When using ES6's default parameter values, the default value is applied to the parameter if you either omit an argument, or you pass an <code>undefined</code> value in its place:<div class=highlight><pre><span class=code-line><span></span><span class=kd>function</span> <span class=nx>foo</span><span class=p>(</span> <span class=nx>a</span> <span class=o>=</span> <span class=mi>42</span><span class=p>,</span> <span class=nx>b</span> <span class=o>=</span> <span class=nx>a</span> <span class=o>+</span> <span class=mi>1</span> <span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span> <span class=nx>a</span><span class=p>,</span> <span class=nx>b</span> <span class=p>);</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>foo</span><span class=p>();</span>                  <span class=c1>// 42 43</span></span>
+<span class=code-line><span class=nx>foo</span><span class=p>(</span> <span class=kc>undefined</span> <span class=p>);</span>       <span class=c1>// 42 43</span></span>
+<span class=code-line><span class=nx>foo</span><span class=p>(</span> <span class=mi>5</span> <span class=p>);</span>               <span class=c1>// 5 6</span></span>
+<span class=code-line><span class=nx>foo</span><span class=p>(</span> <span class=k>void</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>7</span> <span class=p>);</span>       <span class=c1>// 42 7</span></span>
+<span class=code-line><span class=nx>foo</span><span class=p>(</span> <span class=kc>null</span> <span class=p>);</span>            <span class=c1>// null 1</span></span>
+</pre></div><p><strong>Note:</strong> <code>null</code> is coerced to a <code>0</code> value in the <code>a + 1</code> expression. See Chapter 4 for more info.<p>Even though the default parameter values are applied to the <code>a</code> and <code>b</code> parameters, if no arguments were passed in those slots, the <code>arguments</code> array will not have entries:<div class=highlight><pre><span class=code-line><span></span><span class=kd>function</span> <span class=nx>foo</span><span class=p>(</span> <span class=nx>a</span> <span class=o>=</span> <span class=mi>42</span><span class=p>,</span> <span class=nx>b</span> <span class=o>=</span> <span class=nx>a</span> <span class=o>+</span> <span class=mi>1</span> <span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span></span>
+<span class=code-line>        <span class=nx>arguments</span><span class=p>.</span><span class=nx>length</span><span class=p>,</span> <span class=nx>a</span><span class=p>,</span> <span class=nx>b</span><span class=p>,</span></span>
+<span class=code-line>        <span class=nx>arguments</span><span class=p>[</span><span class=mi>0</span><span class=p>],</span> <span class=nx>arguments</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span></span>
+<span class=code-line>    <span class=p>);</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>foo</span><span class=p>();</span>                  <span class=c1>// 0 42 43 undefined undefined</span></span>
+<span class=code-line><span class=nx>foo</span><span class=p>(</span> <span class=mi>10</span> <span class=p>);</span>              <span class=c1>// 1 10 11 10 undefined</span></span>
+<span class=code-line><span class=nx>foo</span><span class=p>(</span> <span class=mi>10</span><span class=p>,</span> <span class=kc>undefined</span> <span class=p>);</span>   <span class=c1>// 2 10 11 10 undefined</span></span>
+<span class=code-line><span class=nx>foo</span><span class=p>(</span> <span class=mi>10</span><span class=p>,</span> <span class=kc>null</span> <span class=p>);</span>        <span class=c1>// 2 10 null 10 null</span></span>
+</pre></div><p>While ES6 default parameter values can create divergence between the <code>arguments</code> array slot and the corresponding named parameter variable, this same disjointedness can also occur in tricky ways in ES5:<div class=highlight><pre><span class=code-line><span></span><span class=kd>function</span> <span class=nx>foo</span><span class=p>(</span><span class=nx>a</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=nx>a</span> <span class=o>=</span> <span class=mi>42</span><span class=p>;</span></span>
+<span class=code-line>    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span> <span class=nx>arguments</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=p>);</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>foo</span><span class=p>(</span> <span class=mi>2</span> <span class=p>);</span>   <span class=c1>// 42 (linked)</span></span>
+<span class=code-line><span class=nx>foo</span><span class=p>();</span>      <span class=c1>// undefined (not linked)</span></span>
+</pre></div><p>Note: <strong>Never refer to a named parameter <em>and</em> its corresponding <code>arguments</code> slot at the same time.</strong><h3 id=tryfinally><a class=toclink href=#tryfinally><code>try..finally</code></a></h3><p>What happens if there's a <code>return</code> statement inside a <code>try</code> clause? It obviously will return a value, right? But does the calling code that receives that value run before or after the <code>finally</code>?<div class=highlight><pre><span class=code-line><span></span><span class=kd>function</span> <span class=nx>foo</span><span class=p>()</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=k>try</span> <span class=p>{</span></span>
+<span class=code-line>        <span class=k>return</span> <span class=mi>42</span><span class=p>;</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line>    <span class=k>finally</span> <span class=p>{</span></span>
+<span class=code-line>        <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span> <span class=s2>&quot;Hello&quot;</span> <span class=p>);</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line></span>
+<span class=code-line>    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span> <span class=s2>&quot;never runs&quot;</span> <span class=p>);</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span> <span class=nx>foo</span><span class=p>()</span> <span class=p>);</span></span>
+<span class=code-line><span class=c1>// Hello</span></span>
+<span class=code-line><span class=c1>// 42</span></span>
+</pre></div><p>The exact same behavior is true of a <code>throw</code> inside <code>try</code>:<div class=highlight><pre><span class=code-line><span></span> <span class=kd>function</span> <span class=nx>foo</span><span class=p>()</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=k>try</span> <span class=p>{</span></span>
+<span class=code-line>        <span class=k>throw</span> <span class=mi>42</span><span class=p>;</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line>    <span class=k>finally</span> <span class=p>{</span></span>
+<span class=code-line>        <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span> <span class=s2>&quot;Hello&quot;</span> <span class=p>);</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line></span>
+<span class=code-line>    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span> <span class=s2>&quot;never runs&quot;</span> <span class=p>);</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span> <span class=nx>foo</span><span class=p>()</span> <span class=p>);</span></span>
+<span class=code-line><span class=c1>// Hello</span></span>
+<span class=code-line><span class=c1>// Uncaught Exception: 42</span></span>
+</pre></div><div class=highlight><pre><span class=code-line><span></span><span class=kd>function</span> <span class=nx>foo</span><span class=p>()</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=k>try</span> <span class=p>{</span></span>
+<span class=code-line>        <span class=k>return</span> <span class=mi>42</span><span class=p>;</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line>    <span class=k>finally</span> <span class=p>{</span></span>
+<span class=code-line>        <span class=c1>// no `return ..` here, so no override</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=kd>function</span> <span class=nx>bar</span><span class=p>()</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=k>try</span> <span class=p>{</span></span>
+<span class=code-line>        <span class=k>return</span> <span class=mi>42</span><span class=p>;</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line>    <span class=k>finally</span> <span class=p>{</span></span>
+<span class=code-line>        <span class=c1>// override previous `return 42`</span></span>
+<span class=code-line>        <span class=k>return</span><span class=p>;</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=kd>function</span> <span class=nx>baz</span><span class=p>()</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=k>try</span> <span class=p>{</span></span>
+<span class=code-line>        <span class=k>return</span> <span class=mi>42</span><span class=p>;</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line>    <span class=k>finally</span> <span class=p>{</span></span>
+<span class=code-line>        <span class=c1>// override previous `return 42`</span></span>
+<span class=code-line>        <span class=k>return</span> <span class=s2>&quot;Hello&quot;</span><span class=p>;</span></span>
+<span class=code-line>    <span class=p>}</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=nx>foo</span><span class=p>();</span>  <span class=c1>// 42</span></span>
+<span class=code-line><span class=nx>bar</span><span class=p>();</span>  <span class=c1>// undefined</span></span>
+<span class=code-line><span class=nx>baz</span><span class=p>();</span>  <span class=c1>// &quot;Hello&quot;</span></span>
+</pre></div><p>Using a <code>finally</code> + labeled <code>break</code> to effectively cancel a <code>return</code> is doing your best to create the most confusing code possible.<h3 id=switch><a class=toclink href=#switch><code>switch</code></a></h3><p>Coersive equality:<div class=highlight><pre><span class=code-line><span></span><span class=kd>var</span> <span class=nx>a</span> <span class=o>=</span> <span class=s2>&quot;42&quot;</span><span class=p>;</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>switch</span> <span class=p>(</span><span class=kc>true</span><span class=p>)</span> <span class=p>{</span></span>
+<span class=code-line>    <span class=k>case</span> <span class=nx>a</span> <span class=o>==</span> <span class=mi>10</span><span class=o>:</span></span>
+<span class=code-line>        <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span> <span class=s2>&quot;10 or &#39;10&#39;&quot;</span> <span class=p>);</span></span>
+<span class=code-line>        <span class=k>break</span><span class=p>;</span></span>
+<span class=code-line>    <span class=k>case</span> <span class=nx>a</span> <span class=o>==</span> <span class=mi>42</span><span class=o>:</span></span>
+<span class=code-line>        <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span> <span class=s2>&quot;42 or &#39;42&#39;&quot;</span> <span class=p>);</span></span>
+<span class=code-line>        <span class=k>break</span><span class=p>;</span></span>
+<span class=code-line>    <span class=k>default</span><span class=o>:</span></span>
+<span class=code-line>        <span class=c1>// never gets here</span></span>
+<span class=code-line><span class=p>}</span></span>
+<span class=code-line><span class=c1>// 42 or &#39;42&#39;</span></span>
+</pre></div><div class=footnote><hr><ol><li id=fn:1><p><a href=https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce>Array.prototype.reduce() - JavaScript | MDN</a>&#160;<a class=footnote-backref href=#fnref:1 rev=footnote title="Jump back to footnote 1 in the text">&#8617;</a></ol></div></div><footer id=q><svg id="publish"/><b>Created:&nbsp;</b><time datetime=2019-05-07T17:00:00+02:00>May 07, 2019</time><span id=y>•</span><svg id="edit"/><b>Updated:&nbsp;</b><time datetime=2019-05-17T22:24:00+02:00>May 17, 2019</time><span id=y>•</span><svg id="session"/></svg>In a <a href=https://archives.snorl.ax/terminal/ rel="category tag"><b>Terminal</b></a> Session<span id=y>•</span><svg id="tags"/><b>Tags:&nbsp;</b><a href=https://archives.snorl.ax/tags/js/ rel=tag>js</a>,&nbsp;<a href=https://archives.snorl.ax/tags/you-dont-know-js/ rel=tag>You don't know Js</a>,&nbsp;<a href=https://archives.snorl.ax/tags/learning-notes/ rel=tag>learning notes</a></footer></article><article id=m><div id=n><section id=comments data-title="Notes on Types & Grammer (YDJS)" data-isso-id=/terminal/2019/05/07/notes-on-types-grammer-ydjs/></section></div></article></main></div><footer id=g><div id=l>Simputer Archives &#169; 2016 - 2019 (<a href=https://snorl.ax/>Click to view Current Version of Simputer</a>) • Licensed under <a target=_blank rel=license href=http://creativecommons.org/licenses/by/3.0/>CC BY 3.0</a><br>Made using <a href=http://getpelican.com/ target=_blank>Pelican</a> • Design from <a href=https://wordpress.org/themes/twentyfifteen/ target=_blank>TwentyFifteen</a></div></footer><script data-isso=https://isso.snorl.ax/ data-isso-gravatar=true data-isso-avatar=false data-isso-reply-notifications=true data-isso-reply-to-self=true data-isso-css=false src=https://archives.snorl.ax/theme/js/isso_embed.min.js data-isso-lang=en></script>

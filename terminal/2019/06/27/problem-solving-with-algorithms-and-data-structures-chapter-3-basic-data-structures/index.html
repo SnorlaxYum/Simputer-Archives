@@ -1,0 +1,274 @@
+﻿<!doctype html><html lang=en><title>Problem Solving with Algorithms and Data Structures - Chapter 3 - Basic Data Structures - Terminal In A Simputer Archives</title><meta charset=utf-8><link rel=canonical href=https://archives.snorl.ax/terminal/2019/06/27/problem-solving-with-algorithms-and-data-structures-chapter-3-basic-data-structures/><link href=https://archives.snorl.ax/theme/css/all.css rel=stylesheet><link rel=dns-prefetch href=https://fonts.googleapis.com><link rel=dns-prefetch href=https://fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Luckiest+Guy|Rajdhani:600|Rajdhani:700&amp;display=swap"><link href=https://archives.snorl.ax/theme/images/icon.png rel=icon><link href=https://archives.snorl.ax/theme/images/icon-apple.png rel=apple-touch-icon-precomposed><link href=https://archives.snorl.ax/feeds/terminal.xml rel=alternate title="Simputer Archives Terminal RSS Feed" type=application/rss+xml><meta content=python name=tags><meta content=algorithms name=tags><meta content=data structure name=tags><meta content=learning notes name=tags><meta content="width=device-width" name=viewport><meta name=twitter:card content=summary><meta name=twitter:image content=https://archives.snorl.ax/theme/images/usual-twitter.png><meta name=twitter:site content=@Snorl_ax><meta name=twitter:title content="Problem Solving with Algorithms and Data Structures - Chapter 3 - Basic Data Structures"><meta name=twitter:description content="Basic Data Structures......."><div id=a><header id=c><div id=d><h1 id=e><a href=https://archives.snorl.ax/>Simputer Archives</a></h1></div></header><div id=f><nav id=h><ul><li><a href=https://archives.snorl.ax/>Home</a><li><a href=https://archives.snorl.ax/browser/>Browser</a><li id=i><a href=https://archives.snorl.ax/terminal/>Terminal</a><li><a href=https://archives.snorl.ax/tags/>Tags</a></ul></nav><nav id=r><a href=https://www.youtube.com/channel/UCnqOLMtPJaqa7e_6FhZ8-rw title=Youtube><svg id="youtube"/></a><a href=https://github.com/SnorlaxYum/ title=Github><svg id="github"/></a><a href=https://twitter.com/Snorl_ax title=Twitter><svg id="twitter"/></a><a href=https://archives.snorl.ax/feeds/terminal.xml title="Terminal RSS"><svg id="rss"/></a><a href=mailto:sim@snorl.ax title=Email><svg id="mail"/></a></nav><aside id=j><form action=https://archives.snorl.ax/search.html onsubmit="return validateForm(this.elements['q'].value);"><input placeholder=Search... name=q id=tipue_search_input></form></aside></div></div><div id=b><main id=k><article id=m><header id=o><h2 id=p>Problem Solving with Algorithms and Data Structures - Chapter 3 - Basic Data Structures</h2></header><div id=n><div id=series><p>This post is part 3 of the "Problem Solving with Algorithms and Data Structures Reading" series:<ol class=parts><li><a href=https://archives.snorl.ax/terminal/2019/06/19/problem-solving-with-algorithms-and-data-structures-chapter-1-introduction/>Problem Solving with Algorithms and Data Structures - Chapter 1 - Introduction</a><li><a href=https://archives.snorl.ax/terminal/2019/06/23/problem-solving-with-algorithms-and-data-structures-chapter-2-analysis/>Problem Solving with Algorithms and Data Structures - Chapter 2 - Analysis</a><li id=i><a>Problem Solving with Algorithms and Data Structures - Chapter 3 - Basic Data Structures</a></ol></div><h2 id=toc>Table Of Contents</h2><div class=toc><ul><li><a href=#32-what-are-linear-structures>3.2 What Are Linear Structures</a><li><a href=#33-what-is-a-stack>3.3 What is a Stack?</a><li><a href=#34-the-stack-abstract-data-type>3.4 The Stack Abstract Data Type</a><li><a href=#35-stack-implementation>3.5 Stack implementation</a><li><a href=#36-simple-balanced-parentheses>3.6 Simple Balanced Parentheses</a><li><a href=#37-balanced-symbols-a-general-case>3.7 Balanced Symbols (A General Case)</a><li><a href=#38-converting-decimal-numbers-to-binary-numbers>3.8 Converting Decimal Numbers to Binary Numbers</a><li><a href=#39-infix-prefix-and-postfix-expressions>3.9. Infix, Prefix and Postfix Expressions</a><ul><li><a href=#392-general-infix-to-postfix-conversion>3.9.2. General Infix-to-Postfix Conversion</a><li><a href=#393-postfix-evaluation>3.9.3. Postfix Evaluation</a></ul><li><a href=#312-implementing-a-queue-in-python>3.12. Implementing a Queue in Python</a><li><a href=#313-simulation-hot-potato>3.13. Simulation: Hot Potato</a></ul></div><h2 id=32-what-are-linear-structures><a class=toclink href=#32-what-are-linear-structures>3.2 What Are Linear Structures</a></h2><p>Linear structures can be thought of as having two ends. Sometimes these ends are referred to as the “left” and the “right” or in some cases the “front” and the “rear.” You could also call them the “top” and the “bottom.” The names given to the ends are not significant. What distinguishes one linear structure from another is the way in which items are added and removed, in particular the location where these additions and removals occur. For example, a structure might allow new items to be added at only one end. Some structures might allow items to be removed from either end.<h2 id=33-what-is-a-stack><a class=toclink href=#33-what-is-a-stack>3.3 What is a Stack?</a></h2><p>In a word, LIFO, last-in first-out<h2 id=34-the-stack-abstract-data-type><a class=toclink href=#34-the-stack-abstract-data-type>3.4 The Stack Abstract Data Type</a></h2><table><thead><tr><th align=center><strong>Stack Operation</strong><th align=center><strong>Stack Contents</strong><th align=center><strong>Return Value</strong><tbody><tr><td align=center>s.isEmpty()<td align=center>[]<td align=center>True<tr><td align=center>s.push(4)<td align=center>[4]<td align=center><tr><td align=center>s.push('dog')<td align=center>[4,'dog']<td align=center><tr><td align=center>s.peek()<td align=center>[4,'dog']<td align=center>'dog'<tr><td align=center>s.push(True)<td align=center>[4,'dog',True]<td align=center><tr><td align=center>s.size()<td align=center>[4,'dog',True]<td align=center>3<tr><td align=center>s.isEmpty()<td align=center>[4,'dog',True]<td align=center>False<tr><td align=center>s.push(8.4)<td align=center>[4,'dog',True,8.4]<td align=center><tr><td align=center>s.pop()<td align=center>[4,'dog',True]<td align=center>8.4<tr><td align=center>s.pop()<td align=center>[4,'dog']<td align=center>True<tr><td align=center>s.size()<td align=center>[4,'dog']<td align=center>2</table><h2 id=35-stack-implementation><a class=toclink href=#35-stack-implementation>3.5 Stack implementation</a></h2><div class=highlight><pre><span class=code-line><span></span><span class=k>class</span> <span class=nc>Stack</span><span class=p>:</span></span>
+<span class=code-line>     <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>         <span class=bp>self</span><span class=o>.</span><span class=n>items</span> <span class=o>=</span> <span class=p>[]</span></span>
+<span class=code-line></span>
+<span class=code-line>     <span class=k>def</span> <span class=nf>isEmpty</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>         <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>items</span> <span class=o>==</span> <span class=p>[]</span></span>
+<span class=code-line></span>
+<span class=code-line>     <span class=k>def</span> <span class=nf>push</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>item</span><span class=p>):</span></span>
+<span class=code-line>         <span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>item</span><span class=p>)</span></span>
+<span class=code-line></span>
+<span class=code-line>     <span class=k>def</span> <span class=nf>pop</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>         <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=o>.</span><span class=n>pop</span><span class=p>()</span></span>
+<span class=code-line></span>
+<span class=code-line>     <span class=k>def</span> <span class=nf>peek</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>         <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=p>[</span><span class=nb>len</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=p>)</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span></span>
+<span class=code-line></span>
+<span class=code-line>     <span class=k>def</span> <span class=nf>size</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>         <span class=k>return</span> <span class=nb>len</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=p>)</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=n>s</span><span class=o>=</span><span class=n>Stack</span><span class=p>()</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>print</span><span class=p>(</span><span class=n>s</span><span class=o>.</span><span class=n>isEmpty</span><span class=p>())</span></span>
+<span class=code-line><span class=n>s</span><span class=o>.</span><span class=n>push</span><span class=p>(</span><span class=mi>4</span><span class=p>)</span></span>
+<span class=code-line><span class=n>s</span><span class=o>.</span><span class=n>push</span><span class=p>(</span><span class=s1>&#39;dog&#39;</span><span class=p>)</span></span>
+<span class=code-line><span class=k>print</span><span class=p>(</span><span class=n>s</span><span class=o>.</span><span class=n>peek</span><span class=p>())</span></span>
+<span class=code-line><span class=n>s</span><span class=o>.</span><span class=n>push</span><span class=p>(</span><span class=bp>True</span><span class=p>)</span></span>
+<span class=code-line><span class=k>print</span><span class=p>(</span><span class=n>s</span><span class=o>.</span><span class=n>size</span><span class=p>())</span></span>
+<span class=code-line><span class=k>print</span><span class=p>(</span><span class=n>s</span><span class=o>.</span><span class=n>isEmpty</span><span class=p>())</span></span>
+<span class=code-line><span class=n>s</span><span class=o>.</span><span class=n>push</span><span class=p>(</span><span class=mf>8.4</span><span class=p>)</span></span>
+<span class=code-line><span class=k>print</span><span class=p>(</span><span class=n>s</span><span class=o>.</span><span class=n>pop</span><span class=p>())</span></span>
+<span class=code-line><span class=k>print</span><span class=p>(</span><span class=n>s</span><span class=o>.</span><span class=n>pop</span><span class=p>())</span></span>
+<span class=code-line><span class=k>print</span><span class=p>(</span><span class=n>s</span><span class=o>.</span><span class=n>size</span><span class=p>())</span></span>
+</pre></div><h2 id=36-simple-balanced-parentheses><a class=toclink href=#36-simple-balanced-parentheses>3.6 Simple Balanced Parentheses</a></h2><p><code>balanced-par.py</code>:<div class=highlight><pre><span class=code-line><span></span><span class=k>class</span> <span class=nc>Stack</span><span class=p>:</span></span>
+<span class=code-line>     <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>         <span class=bp>self</span><span class=o>.</span><span class=n>items</span> <span class=o>=</span> <span class=p>[]</span></span>
+<span class=code-line></span>
+<span class=code-line>     <span class=k>def</span> <span class=nf>isEmpty</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>         <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>items</span> <span class=o>==</span> <span class=p>[]</span></span>
+<span class=code-line></span>
+<span class=code-line>     <span class=k>def</span> <span class=nf>push</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>item</span><span class=p>):</span></span>
+<span class=code-line>         <span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>item</span><span class=p>)</span></span>
+<span class=code-line></span>
+<span class=code-line>     <span class=k>def</span> <span class=nf>pop</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>         <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=o>.</span><span class=n>pop</span><span class=p>()</span></span>
+<span class=code-line></span>
+<span class=code-line>     <span class=k>def</span> <span class=nf>peek</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>         <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=p>[</span><span class=nb>len</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=p>)</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span></span>
+<span class=code-line></span>
+<span class=code-line>     <span class=k>def</span> <span class=nf>size</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>         <span class=k>return</span> <span class=nb>len</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=p>)</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>def</span> <span class=nf>parChecker</span><span class=p>(</span><span class=n>symbolString</span><span class=p>):</span></span>
+<span class=code-line>    <span class=n>s</span> <span class=o>=</span> <span class=n>Stack</span><span class=p>()</span></span>
+<span class=code-line>    <span class=n>balanced</span> <span class=o>=</span> <span class=bp>True</span></span>
+<span class=code-line>    <span class=n>index</span> <span class=o>=</span> <span class=mi>0</span></span>
+<span class=code-line>    <span class=k>while</span> <span class=n>index</span> <span class=o>&lt;</span> <span class=nb>len</span><span class=p>(</span><span class=n>symbolString</span><span class=p>)</span> <span class=ow>and</span> <span class=n>balanced</span><span class=p>:</span></span>
+<span class=code-line>        <span class=n>symbol</span> <span class=o>=</span> <span class=n>symbolString</span><span class=p>[</span><span class=n>index</span><span class=p>]</span></span>
+<span class=code-line>        <span class=k>if</span> <span class=n>symbol</span> <span class=o>==</span> <span class=s2>&quot;(&quot;</span><span class=p>:</span></span>
+<span class=code-line>            <span class=n>s</span><span class=o>.</span><span class=n>push</span><span class=p>(</span><span class=n>symbol</span><span class=p>)</span></span>
+<span class=code-line>        <span class=k>else</span><span class=p>:</span></span>
+<span class=code-line>            <span class=k>if</span> <span class=n>s</span><span class=o>.</span><span class=n>isEmpty</span><span class=p>():</span></span>
+<span class=code-line>                <span class=n>balanced</span> <span class=o>=</span> <span class=bp>False</span></span>
+<span class=code-line>            <span class=k>else</span><span class=p>:</span></span>
+<span class=code-line>                <span class=n>s</span><span class=o>.</span><span class=n>pop</span><span class=p>()</span></span>
+<span class=code-line></span>
+<span class=code-line>        <span class=n>index</span> <span class=o>=</span> <span class=n>index</span> <span class=o>+</span> <span class=mi>1</span></span>
+<span class=code-line></span>
+<span class=code-line>    <span class=k>if</span> <span class=n>balanced</span> <span class=ow>and</span> <span class=n>s</span><span class=o>.</span><span class=n>isEmpty</span><span class=p>():</span></span>
+<span class=code-line>        <span class=k>return</span> <span class=bp>True</span></span>
+<span class=code-line>    <span class=k>else</span><span class=p>:</span></span>
+<span class=code-line>        <span class=k>return</span> <span class=bp>False</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>print</span><span class=p>(</span><span class=n>parChecker</span><span class=p>(</span><span class=s1>&#39;((()))&#39;</span><span class=p>))</span></span>
+<span class=code-line><span class=k>print</span><span class=p>(</span><span class=n>parChecker</span><span class=p>(</span><span class=s1>&#39;(()&#39;</span><span class=p>))</span></span>
+</pre></div><h2 id=37-balanced-symbols-a-general-case><a class=toclink href=#37-balanced-symbols-a-general-case>3.7 Balanced Symbols (A General Case)</a></h2><div class=highlight><pre><span class=code-line><span></span><span class=k>class</span> <span class=nc>Stack</span><span class=p>:</span></span>
+<span class=code-line>     <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>         <span class=bp>self</span><span class=o>.</span><span class=n>items</span> <span class=o>=</span> <span class=p>[]</span></span>
+<span class=code-line></span>
+<span class=code-line>     <span class=k>def</span> <span class=nf>isEmpty</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>         <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>items</span> <span class=o>==</span> <span class=p>[]</span></span>
+<span class=code-line></span>
+<span class=code-line>     <span class=k>def</span> <span class=nf>push</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>item</span><span class=p>):</span></span>
+<span class=code-line>         <span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>item</span><span class=p>)</span></span>
+<span class=code-line></span>
+<span class=code-line>     <span class=k>def</span> <span class=nf>pop</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>         <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=o>.</span><span class=n>pop</span><span class=p>()</span></span>
+<span class=code-line></span>
+<span class=code-line>     <span class=k>def</span> <span class=nf>peek</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>         <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=p>[</span><span class=nb>len</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=p>)</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span></span>
+<span class=code-line></span>
+<span class=code-line>     <span class=k>def</span> <span class=nf>size</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>         <span class=k>return</span> <span class=nb>len</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=p>)</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>def</span> <span class=nf>parChecker</span><span class=p>(</span><span class=n>symbolString</span><span class=p>):</span></span>
+<span class=code-line>    <span class=n>s</span> <span class=o>=</span> <span class=n>Stack</span><span class=p>()</span></span>
+<span class=code-line>    <span class=n>balanced</span> <span class=o>=</span> <span class=bp>True</span></span>
+<span class=code-line>    <span class=n>index</span> <span class=o>=</span> <span class=mi>0</span></span>
+<span class=code-line>    <span class=k>while</span> <span class=n>index</span> <span class=o>&lt;</span> <span class=nb>len</span><span class=p>(</span><span class=n>symbolString</span><span class=p>)</span> <span class=ow>and</span> <span class=n>balanced</span><span class=p>:</span></span>
+<span class=code-line>        <span class=n>symbol</span> <span class=o>=</span> <span class=n>symbolString</span><span class=p>[</span><span class=n>index</span><span class=p>]</span></span>
+<span class=code-line>        <span class=k>if</span> <span class=n>symbol</span> <span class=ow>in</span> <span class=s2>&quot;([{&quot;</span><span class=p>:</span></span>
+<span class=code-line>            <span class=n>s</span><span class=o>.</span><span class=n>push</span><span class=p>(</span><span class=n>symbol</span><span class=p>)</span></span>
+<span class=code-line>        <span class=k>else</span><span class=p>:</span></span>
+<span class=code-line>            <span class=k>if</span> <span class=n>s</span><span class=o>.</span><span class=n>isEmpty</span><span class=p>():</span></span>
+<span class=code-line>                <span class=n>balanced</span> <span class=o>=</span> <span class=bp>False</span></span>
+<span class=code-line>            <span class=k>else</span><span class=p>:</span></span>
+<span class=code-line>                <span class=n>top</span> <span class=o>=</span> <span class=n>s</span><span class=o>.</span><span class=n>pop</span><span class=p>()</span></span>
+<span class=code-line>                <span class=k>if</span> <span class=ow>not</span> <span class=n>matches</span><span class=p>(</span><span class=n>top</span><span class=p>,</span><span class=n>symbol</span><span class=p>):</span></span>
+<span class=code-line>                       <span class=n>balanced</span> <span class=o>=</span> <span class=bp>False</span></span>
+<span class=code-line>        <span class=n>index</span> <span class=o>=</span> <span class=n>index</span> <span class=o>+</span> <span class=mi>1</span></span>
+<span class=code-line>    <span class=k>if</span> <span class=n>balanced</span> <span class=ow>and</span> <span class=n>s</span><span class=o>.</span><span class=n>isEmpty</span><span class=p>():</span></span>
+<span class=code-line>        <span class=k>return</span> <span class=bp>True</span></span>
+<span class=code-line>    <span class=k>else</span><span class=p>:</span></span>
+<span class=code-line>        <span class=k>return</span> <span class=bp>False</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>def</span> <span class=nf>matches</span><span class=p>(</span><span class=nb>open</span><span class=p>,</span><span class=n>close</span><span class=p>):</span></span>
+<span class=code-line>    <span class=n>opens</span> <span class=o>=</span> <span class=s2>&quot;([{&quot;</span></span>
+<span class=code-line>    <span class=n>closers</span> <span class=o>=</span> <span class=s2>&quot;)]}&quot;</span></span>
+<span class=code-line>    <span class=k>return</span> <span class=n>opens</span><span class=o>.</span><span class=n>index</span><span class=p>(</span><span class=nb>open</span><span class=p>)</span> <span class=o>==</span> <span class=n>closers</span><span class=o>.</span><span class=n>index</span><span class=p>(</span><span class=n>close</span><span class=p>)</span></span>
+<span class=code-line></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>print</span><span class=p>(</span><span class=n>parChecker</span><span class=p>(</span><span class=s1>&#39;{{([][])}()}&#39;</span><span class=p>))</span></span>
+<span class=code-line><span class=k>print</span><span class=p>(</span><span class=n>parChecker</span><span class=p>(</span><span class=s1>&#39;[{()]&#39;</span><span class=p>))</span></span>
+</pre></div><h2 id=38-converting-decimal-numbers-to-binary-numbers><a class=toclink href=#38-converting-decimal-numbers-to-binary-numbers>3.8 Converting Decimal Numbers to Binary Numbers</a></h2><p><code>dec-to-bin.py</code>:<div class=highlight><pre><span class=code-line><span></span><span class=k>class</span> <span class=nc>Stack</span><span class=p>:</span></span>
+<span class=code-line>     <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>         <span class=bp>self</span><span class=o>.</span><span class=n>items</span> <span class=o>=</span> <span class=p>[]</span></span>
+<span class=code-line></span>
+<span class=code-line>     <span class=k>def</span> <span class=nf>isEmpty</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>         <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>items</span> <span class=o>==</span> <span class=p>[]</span></span>
+<span class=code-line></span>
+<span class=code-line>     <span class=k>def</span> <span class=nf>push</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>item</span><span class=p>):</span></span>
+<span class=code-line>         <span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>item</span><span class=p>)</span></span>
+<span class=code-line></span>
+<span class=code-line>     <span class=k>def</span> <span class=nf>pop</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>         <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=o>.</span><span class=n>pop</span><span class=p>()</span></span>
+<span class=code-line></span>
+<span class=code-line>     <span class=k>def</span> <span class=nf>peek</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>         <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=p>[</span><span class=nb>len</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=p>)</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span></span>
+<span class=code-line></span>
+<span class=code-line>     <span class=k>def</span> <span class=nf>size</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>         <span class=k>return</span> <span class=nb>len</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=p>)</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>def</span> <span class=nf>baseConverter</span><span class=p>(</span><span class=n>decNumber</span><span class=p>,</span><span class=n>base</span><span class=p>):</span></span>
+<span class=code-line>    <span class=n>digits</span> <span class=o>=</span> <span class=s2>&quot;0123456789ABCDEF&quot;</span></span>
+<span class=code-line></span>
+<span class=code-line>    <span class=n>remstack</span> <span class=o>=</span> <span class=n>Stack</span><span class=p>()</span></span>
+<span class=code-line></span>
+<span class=code-line>    <span class=k>while</span> <span class=n>decNumber</span> <span class=o>&gt;</span> <span class=mi>0</span><span class=p>:</span></span>
+<span class=code-line>        <span class=n>rem</span> <span class=o>=</span> <span class=n>decNumber</span> <span class=o>%</span> <span class=n>base</span></span>
+<span class=code-line>        <span class=n>remstack</span><span class=o>.</span><span class=n>push</span><span class=p>(</span><span class=n>rem</span><span class=p>)</span></span>
+<span class=code-line>        <span class=n>decNumber</span> <span class=o>=</span> <span class=n>decNumber</span> <span class=o>//</span> <span class=n>base</span></span>
+<span class=code-line></span>
+<span class=code-line>    <span class=n>newString</span> <span class=o>=</span> <span class=s2>&quot;&quot;</span></span>
+<span class=code-line>    <span class=k>while</span> <span class=ow>not</span> <span class=n>remstack</span><span class=o>.</span><span class=n>isEmpty</span><span class=p>():</span></span>
+<span class=code-line>        <span class=n>newString</span> <span class=o>=</span> <span class=n>newString</span> <span class=o>+</span> <span class=n>digits</span><span class=p>[</span><span class=n>remstack</span><span class=o>.</span><span class=n>pop</span><span class=p>()]</span></span>
+<span class=code-line></span>
+<span class=code-line>    <span class=k>return</span> <span class=n>newString</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>print</span><span class=p>(</span><span class=n>baseConverter</span><span class=p>(</span><span class=mi>25</span><span class=p>,</span><span class=mi>2</span><span class=p>))</span></span>
+<span class=code-line><span class=k>print</span><span class=p>(</span><span class=n>baseConverter</span><span class=p>(</span><span class=mi>25</span><span class=p>,</span><span class=mi>16</span><span class=p>))</span></span>
+</pre></div><h2 id=39-infix-prefix-and-postfix-expressions><a class=toclink href=#39-infix-prefix-and-postfix-expressions>3.9. Infix, Prefix and Postfix Expressions</a></h2><h3 id=392-general-infix-to-postfix-conversion><a class=toclink href=#392-general-infix-to-postfix-conversion>3.9.2. General Infix-to-Postfix Conversion</a></h3><p><code>stack.py</code>:<div class=highlight><pre><span class=code-line><span></span><span class=k>class</span> <span class=nc>Stack</span><span class=p>:</span></span>
+<span class=code-line>     <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>         <span class=bp>self</span><span class=o>.</span><span class=n>items</span> <span class=o>=</span> <span class=p>[]</span></span>
+<span class=code-line></span>
+<span class=code-line>     <span class=k>def</span> <span class=nf>isEmpty</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>         <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>items</span> <span class=o>==</span> <span class=p>[]</span></span>
+<span class=code-line></span>
+<span class=code-line>     <span class=k>def</span> <span class=nf>push</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>item</span><span class=p>):</span></span>
+<span class=code-line>         <span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>item</span><span class=p>)</span></span>
+<span class=code-line></span>
+<span class=code-line>     <span class=k>def</span> <span class=nf>pop</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>         <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=o>.</span><span class=n>pop</span><span class=p>()</span></span>
+<span class=code-line></span>
+<span class=code-line>     <span class=k>def</span> <span class=nf>peek</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>         <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=p>[</span><span class=nb>len</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=p>)</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span></span>
+<span class=code-line></span>
+<span class=code-line>     <span class=k>def</span> <span class=nf>size</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>         <span class=k>return</span> <span class=nb>len</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=p>)</span></span>
+</pre></div><p><code>infix2postfix.py</code><div class=highlight><pre><span class=code-line><span></span><span class=kn>from</span> <span class=nn>stack</span> <span class=kn>import</span> <span class=n>Stack</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>def</span> <span class=nf>infixToPostfix</span><span class=p>(</span><span class=n>infixexpr</span><span class=p>):</span></span>
+<span class=code-line>    <span class=n>prec</span> <span class=o>=</span> <span class=p>{}</span></span>
+<span class=code-line>    <span class=n>prec</span><span class=p>[</span><span class=s2>&quot;*&quot;</span><span class=p>]</span> <span class=o>=</span> <span class=mi>3</span></span>
+<span class=code-line>    <span class=n>prec</span><span class=p>[</span><span class=s2>&quot;/&quot;</span><span class=p>]</span> <span class=o>=</span> <span class=mi>3</span></span>
+<span class=code-line>    <span class=n>prec</span><span class=p>[</span><span class=s2>&quot;+&quot;</span><span class=p>]</span> <span class=o>=</span> <span class=mi>2</span></span>
+<span class=code-line>    <span class=n>prec</span><span class=p>[</span><span class=s2>&quot;-&quot;</span><span class=p>]</span> <span class=o>=</span> <span class=mi>2</span></span>
+<span class=code-line>    <span class=n>prec</span><span class=p>[</span><span class=s2>&quot;(&quot;</span><span class=p>]</span> <span class=o>=</span> <span class=mi>1</span></span>
+<span class=code-line>    <span class=n>opStack</span> <span class=o>=</span> <span class=n>Stack</span><span class=p>()</span></span>
+<span class=code-line>    <span class=n>postfixList</span> <span class=o>=</span> <span class=p>[]</span></span>
+<span class=code-line>    <span class=n>tokenList</span> <span class=o>=</span> <span class=n>infixexpr</span><span class=o>.</span><span class=n>split</span><span class=p>()</span></span>
+<span class=code-line></span>
+<span class=code-line>    <span class=k>for</span> <span class=n>token</span> <span class=ow>in</span> <span class=n>tokenList</span><span class=p>:</span></span>
+<span class=code-line>        <span class=k>if</span> <span class=n>token</span> <span class=ow>in</span> <span class=s2>&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span> <span class=ow>or</span> <span class=n>token</span> <span class=ow>in</span> <span class=s2>&quot;0123456789&quot;</span><span class=p>:</span></span>
+<span class=code-line>            <span class=n>postfixList</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>token</span><span class=p>)</span></span>
+<span class=code-line>        <span class=k>elif</span> <span class=n>token</span> <span class=o>==</span> <span class=s1>&#39;(&#39;</span><span class=p>:</span></span>
+<span class=code-line>            <span class=n>opStack</span><span class=o>.</span><span class=n>push</span><span class=p>(</span><span class=n>token</span><span class=p>)</span></span>
+<span class=code-line>        <span class=k>elif</span> <span class=n>token</span> <span class=o>==</span> <span class=s1>&#39;)&#39;</span><span class=p>:</span></span>
+<span class=code-line>            <span class=n>topToken</span> <span class=o>=</span> <span class=n>opStack</span><span class=o>.</span><span class=n>pop</span><span class=p>()</span></span>
+<span class=code-line>            <span class=k>while</span> <span class=n>topToken</span> <span class=o>!=</span> <span class=s1>&#39;(&#39;</span><span class=p>:</span></span>
+<span class=code-line>                <span class=n>postfixList</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>topToken</span><span class=p>)</span></span>
+<span class=code-line>                <span class=n>topToken</span> <span class=o>=</span> <span class=n>opStack</span><span class=o>.</span><span class=n>pop</span><span class=p>()</span></span>
+<span class=code-line>        <span class=k>else</span><span class=p>:</span></span>
+<span class=code-line>            <span class=k>while</span> <span class=p>(</span><span class=ow>not</span> <span class=n>opStack</span><span class=o>.</span><span class=n>isEmpty</span><span class=p>())</span> <span class=ow>and</span> \</span>
+<span class=code-line>               <span class=p>(</span><span class=n>prec</span><span class=p>[</span><span class=n>opStack</span><span class=o>.</span><span class=n>peek</span><span class=p>()]</span> <span class=o>&gt;=</span> <span class=n>prec</span><span class=p>[</span><span class=n>token</span><span class=p>]):</span></span>
+<span class=code-line>                  <span class=n>postfixList</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>opStack</span><span class=o>.</span><span class=n>pop</span><span class=p>())</span></span>
+<span class=code-line>            <span class=n>opStack</span><span class=o>.</span><span class=n>push</span><span class=p>(</span><span class=n>token</span><span class=p>)</span></span>
+<span class=code-line></span>
+<span class=code-line>    <span class=k>while</span> <span class=ow>not</span> <span class=n>opStack</span><span class=o>.</span><span class=n>isEmpty</span><span class=p>():</span></span>
+<span class=code-line>        <span class=n>postfixList</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>opStack</span><span class=o>.</span><span class=n>pop</span><span class=p>())</span></span>
+<span class=code-line>    <span class=k>return</span> <span class=s2>&quot; &quot;</span><span class=o>.</span><span class=n>join</span><span class=p>(</span><span class=n>postfixList</span><span class=p>)</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>print</span><span class=p>(</span><span class=n>infixToPostfix</span><span class=p>(</span><span class=s2>&quot;A * B + C * D&quot;</span><span class=p>))</span></span>
+<span class=code-line><span class=k>print</span><span class=p>(</span><span class=n>infixToPostfix</span><span class=p>(</span><span class=s2>&quot;( A + B ) * C - ( D - E ) * ( F + G )&quot;</span><span class=p>))</span></span>
+</pre></div><p>Result:<div class=highlight><pre><span class=code-line><span></span><span class=n>A</span> <span class=n>B</span> <span class=o>*</span> <span class=n>C</span> <span class=n>D</span> <span class=o>*</span> <span class=o>+</span></span>
+<span class=code-line><span class=n>A</span> <span class=n>B</span> <span class=o>+</span> <span class=n>C</span> <span class=o>*</span> <span class=n>D</span> <span class=n>E</span> <span class=o>-</span> <span class=n>F</span> <span class=n>G</span> <span class=o>+</span> <span class=o>*</span> <span class=o>-</span></span>
+</pre></div><h3 id=393-postfix-evaluation><a class=toclink href=#393-postfix-evaluation>3.9.3. Postfix Evaluation</a></h3><p><code>postfixeval.py</code><div class=highlight><pre><span class=code-line><span></span><span class=kn>from</span> <span class=nn>stack</span> <span class=kn>import</span> <span class=n>Stack</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>def</span> <span class=nf>postfixEval</span><span class=p>(</span><span class=n>postfixExpr</span><span class=p>):</span></span>
+<span class=code-line>    <span class=n>operandStack</span> <span class=o>=</span> <span class=n>Stack</span><span class=p>()</span></span>
+<span class=code-line>    <span class=n>tokenList</span> <span class=o>=</span> <span class=n>postfixExpr</span><span class=o>.</span><span class=n>split</span><span class=p>()</span></span>
+<span class=code-line></span>
+<span class=code-line>    <span class=k>for</span> <span class=n>token</span> <span class=ow>in</span> <span class=n>tokenList</span><span class=p>:</span></span>
+<span class=code-line>        <span class=k>if</span> <span class=n>token</span> <span class=ow>in</span> <span class=s2>&quot;0123456789&quot;</span><span class=p>:</span></span>
+<span class=code-line>            <span class=n>operandStack</span><span class=o>.</span><span class=n>push</span><span class=p>(</span><span class=nb>int</span><span class=p>(</span><span class=n>token</span><span class=p>))</span></span>
+<span class=code-line>        <span class=k>else</span><span class=p>:</span></span>
+<span class=code-line>            <span class=n>operand2</span> <span class=o>=</span> <span class=n>operandStack</span><span class=o>.</span><span class=n>pop</span><span class=p>()</span></span>
+<span class=code-line>            <span class=n>operand1</span> <span class=o>=</span> <span class=n>operandStack</span><span class=o>.</span><span class=n>pop</span><span class=p>()</span></span>
+<span class=code-line>            <span class=n>result</span> <span class=o>=</span> <span class=n>doMath</span><span class=p>(</span><span class=n>token</span><span class=p>,</span><span class=n>operand1</span><span class=p>,</span><span class=n>operand2</span><span class=p>)</span></span>
+<span class=code-line>            <span class=n>operandStack</span><span class=o>.</span><span class=n>push</span><span class=p>(</span><span class=n>result</span><span class=p>)</span></span>
+<span class=code-line>    <span class=k>return</span> <span class=n>operandStack</span><span class=o>.</span><span class=n>pop</span><span class=p>()</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>def</span> <span class=nf>doMath</span><span class=p>(</span><span class=n>op</span><span class=p>,</span> <span class=n>op1</span><span class=p>,</span> <span class=n>op2</span><span class=p>):</span></span>
+<span class=code-line>    <span class=k>if</span> <span class=n>op</span> <span class=o>==</span> <span class=s2>&quot;*&quot;</span><span class=p>:</span></span>
+<span class=code-line>        <span class=k>return</span> <span class=n>op1</span> <span class=o>*</span> <span class=n>op2</span></span>
+<span class=code-line>    <span class=k>elif</span> <span class=n>op</span> <span class=o>==</span> <span class=s2>&quot;/&quot;</span><span class=p>:</span></span>
+<span class=code-line>        <span class=k>return</span> <span class=n>op1</span> <span class=o>/</span> <span class=n>op2</span></span>
+<span class=code-line>    <span class=k>elif</span> <span class=n>op</span> <span class=o>==</span> <span class=s2>&quot;+&quot;</span><span class=p>:</span></span>
+<span class=code-line>        <span class=k>return</span> <span class=n>op1</span> <span class=o>+</span> <span class=n>op2</span></span>
+<span class=code-line>    <span class=k>else</span><span class=p>:</span></span>
+<span class=code-line>        <span class=k>return</span> <span class=n>op1</span> <span class=o>-</span> <span class=n>op2</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>print</span><span class=p>(</span><span class=n>postfixEval</span><span class=p>(</span><span class=s1>&#39;7 8 + 3 2 + /&#39;</span><span class=p>))</span></span>
+</pre></div><p>Result:<div class=highlight><pre><span class=code-line><span></span>3.0</span>
+</pre></div><h2 id=312-implementing-a-queue-in-python><a class=toclink href=#312-implementing-a-queue-in-python>3.12. Implementing a Queue in Python</a></h2><p><code>queue.py</code>:<div class=highlight><pre><span class=code-line><span></span><span class=k>class</span> <span class=nc>Queue</span><span class=p>:</span></span>
+<span class=code-line>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>        <span class=bp>self</span><span class=o>.</span><span class=n>items</span> <span class=o>=</span> <span class=p>[]</span></span>
+<span class=code-line></span>
+<span class=code-line>    <span class=k>def</span> <span class=nf>isEmpty</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>        <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>items</span> <span class=o>==</span> <span class=p>[]</span></span>
+<span class=code-line></span>
+<span class=code-line>    <span class=k>def</span> <span class=nf>enqueue</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>item</span><span class=p>):</span></span>
+<span class=code-line>        <span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=o>.</span><span class=n>insert</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span><span class=n>item</span><span class=p>)</span></span>
+<span class=code-line></span>
+<span class=code-line>    <span class=k>def</span> <span class=nf>dequeue</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>        <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=o>.</span><span class=n>pop</span><span class=p>()</span></span>
+<span class=code-line></span>
+<span class=code-line>    <span class=k>def</span> <span class=nf>size</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span></span>
+<span class=code-line>        <span class=k>return</span> <span class=nb>len</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>items</span><span class=p>)</span></span>
+</pre></div><h2 id=313-simulation-hot-potato><a class=toclink href=#313-simulation-hot-potato>3.13. Simulation: Hot Potato</a></h2><p><code>hotpotato.py</code>:<div class=highlight><pre><span class=code-line><span></span><span class=kn>from</span> <span class=nn>queue</span> <span class=kn>import</span> <span class=n>Queue</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>def</span> <span class=nf>hotPotato</span><span class=p>(</span><span class=n>namelist</span><span class=p>,</span> <span class=n>num</span><span class=p>):</span></span>
+<span class=code-line>    <span class=n>simqueue</span> <span class=o>=</span> <span class=n>Queue</span><span class=p>()</span></span>
+<span class=code-line>    <span class=k>for</span> <span class=n>name</span> <span class=ow>in</span> <span class=n>namelist</span><span class=p>:</span></span>
+<span class=code-line>        <span class=n>simqueue</span><span class=o>.</span><span class=n>enqueue</span><span class=p>(</span><span class=n>name</span><span class=p>)</span></span>
+<span class=code-line></span>
+<span class=code-line>    <span class=k>while</span> <span class=n>simqueue</span><span class=o>.</span><span class=n>size</span><span class=p>()</span> <span class=o>&gt;</span> <span class=mi>1</span><span class=p>:</span></span>
+<span class=code-line>        <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>num</span><span class=p>):</span></span>
+<span class=code-line>            <span class=n>simqueue</span><span class=o>.</span><span class=n>enqueue</span><span class=p>(</span><span class=n>simqueue</span><span class=o>.</span><span class=n>dequeue</span><span class=p>())</span></span>
+<span class=code-line></span>
+<span class=code-line>        <span class=n>simqueue</span><span class=o>.</span><span class=n>dequeue</span><span class=p>()</span></span>
+<span class=code-line></span>
+<span class=code-line>    <span class=k>return</span> <span class=n>simqueue</span><span class=o>.</span><span class=n>dequeue</span><span class=p>()</span></span>
+<span class=code-line></span>
+<span class=code-line><span class=k>print</span><span class=p>(</span><span class=n>hotPotato</span><span class=p>([</span><span class=s2>&quot;Bill&quot;</span><span class=p>,</span><span class=s2>&quot;David&quot;</span><span class=p>,</span><span class=s2>&quot;Susan&quot;</span><span class=p>,</span><span class=s2>&quot;Jane&quot;</span><span class=p>,</span><span class=s2>&quot;Kent&quot;</span><span class=p>,</span><span class=s2>&quot;Brad&quot;</span><span class=p>],</span><span class=mi>7</span><span class=p>))</span></span>
+</pre></div></div><footer id=q><svg id="publish"/><b>Created:&nbsp;</b><time datetime=2019-06-27T22:30:00+02:00>June 27, 2019</time><span id=y>•</span><svg id="edit"/><b>Updated:&nbsp;</b><time datetime=2019-07-13T22:20:00+02:00>July 13, 2019</time><span id=y>•</span><svg id="session"/></svg>In a <a href=https://archives.snorl.ax/terminal/ rel="category tag"><b>Terminal</b></a> Session<span id=y>•</span><svg id="tags"/><b>Tags:&nbsp;</b><a href=https://archives.snorl.ax/tags/python/ rel=tag>python</a>,&nbsp;<a href=https://archives.snorl.ax/tags/algorithms/ rel=tag>algorithms</a>,&nbsp;<a href=https://archives.snorl.ax/tags/data-structure/ rel=tag>data structure</a>,&nbsp;<a href=https://archives.snorl.ax/tags/learning-notes/ rel=tag>learning notes</a></footer></article><article id=m><div id=n><section id=comments data-title="Problem Solving with Algorithms and Data Structures - Chapter 3 - Basic Data Structures" data-isso-id=/terminal/2019/06/27/problem-solving-with-algorithms-and-data-structures-chapter-3-basic-data-structures/></section></div></article></main></div><footer id=g><div id=l>Simputer Archives &#169; 2016 - 2019 (<a href=https://snorl.ax/>Click to view Current Version of Simputer</a>) • Licensed under <a target=_blank rel=license href=http://creativecommons.org/licenses/by/3.0/>CC BY 3.0</a><br>Made using <a href=http://getpelican.com/ target=_blank>Pelican</a> • Design from <a href=https://wordpress.org/themes/twentyfifteen/ target=_blank>TwentyFifteen</a></div></footer><script data-isso=https://isso.snorl.ax/ data-isso-gravatar=true data-isso-avatar=false data-isso-reply-notifications=true data-isso-reply-to-self=true data-isso-css=false src=https://archives.snorl.ax/theme/js/isso_embed.min.js data-isso-lang=en></script>
